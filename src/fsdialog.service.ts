@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
-import { ConfirmOptions } from './interfaces';
+import { ConfirmOptions, ShowOptions } from './interfaces';
+import { FsModalWrapperComponent } from './fs-modal-wrapper/fs-modal-wrapper.component';
 
 @Injectable()
 export class FsDialogService {
@@ -42,6 +43,43 @@ export class FsDialogService {
     dialogOptions = Object.assign(defaultOptions, options, dialogOptions);
 
     return this.openConfirmDialog(dialogOptions);
+  }
+
+  /**
+   * Show modal dialog with or without confirmation
+   *
+   * @param {ShowOptions<T>} options
+   * @param {string} options.title
+   * @param {ComponentType<T> | TemplateRef<T>} options.component
+   * @param {string} options.okLabel
+   * @param {string} options.cancelLabel
+   * @param {MatDialogConfig} options.modalOptions
+   * @param {object} options.confirm
+   * 
+   * @returns {MatDialogRef<FsModalWrapperComponent>}
+   */
+  public show<T>(options: ShowOptions<T>) {
+    if (!options.component) { throw 'Incorrect argument passed to FsDialogService.show. Component required.'}
+
+    let modalOptions = options.modalOptions && Object.assign(options.modalOptions) || {};
+
+    modalOptions.data = {
+      component: options.component,
+      title: options.title || false,
+      okLabel: options.okLabel || 'Ok',
+      cancelLabel: options.cancelLabel || 'Cancel',
+    };
+
+    if (options.confirm && options.confirm.message) {
+      modalOptions.data.confirm = {
+        title: options.confirm.title || 'Confirm',
+        message: options.confirm.message,
+        okLabel: options.confirm.okLabel,
+        cancelLabel: options.confirm.cancelLabel,
+      };
+    }
+
+    return this.dialog.open(FsModalWrapperComponent, modalOptions);
   }
 
 

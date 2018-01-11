@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Dialog
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
+import { FsModalWrapperComponent } from './fs-modal-wrapper/fs-modal-wrapper.component';
 
 export * from './fsdialog.service';
 export * from './fsdialog.component';
@@ -25,10 +26,12 @@ export * from './fs-confirm/index';
   ],
   entryComponents: [
     FsConfirmComponent,
+    FsModalWrapperComponent,
   ],
   declarations: [
     FsDialogComponent,
     FsConfirmComponent,
+    FsModalWrapperComponent,
   ],
   providers: [
     FsDialogService,
