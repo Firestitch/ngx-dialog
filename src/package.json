@@ -1,0 +1,31 @@
+{
+  "name": "@firestitch/dialog",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Firestitch/fs-dialog"
+  },
+  "author": {
+    "name": "Firestitch",
+    "email": "admin@firestitch.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Firestitch/fs-dialog/issues"
+  },
+  "main": "dialog.umd.js",
+  "module": "dialog.js",
+  "jsnext:main": "dialog.js",
+  "typings": "dialog.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  },
+  "dependencies": {
+    "@angular/material": "^5.0.1"
+  }
+}
