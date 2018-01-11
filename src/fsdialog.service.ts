@@ -21,7 +21,7 @@ export class FsDialogService {
    *
    * @returns {MatDialogRef<FsConfirmComponent>}
    */
-  public confirm(options: ConfirmOptions) {
+  public confirm(options: ConfirmOptions = {}) {
     const defaultStyles = {
       width: '250px',
       height: 'auto'
