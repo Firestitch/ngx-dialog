@@ -4,18 +4,28 @@ import { FsDialogService } from './fsdialog.service';
 import { FsDialogComponent } from './fsdialog.component';
 
 // Material
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+
+// Dialog
+import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
 
 export * from './fsdialog.service';
 export * from './fsdialog.component';
+export * from './fs-confirm/index';
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
+    MatButtonModule,
+  ],
+  entryComponents: [
+    FsConfirmComponent,
   ],
   declarations: [
     FsDialogComponent,
+    FsConfirmComponent,
   ],
   providers: [
     FsDialogService,
