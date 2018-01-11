@@ -15,14 +15,12 @@ export class FsDialogService {
    * @property {string} options.content
    * @property {string} options.okLabel
    * @property {string} options.cancelLabel
-   * @property {object} options.style
-   * @property {string} options.style.width
-   * @property {string} options.style.height
+   * @property {MatDialogConfig} options.modalOptions - config for material modal dialog
    *
    * @returns {MatDialogRef<FsConfirmComponent>}
    */
   public confirm(options: ConfirmOptions = {}) {
-    const defaultStyles = {
+    const defaultModalOptions = {
       width: '250px',
       height: 'auto'
     };
@@ -33,11 +31,11 @@ export class FsDialogService {
       cancelLabel: 'Cancel',
     };
 
-    let dialogOptions: any = { style: defaultStyles };
+    let dialogOptions: any = { style: defaultModalOptions };
 
     // if we have re-writed style options
-    if (options.style) {
-      dialogOptions.style = Object.assign({}, defaultStyles, options.style)
+    if (options.modalOptions) {
+      dialogOptions.style = Object.assign({}, defaultModalOptions, options.modalOptions)
     }
 
     // Build final dialog options
@@ -45,6 +43,7 @@ export class FsDialogService {
 
     return this.openConfirmDialog(dialogOptions);
   }
+
 
   /**
    * Open MatDialog with confirm component and return dialogRef
@@ -54,22 +53,21 @@ export class FsDialogService {
    * @property {string} options.content
    * @property {string} options.okLabel
    * @property {string} options.cancelLabel
-   * @property {object} options.style
-   * @property {string} options.style.width
-   * @property {string} options.style.height
+   * @property {MatDialogConfig} options.modalOptions - config for material modal dialog
    *
    * @returns {MatDialogRef<FsConfirmComponent>}
    */
   private openConfirmDialog(dialogOptions: ConfirmOptions) {
-    return this.dialog.open(FsConfirmComponent, {
-      width: dialogOptions.style.width,
-      height: dialogOptions.style.height,
-      data: {
-        content: dialogOptions.content,
-        title: dialogOptions.title,
-        okLabel: dialogOptions.okLabel,
-        cancelLabel: dialogOptions.cancelLabel,
-      }
-    });
+    // Check if we have defined modal options (options for material modal) and incapsulate it
+    let modalOptions = dialogOptions.modalOptions && Object.assign(dialogOptions.modalOptions) || {};
+
+    modalOptions['data'] = {
+      content: dialogOptions.content,
+      title: dialogOptions.title,
+      okLabel: dialogOptions.okLabel,
+      cancelLabel: dialogOptions.cancelLabel,
+    };
+
+    return this.dialog.open(FsConfirmComponent, modalOptions);
   }
 }

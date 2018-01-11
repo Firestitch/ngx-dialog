@@ -16,7 +16,10 @@ export * from './fs-confirm/index';
 
 @NgModule({
   imports: [
+    // Angular
     CommonModule,
+
+    // Material
     MatDialogModule,
     MatButtonModule,
   ],

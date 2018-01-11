@@ -19,10 +19,17 @@ class AppComponent implements OnInit {
   public ngOnInit() {
   }
 
+  /**
+   * Confirm modal
+   */
   public showConfirm() {
     let dialogRef = this.fsDialog.confirm({
       title: 'Title',
       content: 'Are you sure?',
+      modalOptions: {
+        width: '400px',
+        disableClose: true
+      }
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
