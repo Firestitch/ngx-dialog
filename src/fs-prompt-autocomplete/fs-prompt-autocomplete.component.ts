@@ -1,32 +1,59 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FsPromptService, Converter_Type } from '../fsprompt.service';
+import { Observable } from 'rxjs/Observable';
+
+import { startWith, map } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
-  selector: 'fs-prompt-select',
-  templateUrl: 'fs-prompt-select.component.html',
+  selector: 'fs-prompt-autocomplete',
+  templateUrl: 'fs-prompt-autocomplete.component.html',
 })
-export class FsPromptSelectComponent implements OnInit {
+export class FsPromptAutocompleteComponent implements OnInit {
 
+  public inputControl = new FormControl('', []);
+  public filteredItems: Observable<any[]>;
   public result;
   public loading = false;
   public items = [];
   public error = false;
 
   constructor(
-    public dialogRef: MatDialogRef<FsPromptSelectComponent>,
+    public dialogRef: MatDialogRef<FsPromptAutocompleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
   public ngOnInit() {
     this.loadItems();
+
+    this.filteredItems = this.inputControl.valueChanges
+      .pipe(
+        startWith(''),
+        map((item: any) => typeof item === 'string' ? item : item.name),
+        map(item => item ? this.filterItems(item) : this.items.slice())
+      );
   }
 
   public complete() {
     this.dialogRef.close(this.result);
   }
 
+  public setSelectedValue(event: MatAutocompleteSelectedEvent) {
+    if (event) {
+      this.result = event.option.value.value;
+    }
+  }
+
+  public displayWith(value) {
+    return value ? value.name : undefined;
+  }
+
+  /**
+   * Load items depend from values type
+   */
   private loadItems() {
     let result = FsPromptService.valuesConverter(this.data.values);
 
@@ -61,5 +88,15 @@ export class FsPromptSelectComponent implements OnInit {
         this.error = true;
       }
     }
+  }
+
+  /**
+   * Filter items by name
+   * @param {string} name
+   * @returns {any[]}
+   */
+  private filterItems(name: string) {
+    return this.items.filter(item =>
+      item.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 }

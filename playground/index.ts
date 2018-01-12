@@ -50,6 +50,7 @@ export class ConfirmExampleModalComponent {
 class AppComponent implements OnInit {
   public inputValue: string | boolean = false;
   public selectValue = false;
+  public selectAutoValue = false;
 
   constructor(public fsDialog: FsPromptService) {}
 
@@ -122,6 +123,42 @@ class AppComponent implements OnInit {
 
     dialogRef.subscribe((result: any) => {
       this.selectValue = result;
+    })
+  }
+
+  public openAutocomplete() {
+    let testObservable = new Subject();
+
+    // Array test case
+    let simpleArray = [
+      { name: 'Dave', value: 0 },
+      { name: 'Mike', value: 1 }
+    ];
+
+    // Observable test case
+    let testPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(simpleArray);
+        //reject('error')
+      }, 3000)
+    });
+
+    // Observable test case
+    setTimeout(() => {
+      testObservable.next(simpleArray);
+      // testObservable.error('error')
+    }, 3000);
+
+    let dialogRef = this.fsDialog.autocomplete({
+      label: 'Please select a user',
+      hint: 'Hint: His name is Dave',
+      values: () => {
+        return testObservable;
+      }
+    });
+
+    dialogRef.subscribe((result: any) => {
+      this.selectAutoValue = result;
     })
   }
 }

@@ -11,6 +11,7 @@ import { MatDialogConfig } from '@angular/material';
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
 import { FsInputComponent } from './fs-input/fs-input.component';
 import { FsPromptSelectComponent } from './fs-prompt-select/fs-prompt-select.component';
+import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete/fs-prompt-autocomplete.component';
 
 // RX
 import 'rxjs/add/observable/of';
@@ -21,6 +22,7 @@ enum Prompt_Type {
   confirm = 0,
   input = 1,
   select = 2,
+  autocomplete = 3
 }
 
 export enum Converter_Type {
@@ -142,6 +144,19 @@ export class FsPromptService {
   }
 
   /**
+   * Open modal with autocomplete
+   *
+   * @param {FsConfirmOptions} options
+   * @param {MatDialogConfig} modalOptions
+   * @returns {Observable<any> | boolean}
+   */
+  public autocomplete(options: FsConfirmOptions = {}, modalOptions: MatDialogConfig = this._defaultModalOptions) {
+    const openOptions = this.getOpenOptions(options);
+
+    return this.open(openOptions, Prompt_Type.autocomplete, modalOptions);
+  }
+
+  /**
    * Open modal dialog depends from type
    *
    * @param {FsConfirmOptions} options
@@ -170,6 +185,10 @@ export class FsPromptService {
 
       case Prompt_Type.select: {
         return this.dialog.open(FsPromptSelectComponent, modalOptions).afterClosed();
+      }
+
+      case Prompt_Type.autocomplete: {
+        return this.dialog.open(FsPromptAutocompleteComponent, modalOptions).afterClosed();
       }
 
       default: return false;

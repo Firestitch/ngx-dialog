@@ -27,6 +27,7 @@
       '@angular/material/core': 'npm:@angular/material/bundles/material-core.umd.js',
       '@angular/material/button': 'npm:@angular/material/bundles/material-button.umd.js',
       '@angular/material/input': 'npm:@angular/material/bundles/material-input.umd.js',
+      '@angular/material/autocomplete': 'npm:@angular/material/bundles/material-autocomplete.umd.js',
       '@angular/material/select': 'npm:@angular/material/bundles/material-select.umd.js',
       '@angular/material/form-field': 'npm:@angular/material/bundles/material-form-field.umd.js',
       '@angular/material/dialog': 'npm:@angular/material/bundles/material-dialog.umd.js',
