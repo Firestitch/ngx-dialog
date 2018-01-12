@@ -13,3 +13,8 @@ export interface FsConfirmOptions {
   cancelLabel?: string;
   values?: Observable<any>
 }
+
+
+export interface FsValuesFunction {
+  <T>(): Observable<T> | Promise<T> | Array<T>
+}

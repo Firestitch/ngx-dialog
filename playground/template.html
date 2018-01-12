@@ -3,7 +3,10 @@
 <br>
 <button mat-raised-button (click)="openInput()">Open Input</button>
 <br>
-{{inputValue}}
+<ng-container *ngIf="inputValue !== false">Typed value: {{inputValue}}</ng-container>
 <br>
 <br>
-<button mat-raised-button (click)="openConfirmModal()">Open Modal with Confirm</button>
+<button mat-raised-button (click)="openSelect()">Open Select</button>
+<br>
+<ng-container *ngIf="selectValue !== false">Selected: {{selectValue}}</ng-container>
+<br>

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsDialogModule, FsPromptService }  from '@firestitch/dialog';
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -47,9 +48,10 @@ export class ConfirmExampleModalComponent {
   encapsulation: ViewEncapsulation.None
 })
 class AppComponent implements OnInit {
-  constructor(public fsDialog: FsPromptService) {}
+  public inputValue: string | boolean = false;
+  public selectValue = false;
 
-  public inputValue;
+  constructor(public fsDialog: FsPromptService) {}
 
   public ngOnInit() {
   }
@@ -86,18 +88,42 @@ class AppComponent implements OnInit {
       }
     })
   }
-  //
-  // public openConfirmModal() {
-  //   this.fsDialog.show({
-  //     component: ConfirmExampleModalComponent,
-  //     title: 'Test modal',
-  //     confirm: {
-  //       message: 'You have unsaved changes.',
-  //       okLabel: 'Ok',
-  //       cancelLabel: 'Cancel'
-  //     }
-  //   });
-  // }
+
+  public openSelect() {
+    let testObservable = new Subject();
+
+    // Array test case
+    let simpleArray = [
+      { name: 'Dave', value: 0 },
+      { name: 'Mike', value: 1 }
+    ];
+
+    // Observable test case
+    let testPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(simpleArray);
+        //reject('error')
+      }, 3000)
+    });
+
+    // Observable test case
+    setTimeout(() => {
+      testObservable.next(simpleArray);
+      // testObservable.error('error')
+    }, 3000);
+
+    let dialogRef = this.fsDialog.select({
+      label: 'Please select a user',
+      hint: 'Hint: His name is Dave',
+      values: () => {
+        return testObservable;
+      }
+    });
+
+    dialogRef.subscribe((result: any) => {
+      this.selectValue = result;
+    })
+  }
 }
 
 @NgModule({
