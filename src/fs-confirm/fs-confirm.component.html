@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content tabindex="-1">
-  {{data.content}}
+  {{data.template}}
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="false">{{data.cancelLabel}}</button>
-  <button mat-button [mat-dialog-close]="true">{{data.okLabel}}</button>
+  <button mat-button [mat-dialog-close]="true">{{data.commitLabel}}</button>
 </mat-dialog-actions>

@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FsDialogService } from './fsdialog.service';
+import { FsPromptService } from './fsprompt.service';
 import { FsDialogComponent } from './fsdialog.component';
 
 // Material
@@ -9,9 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Dialog
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
-import { FsModalWrapperComponent } from './fs-modal-wrapper/fs-modal-wrapper.component';
 
-export * from './fsdialog.service';
+export * from './fsprompt.service';
 export * from './fsdialog.component';
 export * from './fs-confirm/index';
 
@@ -26,15 +25,13 @@ export * from './fs-confirm/index';
   ],
   entryComponents: [
     FsConfirmComponent,
-    FsModalWrapperComponent,
   ],
   declarations: [
     FsDialogComponent,
     FsConfirmComponent,
-    FsModalWrapperComponent,
   ],
   providers: [
-    FsDialogService,
+    FsPromptService,
   ],
   exports: [
     FsDialogComponent,
@@ -44,7 +41,7 @@ export class FsDialogModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDialogModule,
-      providers: [FsDialogService]
+      providers: [FsPromptService]
     };
   }
 }

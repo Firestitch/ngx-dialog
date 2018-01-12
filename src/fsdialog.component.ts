@@ -1,4 +1,3 @@
-import { FsDialogService } from './fsdialog.service';
 import { Component, Output, Input } from '@angular/core';
 
 @Component({
@@ -8,5 +7,5 @@ import { Component, Output, Input } from '@angular/core';
 })
 export class FsDialogComponent {
   constructor() {}
-  
+
 }

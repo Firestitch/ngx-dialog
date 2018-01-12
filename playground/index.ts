@@ -4,10 +4,9 @@ import {
 } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FsDialogModule, FsDialogService }  from '@firestitch/dialog';
+import { FsDialogModule, FsPromptService }  from '@firestitch/dialog';
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FsModal } from '../src/interfaces';
 
 
 @Component({
@@ -44,21 +43,13 @@ export class ConfirmExampleModalComponent {
   selector: 'app-root',
   templateUrl: 'template.html',
   styleUrls: [ 'styles.css' ],
-  providers: [ FsDialogService, ],
+  providers: [ FsPromptService, ],
   encapsulation: ViewEncapsulation.None
 })
-class AppComponent implements OnInit, FsModal {
-  constructor(public fsDialog: FsDialogService) {}
+class AppComponent implements OnInit {
+  constructor(public fsDialog: FsPromptService) {}
 
   public ngOnInit() {
-  }
-
-  get resultData() {
-    return {}
-  }
-
-  get needConfirmation() {
-    return true;
   }
 
   /**
@@ -66,15 +57,12 @@ class AppComponent implements OnInit, FsModal {
    */
   public showConfirm() {
     let dialogRef = this.fsDialog.confirm({
-      title: 'Title',
-      content: 'Are you sure?',
-      modalOptions: {
-        width: '400px',
-        disableClose: true
-      }
+      title: 'Confirm',
+      template: 'Are you sure?',
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+
+    dialogRef.subscribe((result: boolean) => {
       if (result) {
         alert('Ok');
       } else {
@@ -84,24 +72,24 @@ class AppComponent implements OnInit, FsModal {
 
   }
 
-  public openModal() {
-    this.fsDialog.show({
-      component: ExampleModalComponent,
-      title: 'Test modal',
-    });
-  }
-
-  public openConfirmModal() {
-    this.fsDialog.show({
-      component: ConfirmExampleModalComponent,
-      title: 'Test modal',
-      confirm: {
-        message: 'You have unsaved changes.',
-        okLabel: 'Ok',
-        cancelLabel: 'Cancel'
-      }
-    });
-  }
+  // public openModal() {
+  //   this.fsDialog.show({
+  //     component: ExampleModalComponent,
+  //     title: 'Test modal',
+  //   });
+  // }
+  //
+  // public openConfirmModal() {
+  //   this.fsDialog.show({
+  //     component: ConfirmExampleModalComponent,
+  //     title: 'Test modal',
+  //     confirm: {
+  //       message: 'You have unsaved changes.',
+  //       okLabel: 'Ok',
+  //       cancelLabel: 'Cancel'
+  //     }
+  //   });
+  // }
 }
 
 @NgModule({
