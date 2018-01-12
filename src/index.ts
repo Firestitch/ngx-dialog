@@ -14,7 +14,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
 import { FsInputComponent } from './fs-input/fs-input.component';
 import { FsPromptSelectComponent } from './fs-prompt-select/fs-prompt-select.component';
-import { FsPromptService } from './fsprompt.service';
+import { FsPrompt } from './fsprompt.service';
 import { FsDialogComponent } from './fsdialog.component';
 import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete/fs-prompt-autocomplete.component';
 
@@ -50,7 +50,7 @@ export * from './fsdialog.component';
     FsPromptAutocompleteComponent,
   ],
   providers: [
-    FsPromptService,
+    FsPrompt,
   ],
   exports: [
     FsDialogComponent,
@@ -60,7 +60,7 @@ export class FsDialogModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsDialogModule,
-      providers: [FsPromptService]
+      providers: [FsPrompt]
     };
   }
 }

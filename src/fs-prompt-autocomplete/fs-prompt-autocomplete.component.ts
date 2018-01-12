@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FsPromptService, Converter_Type } from '../fsprompt.service';
+import { FsPrompt, Converter_Type } from '../fsprompt.service';
 import { Observable } from 'rxjs/Observable';
 
 import { startWith, map } from 'rxjs/operators';
@@ -55,7 +55,7 @@ export class FsPromptAutocompleteComponent implements OnInit {
    * Load items depend from values type
    */
   private loadItems() {
-    let result = FsPromptService.valuesConverter(this.data.values);
+    let result = FsPrompt.valuesConverter(this.data.values);
 
     switch (result.type) {
       case Converter_Type.observable: {

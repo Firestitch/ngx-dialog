@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FsPromptService, Converter_Type } from '../fsprompt.service';
+import { FsPrompt, Converter_Type } from '../fsprompt.service';
 
 @Component({
   selector: 'fs-prompt-select',
@@ -28,7 +28,7 @@ export class FsPromptSelectComponent implements OnInit {
   }
 
   private loadItems() {
-    let result = FsPromptService.valuesConverter(this.data.values);
+    let result = FsPrompt.valuesConverter(this.data.values);
 
     switch (result.type) {
       case Converter_Type.observable: {

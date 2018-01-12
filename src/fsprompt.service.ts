@@ -32,7 +32,7 @@ export enum Converter_Type {
 }
 
 @Injectable()
-export class FsPromptService {
+export class FsPrompt {
   private _defaultOptions = {
     title: '',
     hint: '',

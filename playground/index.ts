@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FsDialogModule, FsPromptService }  from '@firestitch/dialog';
+import { FsDialogModule, FsPrompt }  from '@firestitch/dialog';
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Subject } from 'rxjs/Subject';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs/Subject';
   selector: 'app-root',
   templateUrl: 'template.html',
   styleUrls: [ 'styles.css' ],
-  providers: [ FsPromptService, ],
+  providers: [ FsPrompt, ],
   encapsulation: ViewEncapsulation.None
 })
 class AppComponent implements OnInit {
@@ -22,7 +22,7 @@ class AppComponent implements OnInit {
   public selectValue = false;
   public selectAutoValue = false;
 
-  constructor(public fsDialog: FsPromptService) {}
+  constructor(public fsDialog: FsPrompt) {}
 
   public ngOnInit() {
   }
