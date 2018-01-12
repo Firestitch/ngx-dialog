@@ -92,7 +92,7 @@ export class FsPromptService {
    */
   public confirm(options: FsConfirmOptions = {}, modalOptions: MatDialogConfig = void 0) {
     if (modalOptions === void 0) {
-      modalOptions = this._defaultModalOptions;
+      modalOptions = Object.assign({}, this._defaultModalOptions);
       modalOptions.width = '250px';
     }
 
