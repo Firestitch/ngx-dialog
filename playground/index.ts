@@ -11,36 +11,6 @@ import { Subject } from 'rxjs/Subject';
 
 
 @Component({
-  selector: 'example-modal',
-  templateUrl: 'example-modal.component.html'
-})
-export class ExampleModalComponent {
-  constructor() {
-  }
-}
-
-@Component({
-  selector: 'confirm-example-modal',
-  templateUrl: 'confirm-example-modal.component.html'
-})
-export class ConfirmExampleModalComponent {
-  @Input() data: any;
-
-  constructor() {
-  }
-
-  @Output()
-  get needConfirmation() {
-    return true;
-  }
-
-  @Output()
-  get resultData() {
-    return {}
-  }
-}
-
-@Component({
   selector: 'app-root',
   templateUrl: 'template.html',
   styleUrls: [ 'styles.css' ],
@@ -167,12 +137,6 @@ class AppComponent implements OnInit {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    ExampleModalComponent,
-    ConfirmExampleModalComponent,
-  ],
-  entryComponents: [
-    ExampleModalComponent,
-    ConfirmExampleModalComponent
   ],
   imports: [ BrowserModule, FsDialogModule, BrowserAnimationsModule, MatButtonModule, MatDialogModule, ]
 })
