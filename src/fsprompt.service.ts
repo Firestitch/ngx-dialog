@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable, ViewContainerRef, ComponentRef, Type,
+  ComponentFactoryResolver
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
 import { FsConfirmOptions } from './interfaces';
 import { MatDialogConfig } from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
+import { FsDialogComponent } from './fsdialog.component';
+import { FsInputComponent } from './fs-input/fs-input.component';
 
 enum Prompt_Type {
   confirm = 0,
@@ -15,7 +20,7 @@ enum Prompt_Type {
 @Injectable()
 export class FsPromptService {
   private _defaultOptions = {
-    title: 'Confirm',
+    title: '',
     hint: '',
     'class': '',
     label: '',
@@ -24,11 +29,14 @@ export class FsPromptService {
   };
 
   private _defaultModalOptions = {
-    width: '250px',
+    width: 'auto',
     heigth: 'auto'
   };
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private dialog: MatDialog
+  ) {}
 
   /**
    * Open confirmation window and return close observable
@@ -38,9 +46,45 @@ export class FsPromptService {
    * @returns {Observable<any>}
    */
   public confirm(options: FsConfirmOptions = {}, modalOptions: MatDialogConfig = this._defaultModalOptions) {
-    const openOptions = Object.assign({}, this._defaultOptions, options);
+    const openOptions = this.getOpenOptions(options);
+
+    if (!openOptions.title) {
+      openOptions.title = 'Confirm';
+    }
+
+    if (!openOptions.class) {
+      openOptions.class = 'fs-modal-confirm'
+    }
+
+    // For this type we need default width at least 250px
+    if (!modalOptions.width || modalOptions.width === 'auto') {
+      modalOptions.width = '250px'
+    }
 
     return this.open(openOptions, Prompt_Type.confirm, modalOptions);
+  }
+
+  /**
+   * Open window with input field for filling
+   *
+   * @param {FsConfirmOptions} options
+   * @param {MatDialogConfig} modalOptions
+   * @returns {Observable<any> | boolean}
+   */
+  public input(options: FsConfirmOptions = {}, modalOptions: MatDialogConfig = this._defaultModalOptions) {
+    const openOptions = this.getOpenOptions(options);
+
+    // For this type we need default width at least 500px
+    if (!modalOptions.width || modalOptions.width === 'auto') {
+      modalOptions.width = '500px'
+    }
+
+    // For this type we don't need title by default
+    if (!options.title) {
+      openOptions.title = ''
+    }
+
+    return this.open(openOptions, Prompt_Type.input, modalOptions);
   }
 
   /**
@@ -54,7 +98,7 @@ export class FsPromptService {
   private open(options: FsConfirmOptions, type: Prompt_Type, modalOptions: MatDialogConfig) {
     if (!modalOptions) { modalOptions = {} }
 
-    //Assign panel class (class for modal container) only if we don't have this class in modal options
+    // Assign panel class (class for modal container) only if we don't have this class in modal options
     if (options.class && !modalOptions.panelClass) {
       modalOptions.panelClass = options.class;
     }
@@ -66,7 +110,15 @@ export class FsPromptService {
         return this.dialog.open(FsConfirmComponent, modalOptions).afterClosed();
       }
 
+      case Prompt_Type.input: {
+        return this.dialog.open(FsInputComponent, modalOptions).afterClosed();
+      }
+
       default: return false;
     }
+  }
+
+  private getOpenOptions(options) {
+    return Object.assign({}, this._defaultOptions, options);
   }
 }

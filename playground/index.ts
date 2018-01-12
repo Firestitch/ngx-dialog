@@ -49,6 +49,8 @@ export class ConfirmExampleModalComponent {
 class AppComponent implements OnInit {
   constructor(public fsDialog: FsPromptService) {}
 
+  public inputValue;
+
   public ngOnInit() {
   }
 
@@ -72,12 +74,18 @@ class AppComponent implements OnInit {
 
   }
 
-  // public openModal() {
-  //   this.fsDialog.show({
-  //     component: ExampleModalComponent,
-  //     title: 'Test modal',
-  //   });
-  // }
+  public openInput() {
+    let dialogRef = this.fsDialog.input({
+      hint: 'Use commas to separate multiple email addresses',
+      label: 'Please an email adresses',
+    });
+
+    dialogRef.subscribe((value: string | boolean) => {
+      if (value !== false) {
+        this.inputValue = value;
+      }
+    })
+  }
   //
   // public openConfirmModal() {
   //   this.fsDialog.show({
