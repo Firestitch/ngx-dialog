@@ -176,7 +176,8 @@ export class FsPrompt {
 
     switch (type) {
       case PromptType.confirm: {
-        return this.dialog.open(FsConfirmComponent, dialogConfig).afterClosed();
+        return this.dialog.open(FsConfirmComponent, dialogConfig).afterClosed()
+          .switchMap((value) => (value) ? Observable.of(value) : Observable.throw('error'));
       }
 
       case PromptType.input: {

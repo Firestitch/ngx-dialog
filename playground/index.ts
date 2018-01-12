@@ -38,11 +38,9 @@ class AppComponent implements OnInit {
 
 
     dialogRef.subscribe((result: boolean) => {
-      if (result) {
-        alert('Ok');
-      } else {
-        alert('Cancel');
-      }
+      alert('Ok');
+    }, (error: any) => {
+      alert('Cancel');
     });
 
   }
