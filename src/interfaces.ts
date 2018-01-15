@@ -3,7 +3,7 @@ import { TemplateRef } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { Observable } from 'rxjs/Observable';
 
-export interface FsConfirmOptions {
+export interface IFsPromptConfig {
   title?: string;
   template?: string;
   hint?: string;
@@ -11,7 +11,8 @@ export interface FsConfirmOptions {
   class?: string;
   commitLabel?: string;
   cancelLabel?: string;
-  values?: Observable<any>
+  values?: Observable<any>;
+  dialogConfig?: MatDialogConfig;
 }
 
 

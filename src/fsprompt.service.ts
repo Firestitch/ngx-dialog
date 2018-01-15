@@ -4,8 +4,7 @@ import {
 
 // Modal
 import { MatDialog } from '@angular/material/dialog';
-import { FsConfirmOptions, FsValuesFunction } from './interfaces';
-import { MatDialogConfig } from '@angular/material';
+import { IFsPromptConfig, FsValuesFunction } from './interfaces';
 
 // Components for open in modal
 import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
@@ -13,12 +12,16 @@ import { FsInputComponent } from './fs-input/fs-input.component';
 import { FsPromptSelectComponent } from './fs-prompt-select/fs-prompt-select.component';
 import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete/fs-prompt-autocomplete.component';
 
+// Configs
+import { FsPromptConfig } from './configs/fsprompt.config';
+import { FsPromptConfirmConfig } from './configs/fsprompt-confirm.config';
+
 // RX
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-enum PromptType {
+export enum PromptType {
   confirm = 0,
   input = 1,
   select = 2,
@@ -33,19 +36,6 @@ export enum ConverterType {
 
 @Injectable()
 export class FsPrompt {
-  private _defaultConfig = {
-    title: '',
-    hint: '',
-    'class': '',
-    label: '',
-    commitLabel: 'Ok',
-    cancelLabel: 'Cancel'
-  };
-
-  private _defaultDialogConfig = {
-    width: '500px',
-    heigth: 'auto'
-  };
 
   /**
    * Values converter
@@ -86,117 +76,78 @@ export class FsPrompt {
   /**
    * Open confirmation window and return close observable
    *
-   * @param {FsConfirmOptions} config
-   * @param {MatDialogConfig} dialogCofig
+   * @param {IFsPromptConfig} config
    * @returns {Observable<any>}
    */
-  public confirm(config: FsConfirmOptions = {}, dialogCofig: MatDialogConfig = void 0) {
-    if (dialogCofig === void 0) {
-      dialogCofig = Object.assign({}, this._defaultDialogConfig);
-      dialogCofig.width = '250px';
-    }
+  public confirm(config: IFsPromptConfig = {}) {
+    const openConfig = new FsPromptConfirmConfig(config);
 
-    if (dialogCofig.width === void 0) {
-      dialogCofig.width = '250px';
-    }
-
-    const openOptions = this.getOpenConfig(config);
-
-    if (!openOptions.title) {
-      openOptions.title = 'Confirm';
-    }
-
-    if (!openOptions.class) {
-      openOptions.class = 'fs-modal-confirm'
-    }
-
-    return this.open(openOptions, PromptType.confirm, dialogCofig);
+    return this.open(openConfig, PromptType.confirm);
   }
 
   /**
    * Open window with input field for filling
    *
-   * @param {FsConfirmOptions} config
-   * @param {MatDialogConfig} dialogConfig
+   * @param {IFsPromptConfig} config
    * @returns {Observable<any> | boolean}
    */
-  public input(config: FsConfirmOptions = {}, dialogConfig: MatDialogConfig = this._defaultDialogConfig) {
-    const openOptions = this.getOpenConfig(config);
+  public input(config: IFsPromptConfig = {}) {
+    const openConfig = new FsPromptConfig(config);
 
-    // For this type we don't need title by default
-    if (!config.title) {
-      openOptions.title = ''
-    }
-
-    return this.open(openOptions, PromptType.input, dialogConfig);
+    return this.open(openConfig, PromptType.input);
   }
 
   /**
    * Open modal with list
    *
-   * @param {FsConfirmOptions} config
-   * @param {MatDialogConfig} dialogConfig
+   * @param {IFsPromptConfig} config
    */
-  public select(config: FsConfirmOptions = {}, dialogConfig: MatDialogConfig = this._defaultDialogConfig) {
-    const openOptions = this.getOpenConfig(config);
+  public select(config: IFsPromptConfig = {}) {
+    const openConfig = new FsPromptConfig(config);
 
-    return this.open(openOptions, PromptType.select, dialogConfig);
+    return this.open(openConfig, PromptType.select);
   }
 
   /**
    * Open modal with autocomplete
    *
-   * @param {FsConfirmOptions} config
-   * @param {MatDialogConfig} dialogConfig
+   * @param {IFsPromptConfig} config
    * @returns {Observable<any> | boolean}
    */
-  public autocomplete(config: FsConfirmOptions = {}, dialogConfig: MatDialogConfig = this._defaultDialogConfig) {
-    const openOptions = this.getOpenConfig(config);
+  public autocomplete(config: IFsPromptConfig = {}) {
+    const openConfig = new FsPromptConfig(config);
 
-    return this.open(openOptions, PromptType.autocomplete, dialogConfig);
+    return this.open(openConfig, PromptType.autocomplete);
   }
 
   /**
    * Open modal dialog depends from type
    *
-   * @param {FsConfirmOptions} config
+   * @param {IFsPromptConfig} config
    * @param {PromptType} type
-   * @param {MatDialogConfig} dialogConfig
    * @returns {any}
    */
-  private open(config: FsConfirmOptions, type: PromptType, dialogConfig: MatDialogConfig) {
-    if (!dialogConfig) { dialogConfig = {} }
-
-    // Assign panel class (class for modal container) only if we don't have this class in modal options
-    if (config.class && !dialogConfig.panelClass) {
-      dialogConfig.panelClass = config.class;
-    }
-
-    dialogConfig.data = config;
+  private open(config: FsPromptConfig<any> | FsPromptConfirmConfig<any>, type: PromptType) {
 
     switch (type) {
       case PromptType.confirm: {
-        return this.dialog.open(FsConfirmComponent, dialogConfig).afterClosed()
+        return this.dialog.open(FsConfirmComponent, config.dialogConfig).afterClosed()
           .switchMap((value) => (value) ? Observable.of(value) : Observable.throw('error'));
       }
 
       case PromptType.input: {
-        return this.dialog.open(FsInputComponent, dialogConfig).afterClosed();
+        return this.dialog.open(FsInputComponent, config.dialogConfig).afterClosed();
       }
 
       case PromptType.select: {
-        return this.dialog.open(FsPromptSelectComponent, dialogConfig).afterClosed();
+        return this.dialog.open(FsPromptSelectComponent, config.dialogConfig).afterClosed();
       }
 
       case PromptType.autocomplete: {
-        return this.dialog.open(FsPromptAutocompleteComponent, dialogConfig).afterClosed();
+        return this.dialog.open(FsPromptAutocompleteComponent, config.dialogConfig).afterClosed();
       }
 
       default: return false;
     }
-  }
-
-  private getOpenConfig(config) {
-    return Object.assign({}, this._defaultConfig, config);
   }
 }
