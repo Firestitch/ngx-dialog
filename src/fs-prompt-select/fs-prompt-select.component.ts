@@ -5,6 +5,7 @@ import { FsPrompt, ConverterType } from '../fsprompt.service';
 @Component({
   selector: 'fs-prompt-select',
   templateUrl: 'fs-prompt-select.component.html',
+  styleUrls: [ '../fsprompt.scss' ],
 })
 export class FsPromptSelectComponent implements OnInit {
 

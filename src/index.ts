@@ -15,11 +15,9 @@ import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
 import { FsInputComponent } from './fs-input/fs-input.component';
 import { FsPromptSelectComponent } from './fs-prompt-select/fs-prompt-select.component';
 import { FsPrompt } from './fsprompt.service';
-import { FsDialogComponent } from './fsdialog.component';
 import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete/fs-prompt-autocomplete.component';
 
 export * from './fsprompt.service';
-export * from './fsdialog.component';
 
 @NgModule({
   imports: [
@@ -43,7 +41,6 @@ export * from './fsdialog.component';
     FsPromptAutocompleteComponent,
   ],
   declarations: [
-    FsDialogComponent,
     FsConfirmComponent,
     FsInputComponent,
     FsPromptSelectComponent,
@@ -52,9 +49,6 @@ export * from './fsdialog.component';
   providers: [
     FsPrompt,
   ],
-  exports: [
-    FsDialogComponent,
-  ]
 })
 export class FsDialogModule {
   static forRoot(): ModuleWithProviders {

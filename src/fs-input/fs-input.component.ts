@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'fs-input',
   templateUrl: 'fs-input.component.html',
+  styleUrls: [ '../fsprompt.scss' ],
 })
 export class FsInputComponent {
 
