@@ -1,0 +1,17 @@
+<button mat-raised-button (click)="showConfirm()">Open Confirm Dialog</button>
+<br>
+<br>
+<button mat-raised-button (click)="openInput()">Open Input</button>
+<br>
+<ng-container *ngIf="inputValue !== false">Typed value: {{inputValue}}</ng-container>
+<br>
+<br>
+<button mat-raised-button (click)="openSelect()">Open Select</button>
+<br>
+<ng-container *ngIf="selectValue !== false">Selected: {{selectValue}}</ng-container>
+<br>
+<br>
+<button mat-raised-button (click)="openAutocomplete()">Open Autocomplete</button>
+<br>
+<ng-container *ngIf="selectAutoValue !== false">Selected: {{selectAutoValue}}</ng-container>
+<br>

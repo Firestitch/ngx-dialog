@@ -11,26 +11,34 @@
     "pretty": true,
     "allowUnreachableCode": true,
     "allowUnusedLabels": true,
-    "noImplicitAny": false,
     "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": false,
     "allowSyntheticDefaultImports": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
+    "outDir": "release",
+    "declarationDir": "release",
     "lib": ["es6", "dom"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": []
   },
-  "include": [
+  "files": [
     "src/index.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "demo"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": false
+  },
+  "angularCompilerOptions": {
+    "genDir": "release/",
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "annotationsAs": "decorators"
   }
 }
