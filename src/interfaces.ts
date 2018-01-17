@@ -1,6 +1,4 @@
 import { MatDialogConfig } from '@angular/material/dialog';
-import { TemplateRef } from '@angular/core';
-import { ComponentType } from '@angular/cdk/portal';
 import { Observable } from 'rxjs/Observable';
 
 export interface IFsPromptConfig {
@@ -11,11 +9,11 @@ export interface IFsPromptConfig {
   class?: string;
   commitLabel?: string;
   cancelLabel?: string;
-  values?: Observable<any>;
+  values?: FsValuesFunction;
   dialogConfig?: MatDialogConfig;
 }
 
 
 export interface FsValuesFunction {
-  <T>(): Observable<T> | Promise<T> | Array<T>
+  <T>(): Observable<T> | Promise<T> | T[]
 }

@@ -13,7 +13,7 @@ export class FsPromptConfig<T> {
   public class = '';
   public commitLabel = 'Ok';
   public cancelLabel = 'Cancel';
-  public values: Observable<T> | Promise<T> | Array<T> | FsValuesFunction = [];
+  public values: Observable<T> | Promise<T> | T[] | FsValuesFunction = [];
 
   protected _dialogConfig: MatDialogConfig;
 

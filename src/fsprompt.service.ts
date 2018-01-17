@@ -147,7 +147,7 @@ export class FsPrompt {
         return this.dialog.open(FsPromptAutocompleteComponent, config.dialogConfig).afterClosed();
       }
 
-      default: return false;
+      default: return Observable.throw('Erorr')
     }
   }
 }

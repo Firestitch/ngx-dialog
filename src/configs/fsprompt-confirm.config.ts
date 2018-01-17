@@ -11,7 +11,7 @@ export class FsPromptConfirmConfig<T> extends FsPromptConfig<T> {
     }
 
     if (!config.class) {
-      config['class'] = 'fs-modal-confirm'
+      config.class = 'fs-modal-confirm'
     }
   }
 
