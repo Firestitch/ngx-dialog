@@ -302,7 +302,7 @@ __export(__webpack_require__("./configs/fsprompt-confirm.config.ts"));
 /***/ "./fs-confirm/fs-confirm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "module.exports = \"<h2 mat-dialog-title>{{data.title}}</h2>\\n<mat-dialog-content tabindex=\\\"-1\\\">\\n  {{data.template}}\\n</mat-dialog-content>\\n\\n<mat-dialog-actions align=\\\"end\\\">\\n  <button mat-button [mat-dialog-close]=\\\"false\\\">{{data.cancelLabel}}</button>\\n  <button mat-button [mat-dialog-close]=\\\"true\\\">{{data.commitLabel}}</button>\\n</mat-dialog-actions>\\n\""
 
 /***/ }),
 
@@ -334,7 +334,7 @@ var FsConfirmComponent = /** @class */ (function () {
     FsConfirmComponent = __decorate([
         core_1.Component({
             selector: 'fs-confirm',
-            template: __webpack_require__("./fs-confirm/fs-confirm.component.html"),
+            templateUrl: __webpack_require__("./fs-confirm/fs-confirm.component.html"),
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
@@ -436,7 +436,7 @@ exports.FsDialogModule = FsDialogModule;
 /***/ "./fs-input/fs-input.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field>\n    <input matInput [placeholder]=\"data.label\" [(ngModel)]=\"inputValue\">\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "module.exports = \"<h2 mat-dialog-title>{{data.title}}</h2>\\n<mat-dialog-content tabindex=\\\"-1\\\">\\n  {{data.template}}\\n  <mat-form-field>\\n    <input matInput [placeholder]=\\\"data.label\\\" [(ngModel)]=\\\"inputValue\\\">\\n    <mat-hint>{{data.hint}}</mat-hint>\\n  </mat-form-field>\\n</mat-dialog-content>\\n\\n<mat-dialog-actions align=\\\"end\\\">\\n  <button mat-button [mat-dialog-close]=\\\"false\\\">{{data.cancelLabel}}</button>\\n  <button mat-button (click)=\\\"complete()\\\">{{data.commitLabel}}</button>\\n</mat-dialog-actions>\\n\""
 
 /***/ }),
 
@@ -472,8 +472,8 @@ var FsInputComponent = /** @class */ (function () {
     FsInputComponent = __decorate([
         core_1.Component({
             selector: 'fs-input',
-            template: __webpack_require__("./fs-input/fs-input.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
+            templateUrl: __webpack_require__("./fs-input/fs-input.component.html"),
+            styleUrls: [__webpack_require__("./fsprompt.scss")],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
@@ -502,7 +502,7 @@ __export(__webpack_require__("./fs-input/fs-input.component.ts"));
 /***/ "./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <input aria-label=\"State\" matInput\n           [placeholder]=\"data.label\"\n           [matAutocomplete]=\"auto\"\n           [value]=\"inputControl\"\n           [formControl]=\"inputControl\">\n    <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayWith\" (optionSelected)=\"setSelectedValue($event)\">\n      <mat-option *ngFor=\"let item of filteredItems | async\" [value]=\"item\">\n        <small>{{item.name}}</small>\n      </mat-option>\n    </mat-autocomplete>\n  </mat-form-field>\n\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "module.exports = \"<h2 mat-dialog-title>{{data.title}}</h2>\\n<mat-dialog-content tabindex=\\\"-1\\\">\\n  {{data.template}}\\n\\n  <mat-form-field *ngIf=\\\"!loading && !error\\\">\\n    <input aria-label=\\\"State\\\" matInput\\n           [placeholder]=\\\"data.label\\\"\\n           [matAutocomplete]=\\\"auto\\\"\\n           [value]=\\\"inputControl\\\"\\n           [formControl]=\\\"inputControl\\\">\\n    <mat-autocomplete #auto=\\\"matAutocomplete\\\" [displayWith]=\\\"displayWith\\\" (optionSelected)=\\\"setSelectedValue($event)\\\">\\n      <mat-option *ngFor=\\\"let item of filteredItems | async\\\" [value]=\\\"item\\\">\\n        <small>{{item.name}}</small>\\n      </mat-option>\\n    </mat-autocomplete>\\n  </mat-form-field>\\n\\n  <ng-container *ngIf=\\\"loading\\\">Please wait...</ng-container>\\n  <ng-container *ngIf=\\\"error\\\">Something went wrong. Please, try again</ng-container>\\n</mat-dialog-content>\\n\\n<mat-dialog-actions align=\\\"end\\\">\\n  <button mat-button [mat-dialog-close]=\\\"false\\\">{{data.cancelLabel}}</button>\\n  <button mat-button (click)=\\\"complete()\\\" *ngIf=\\\"!error && !loading\\\">{{data.commitLabel}}</button>\\n</mat-dialog-actions>\\n\""
 
 /***/ }),
 
@@ -609,8 +609,8 @@ var FsPromptAutocompleteComponent = /** @class */ (function () {
     FsPromptAutocompleteComponent = __decorate([
         core_1.Component({
             selector: 'fs-prompt-autocomplete',
-            template: __webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
+            templateUrl: __webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html"),
+            styleUrls: [__webpack_require__("./fsprompt.scss")],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
@@ -639,7 +639,7 @@ __export(__webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.co
 /***/ "./fs-prompt-select/fs-prompt-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <mat-select [placeholder]=\"data.label\" [(value)]=\"result\">\n      <mat-option *ngFor=\"let item of items\" [value]=\"item.value\">\n        {{ item.name }}\n      </mat-option>\n    </mat-select>\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "module.exports = \"<h2 mat-dialog-title>{{data.title}}</h2>\\n<mat-dialog-content tabindex=\\\"-1\\\">\\n  {{data.template}}\\n  <mat-form-field *ngIf=\\\"!loading && !error\\\">\\n    <mat-select [placeholder]=\\\"data.label\\\" [(value)]=\\\"result\\\">\\n      <mat-option *ngFor=\\\"let item of items\\\" [value]=\\\"item.value\\\">\\n        {{ item.name }}\\n      </mat-option>\\n    </mat-select>\\n    <mat-hint>{{data.hint}}</mat-hint>\\n  </mat-form-field>\\n  <ng-container *ngIf=\\\"loading\\\">Please wait...</ng-container>\\n  <ng-container *ngIf=\\\"error\\\">Something went wrong. Please, try again</ng-container>\\n</mat-dialog-content>\\n\\n<mat-dialog-actions align=\\\"end\\\">\\n  <button mat-button [mat-dialog-close]=\\\"false\\\">{{data.cancelLabel}}</button>\\n  <button mat-button (click)=\\\"complete()\\\" *ngIf=\\\"!error && !loading\\\">{{data.commitLabel}}</button>\\n</mat-dialog-actions>\\n\""
 
 /***/ }),
 
@@ -719,8 +719,8 @@ var FsPromptSelectComponent = /** @class */ (function () {
     FsPromptSelectComponent = __decorate([
         core_1.Component({
             selector: 'fs-prompt-select',
-            template: __webpack_require__("./fs-prompt-select/fs-prompt-select.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
+            templateUrl: __webpack_require__("./fs-prompt-select/fs-prompt-select.component.html"),
+            styleUrls: [__webpack_require__("./fsprompt.scss")],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])

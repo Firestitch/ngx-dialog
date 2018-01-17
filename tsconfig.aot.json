@@ -24,7 +24,7 @@
     "types": []
   },
   "files": [
-    "src/index.ts"
+    "build/index.ts"
   ],
   "exclude": [
     "node_modules",

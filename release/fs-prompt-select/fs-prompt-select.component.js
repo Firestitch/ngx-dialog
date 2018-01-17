@@ -71,7 +71,7 @@ var FsPromptSelectComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'fs-prompt-select',
             templateUrl: 'fs-prompt-select.component.html',
-            styleUrls: ['../fsprompt.scss'],
+            styleUrls: ['../fsprompt.css'],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])

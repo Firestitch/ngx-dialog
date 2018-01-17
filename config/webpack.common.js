@@ -17,7 +17,6 @@ module.exports = function() {
       hints: false
     },
     output: {
-      path: dir('dist'),
       filename: '[name].js',
       sourceMapFilename: '[name].map',
       chunkFilename: '[id].chunk.js'

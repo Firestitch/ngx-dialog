@@ -22,7 +22,7 @@ var FsConfirmComponent = /** @class */ (function () {
     FsConfirmComponent = __decorate([
         core_1.Component({
             selector: 'fs-confirm',
-            templateUrl: 'fs-confirm.component.html',
+            templateUrl: './fs-confirm.component.html',
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
