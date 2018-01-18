@@ -39,19 +39,10 @@ module.exports = function() {
           test: /\.css$/,
           include: /\/src\//,
           use: [
-            {
-              loader: 'file-loader',
-              query: {
-                name: 'styles/[2].[hash].[ext]',
-                regExp: 'src/(.*)/app/(.*).css'
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            }
+            { loader: 'to-string-loader', options: { sourceMap: true } },
+            { loader: 'css-loader', options: { sourceMap: true } },
+            { loader: 'postcss-loader', options: { sourceMap: true } },
+            { loader: 'resolve-url-loader', options: { sourceMap: true } },
           ]
         },
         {

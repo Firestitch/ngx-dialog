@@ -3,8 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'fs-prompt-input.component.html',
-  // styleUrls: [ './../fspromptinput.css' ],
-  styles: [ String(require('./../fsprompt.css')) ]
+  styleUrls: [ '../fsprompt.css' ],
 })
 export class FsPromptInputComponent {
 

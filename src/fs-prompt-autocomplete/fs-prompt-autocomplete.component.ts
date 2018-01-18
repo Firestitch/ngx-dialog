@@ -10,7 +10,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 @Component({
   selector: 'fs-prompt-autocomplete',
   templateUrl: 'fs-prompt-autocomplete.component.html',
-  styles: [ String(require('./../fsprompt.css')) ]
+  styleUrls: [ '../fsprompt.css' ],
 })
 export class FsPromptAutocompleteComponent implements OnInit {
 

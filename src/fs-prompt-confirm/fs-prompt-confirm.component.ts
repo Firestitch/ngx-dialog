@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './fs-prompt-confirm.component.html',
-  styles: [ String(require('./../fsprompt.css')) ]
+  styleUrls: [ '../fsprompt.css' ],
 })
 export class FsPromptConfirmComponent {
   constructor(

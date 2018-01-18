@@ -17,7 +17,7 @@
     "package:dev": "webpack --config=config/webpack.dev.js --progress --profile --watch",
     "package:minify": "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
     "build:package": "webpack --config=config/webpack.package.js --progress --profile",
-    "build:sass": "node-sass -r build/ -o build/",
+    "build:sass": "node-sass -r build/ -o build/ || true",
     "serve": "webpack-dev-server --config=config/webpack.playground.js --progress --profile --watch",
     "lint": "tslint src/**/*.ts"
   },
