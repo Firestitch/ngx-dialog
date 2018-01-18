@@ -2,12 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'fs-confirm',
-  templateUrl: './fs-confirm.component.html',
+  templateUrl: './fs-prompt-confirm.component.html',
+  styles: [ String(require('./../fsprompt.css')) ]
 })
-export class FsConfirmComponent {
+export class FsPromptConfirmComponent {
   constructor(
-    public dialogRef: MatDialogRef<FsConfirmComponent>,
+    public dialogRef: MatDialogRef<FsPromptConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }

@@ -7,8 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { IFsPromptConfig, FsValuesFunction } from './interfaces';
 
 // Components for open in modal
-import { FsConfirmComponent } from './fs-confirm/fs-confirm.component';
-import { FsInputComponent } from './fs-input/fs-input.component';
+import { FsPromptConfirmComponent } from './fs-prompt-confirm/fs-prompt-confirm.component';
+import { FsPromptInputComponent } from './fs-prompt-input/fs-prompt-input.component';
 import { FsPromptSelectComponent } from './fs-prompt-select/fs-prompt-select.component';
 import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete/fs-prompt-autocomplete.component';
 
@@ -22,10 +22,10 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
 export enum PromptType {
-  confirm = 0,
-  input = 1,
-  select = 2,
-  autocomplete = 3
+  confirm = 'confirm',
+  input = 'input',
+  select = 'select',
+  autocomplete = 'autocomplete'
 }
 
 export enum ConverterType {
@@ -129,14 +129,20 @@ export class FsPrompt {
    */
   private open(config: FsPromptConfig<any> | FsPromptConfirmConfig<any>, type: PromptType) {
 
+    // TODO
+    // if(this.fsUtil.isString(config.dialogConfig.panelClass)) {
+    //  config.dialogConfig.panelClass = config.dialogConfig.panelClass.split(' ');
+    // }
+    //config.dialogConfig.panelClass.push('fs-prompt').push('fs-prompt-' + type);
+
     switch (type) {
       case PromptType.confirm: {
-        return this.dialog.open(FsConfirmComponent, config.dialogConfig).afterClosed()
+        return this.dialog.open(FsPromptConfirmComponent, config.dialogConfig).afterClosed()
           .switchMap((value) => (value) ? Observable.of(value) : Observable.throw('error'));
       }
 
       case PromptType.input: {
-        return this.dialog.open(FsInputComponent, config.dialogConfig).afterClosed();
+        return this.dialog.open(FsPromptInputComponent, config.dialogConfig).afterClosed();
       }
 
       case PromptType.select: {

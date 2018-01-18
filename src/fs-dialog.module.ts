@@ -13,8 +13,8 @@ import {
 } from '@angular/material';
 
 // Dialog
-import { FsConfirmComponent } from './fs-confirm';
-import { FsInputComponent } from './fs-input';
+import { FsPromptConfirmComponent } from './fs-prompt-confirm';
+import { FsPromptInputComponent } from './fs-prompt-input';
 import { FsPromptSelectComponent } from './fs-prompt-select';
 import { FsPrompt } from './fsprompt.service';
 import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete';
@@ -36,14 +36,14 @@ import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete';
     MatAutocompleteModule,
   ],
   entryComponents: [
-    FsConfirmComponent,
-    FsInputComponent,
+    FsPromptConfirmComponent,
+    FsPromptInputComponent,
     FsPromptSelectComponent,
     FsPromptAutocompleteComponent,
   ],
   declarations: [
-    FsConfirmComponent,
-    FsInputComponent,
+    FsPromptConfirmComponent,
+    FsPromptInputComponent,
     FsPromptSelectComponent,
     FsPromptAutocompleteComponent,
   ],

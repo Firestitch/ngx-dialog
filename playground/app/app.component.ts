@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   public selectValue = false;
   public selectAutoValue = false;
 
-  constructor(public fsDialog: FsPrompt) {}
+  constructor(public fsPrompt: FsPrompt) {}
 
   public ngOnInit() {
   }
@@ -20,13 +20,10 @@ export class AppComponent implements OnInit {
    * Confirm modal
    */
   public showConfirm() {
-    let dialogRef = this.fsDialog.confirm({
+    this.fsPrompt.confirm({
       title: 'Confirm',
-      template: 'Are you sure?',
-    });
-
-
-    dialogRef.subscribe((result: boolean) => {
+      template: 'Are you sure?'
+    }).subscribe(() => {
       alert('Ok');
     }, (error: any) => {
       alert('Cancel');
@@ -35,12 +32,10 @@ export class AppComponent implements OnInit {
   }
 
   public openInput() {
-    let dialogRef = this.fsDialog.input({
+    this.fsPrompt.input({
       hint: 'Use commas to separate multiple email addresses',
       label: 'Please an email adresses',
-    });
-
-    dialogRef.subscribe((value: string | boolean) => {
+    }).subscribe((value: string | boolean) => {
       if (value !== false) {
         this.inputValue = value;
       }
@@ -70,15 +65,13 @@ export class AppComponent implements OnInit {
       // testObservable.error('error')
     }, 3000);
 
-    let dialogRef = this.fsDialog.select({
+    this.fsPrompt.select({
       label: 'Please select a user',
       hint: 'Hint: His name is Dave',
       values: () => {
         return testObservable;
       }
-    });
-
-    dialogRef.subscribe((result: any) => {
+    }).subscribe((result: any) => {
       this.selectValue = result;
     })
   }
@@ -106,15 +99,13 @@ export class AppComponent implements OnInit {
       // testObservable.error('error')
     }, 3000);
 
-    let dialogRef = this.fsDialog.autocomplete({
+    this.fsPrompt.autocomplete({
       label: 'Please select a user',
       hint: 'Hint: His name is Dave',
       values: () => {
         return testObservable;
       }
-    });
-
-    dialogRef.subscribe((result: any) => {
+    }).subscribe((result: any) => {
       this.selectAutoValue = result;
     })
   }

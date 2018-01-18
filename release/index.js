@@ -75,104 +75,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!./fsprompt.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
-// imports
-
-
-// module
-exports.push([module.i, ".mat-form-field {\n  display: block;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-dialog/src/src/fsprompt.scss","/Users/Basters/dev/firestitch/fs-dialog/fsprompt.scss"],"names":[],"mappings":"AAAA;EACE,eAAA;CCCD","file":"fsprompt.scss","sourcesContent":[".mat-form-field {\n  display: block;\n}\n",".mat-form-field {\n  display: block;\n}\n\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/lib/css-base.js":
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-
 /***/ "./configs/fsprompt-confirm.config.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -302,7 +204,7 @@ __export(__webpack_require__("./configs/fsprompt-confirm.config.ts"));
 /***/ "./fs-confirm/fs-confirm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
@@ -436,7 +338,7 @@ exports.FsDialogModule = FsDialogModule;
 /***/ "./fs-input/fs-input.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field>\n    <input matInput [placeholder]=\"data.label\" [(ngModel)]=\"inputValue\">\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n  <mat-form-field>\r\n    <input matInput [placeholder]=\"data.label\" [(ngModel)]=\"inputValue\">\r\n    <mat-hint>{{data.hint}}</mat-hint>\r\n  </mat-form-field>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
@@ -502,7 +404,7 @@ __export(__webpack_require__("./fs-input/fs-input.component.ts"));
 /***/ "./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <input aria-label=\"State\" matInput\n           [placeholder]=\"data.label\"\n           [matAutocomplete]=\"auto\"\n           [value]=\"inputControl\"\n           [formControl]=\"inputControl\">\n    <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayWith\" (optionSelected)=\"setSelectedValue($event)\">\n      <mat-option *ngFor=\"let item of filteredItems | async\" [value]=\"item\">\n        <small>{{item.name}}</small>\n      </mat-option>\n    </mat-autocomplete>\n  </mat-form-field>\n\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n\r\n  <mat-form-field *ngIf=\"!loading && !error\">\r\n    <input aria-label=\"State\" matInput\r\n           [placeholder]=\"data.label\"\r\n           [matAutocomplete]=\"auto\"\r\n           [value]=\"inputControl\"\r\n           [formControl]=\"inputControl\">\r\n    <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayWith\" (optionSelected)=\"setSelectedValue($event)\">\r\n      <mat-option *ngFor=\"let item of filteredItems | async\" [value]=\"item\">\r\n        <small>{{item.name}}</small>\r\n      </mat-option>\r\n    </mat-autocomplete>\r\n  </mat-form-field>\r\n\r\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\r\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
@@ -639,7 +541,7 @@ __export(__webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.co
 /***/ "./fs-prompt-select/fs-prompt-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <mat-select [placeholder]=\"data.label\" [(value)]=\"result\">\n      <mat-option *ngFor=\"let item of items\" [value]=\"item.value\">\n        {{ item.name }}\n      </mat-option>\n    </mat-select>\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n  <mat-form-field *ngIf=\"!loading && !error\">\r\n    <mat-select [placeholder]=\"data.label\" [(value)]=\"result\">\r\n      <mat-option *ngFor=\"let item of items\" [value]=\"item.value\">\r\n        {{ item.name }}\r\n      </mat-option>\r\n    </mat-select>\r\n    <mat-hint>{{data.hint}}</mat-hint>\r\n  </mat-form-field>\r\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\r\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
 
 /***/ }),
 
@@ -747,17 +649,9 @@ __export(__webpack_require__("./fs-prompt-select/fs-prompt-select.component.ts")
 /***/ }),
 
 /***/ "./fsprompt.scss":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!./fsprompt.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
 
 /***/ }),
 

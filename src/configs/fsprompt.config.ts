@@ -17,10 +17,9 @@ export class FsPromptConfig<T> {
 
   protected _dialogConfig: MatDialogConfig;
 
-
   protected _defaultDialogConfig = {
     width: '500px',
-    heigth: 'auto'
+    height: 'auto'
   };
 
   constructor(

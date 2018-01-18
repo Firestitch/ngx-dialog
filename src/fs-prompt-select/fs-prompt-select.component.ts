@@ -3,9 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FsPrompt, ConverterType } from '../fsprompt.service';
 
 @Component({
-  selector: 'fs-prompt-select',
   templateUrl: 'fs-prompt-select.component.html',
-  styleUrls: [ '../fsprompt.scss' ],
+  styles: [ String(require('./../fsprompt.css')) ]
 })
 export class FsPromptSelectComponent implements OnInit {
 
