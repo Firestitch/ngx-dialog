@@ -46,6 +46,19 @@ export class FsPromptConfig<T> {
     return config
   }
 
+  public addDefaultPanelClasses(type: string) {
+    // FIXME replace this with FsUtil or something else
+    if (typeof this._dialogConfig.panelClass === 'string' || this._dialogConfig.panelClass instanceof String) {
+      this._dialogConfig.panelClass = this._dialogConfig.panelClass.split(' ');
+    }
+
+    if (!Array.isArray(this._dialogConfig.panelClass)) {
+      this._dialogConfig.panelClass = [];
+    }
+
+    this._dialogConfig.panelClass.push('fs-prompt', 'fs-prompt-' + type);
+  }
+
   protected applyConfig(config: IFsPromptConfig) {
     Object.assign(this, config);
   }

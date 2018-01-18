@@ -128,12 +128,8 @@ export class FsPrompt {
    * @returns {any}
    */
   private open(config: FsPromptConfig<any> | FsPromptConfirmConfig<any>, type: PromptType) {
-
-    // TODO
-    // if(this.fsUtil.isString(config.dialogConfig.panelClass)) {
-    //  config.dialogConfig.panelClass = config.dialogConfig.panelClass.split(' ');
-    // }
-    //config.dialogConfig.panelClass.push('fs-prompt').push('fs-prompt-' + type);
+    // Default classes for modal
+    config.addDefaultPanelClasses(type);
 
     switch (type) {
       case PromptType.confirm: {
