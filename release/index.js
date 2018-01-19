@@ -75,6 +75,104 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./fsprompt.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ".mat-form-field {\n  display: block;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-dialog/fsprompt.css"],"names":[],"mappings":"AAAA;EACE,eAAA;CACD","file":"fsprompt.css","sourcesContent":[".mat-form-field {\n  display: block;\n}\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/lib/css-base.js":
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
 /***/ "./configs/fsprompt-confirm.config.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -140,7 +238,7 @@ var FsPromptConfig = /** @class */ (function () {
         this.values = [];
         this._defaultDialogConfig = {
             width: '500px',
-            heigth: 'auto'
+            height: 'auto'
         };
         this.applyDialogConfig(config);
         this.applyConfig(config);
@@ -163,6 +261,16 @@ var FsPromptConfig = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    FsPromptConfig.prototype.addDefaultPanelClasses = function (type) {
+        // FIXME replace this with FsUtil or something else
+        if (typeof this._dialogConfig.panelClass === 'string' || this._dialogConfig.panelClass instanceof String) {
+            this._dialogConfig.panelClass = this._dialogConfig.panelClass.split(' ');
+        }
+        if (!Array.isArray(this._dialogConfig.panelClass)) {
+            this._dialogConfig.panelClass = [];
+        }
+        this._dialogConfig.panelClass.push('fs-prompt', 'fs-prompt-' + type);
+    };
     FsPromptConfig.prototype.applyConfig = function (config) {
         Object.assign(this, config);
     };
@@ -201,67 +309,6 @@ __export(__webpack_require__("./configs/fsprompt-confirm.config.ts"));
 
 /***/ }),
 
-/***/ "./fs-confirm/fs-confirm.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
-
-/***/ }),
-
-/***/ "./fs-confirm/fs-confirm.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("@angular/core");
-var dialog_1 = __webpack_require__("@angular/material/dialog");
-var FsConfirmComponent = /** @class */ (function () {
-    function FsConfirmComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    FsConfirmComponent = __decorate([
-        core_1.Component({
-            selector: 'fs-confirm',
-            template: __webpack_require__("./fs-confirm/fs-confirm.component.html"),
-        }),
-        __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
-        __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
-    ], FsConfirmComponent);
-    return FsConfirmComponent;
-}());
-exports.FsConfirmComponent = FsConfirmComponent;
-
-
-/***/ }),
-
-/***/ "./fs-confirm/index.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("./fs-confirm/fs-confirm.component.ts"));
-
-
-/***/ }),
-
 /***/ "./fs-dialog.module.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -280,8 +327,8 @@ var forms_1 = __webpack_require__("@angular/forms");
 // Material
 var material_1 = __webpack_require__("@angular/material");
 // Dialog
-var fs_confirm_1 = __webpack_require__("./fs-confirm/index.ts");
-var fs_input_1 = __webpack_require__("./fs-input/index.ts");
+var fs_prompt_confirm_1 = __webpack_require__("./fs-prompt-confirm/index.ts");
+var fs_prompt_input_1 = __webpack_require__("./fs-prompt-input/index.ts");
 var fs_prompt_select_1 = __webpack_require__("./fs-prompt-select/index.ts");
 var fsprompt_service_1 = __webpack_require__("./fsprompt.service.ts");
 var fs_prompt_autocomplete_1 = __webpack_require__("./fs-prompt-autocomplete/index.ts");
@@ -311,14 +358,14 @@ var FsDialogModule = /** @class */ (function () {
                 material_1.MatAutocompleteModule,
             ],
             entryComponents: [
-                fs_confirm_1.FsConfirmComponent,
-                fs_input_1.FsInputComponent,
+                fs_prompt_confirm_1.FsPromptConfirmComponent,
+                fs_prompt_input_1.FsPromptInputComponent,
                 fs_prompt_select_1.FsPromptSelectComponent,
                 fs_prompt_autocomplete_1.FsPromptAutocompleteComponent,
             ],
             declarations: [
-                fs_confirm_1.FsConfirmComponent,
-                fs_input_1.FsInputComponent,
+                fs_prompt_confirm_1.FsPromptConfirmComponent,
+                fs_prompt_input_1.FsPromptInputComponent,
                 fs_prompt_select_1.FsPromptSelectComponent,
                 fs_prompt_autocomplete_1.FsPromptAutocompleteComponent,
             ],
@@ -335,76 +382,10 @@ exports.FsDialogModule = FsDialogModule;
 
 /***/ }),
 
-/***/ "./fs-input/fs-input.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n  <mat-form-field>\r\n    <input matInput [placeholder]=\"data.label\" [(ngModel)]=\"inputValue\">\r\n    <mat-hint>{{data.hint}}</mat-hint>\r\n  </mat-form-field>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
-
-/***/ }),
-
-/***/ "./fs-input/fs-input.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("@angular/core");
-var dialog_1 = __webpack_require__("@angular/material/dialog");
-var FsInputComponent = /** @class */ (function () {
-    function FsInputComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-        this.inputValue = '';
-    }
-    FsInputComponent.prototype.complete = function () {
-        this.dialogRef.close(this.inputValue);
-    };
-    FsInputComponent = __decorate([
-        core_1.Component({
-            selector: 'fs-input',
-            template: __webpack_require__("./fs-input/fs-input.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
-        }),
-        __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
-        __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
-    ], FsInputComponent);
-    return FsInputComponent;
-}());
-exports.FsInputComponent = FsInputComponent;
-
-
-/***/ }),
-
-/***/ "./fs-input/index.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("./fs-input/fs-input.component.ts"));
-
-
-/***/ }),
-
 /***/ "./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n\r\n  <mat-form-field *ngIf=\"!loading && !error\">\r\n    <input aria-label=\"State\" matInput\r\n           [placeholder]=\"data.label\"\r\n           [matAutocomplete]=\"auto\"\r\n           [value]=\"inputControl\"\r\n           [formControl]=\"inputControl\">\r\n    <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayWith\" (optionSelected)=\"setSelectedValue($event)\">\r\n      <mat-option *ngFor=\"let item of filteredItems | async\" [value]=\"item\">\r\n        <small>{{item.name}}</small>\r\n      </mat-option>\r\n    </mat-autocomplete>\r\n  </mat-form-field>\r\n\r\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\r\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <input aria-label=\"State\" matInput\n           [placeholder]=\"data.label\"\n           [matAutocomplete]=\"auto\"\n           [value]=\"inputControl\"\n           [formControl]=\"inputControl\">\n    <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayWith\" (optionSelected)=\"setSelectedValue($event)\">\n      <mat-option *ngFor=\"let item of filteredItems | async\" [value]=\"item\">\n        <small>{{item.name}}</small>\n      </mat-option>\n    </mat-autocomplete>\n  </mat-form-field>\n\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
 
 /***/ }),
 
@@ -512,7 +493,7 @@ var FsPromptAutocompleteComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'fs-prompt-autocomplete',
             template: __webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
+            styles: [__webpack_require__("./fsprompt.css")],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
@@ -538,10 +519,136 @@ __export(__webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.co
 
 /***/ }),
 
+/***/ "./fs-prompt-confirm/fs-prompt-confirm.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+
+/***/ }),
+
+/***/ "./fs-prompt-confirm/fs-prompt-confirm.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("@angular/core");
+var dialog_1 = __webpack_require__("@angular/material/dialog");
+var FsPromptConfirmComponent = /** @class */ (function () {
+    function FsPromptConfirmComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    FsPromptConfirmComponent = __decorate([
+        core_1.Component({
+            template: __webpack_require__("./fs-prompt-confirm/fs-prompt-confirm.component.html"),
+            styles: [__webpack_require__("./fsprompt.css")],
+        }),
+        __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
+        __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
+    ], FsPromptConfirmComponent);
+    return FsPromptConfirmComponent;
+}());
+exports.FsPromptConfirmComponent = FsPromptConfirmComponent;
+
+
+/***/ }),
+
+/***/ "./fs-prompt-confirm/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("./fs-prompt-confirm/fs-prompt-confirm.component.ts"));
+
+
+/***/ }),
+
+/***/ "./fs-prompt-input/fs-prompt-input.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 mat-dialog-title *ngIf=\"data.title\">{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field>\n    <input matInput [placeholder]=\"data.label\" [(ngModel)]=\"inputValue\">\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+
+/***/ }),
+
+/***/ "./fs-prompt-input/fs-prompt-input.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("@angular/core");
+var dialog_1 = __webpack_require__("@angular/material/dialog");
+var FsPromptInputComponent = /** @class */ (function () {
+    function FsPromptInputComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.inputValue = '';
+    }
+    FsPromptInputComponent.prototype.complete = function () {
+        this.dialogRef.close(this.inputValue);
+    };
+    FsPromptInputComponent = __decorate([
+        core_1.Component({
+            template: __webpack_require__("./fs-prompt-input/fs-prompt-input.component.html"),
+            styles: [__webpack_require__("./fsprompt.css")],
+        }),
+        __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
+        __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
+    ], FsPromptInputComponent);
+    return FsPromptInputComponent;
+}());
+exports.FsPromptInputComponent = FsPromptInputComponent;
+
+
+/***/ }),
+
+/***/ "./fs-prompt-input/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("./fs-prompt-input/fs-prompt-input.component.ts"));
+
+
+/***/ }),
+
 /***/ "./fs-prompt-select/fs-prompt-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\r\n<mat-dialog-content tabindex=\"-1\">\r\n  {{data.template}}\r\n  <mat-form-field *ngIf=\"!loading && !error\">\r\n    <mat-select [placeholder]=\"data.label\" [(value)]=\"result\">\r\n      <mat-option *ngFor=\"let item of items\" [value]=\"item.value\">\r\n        {{ item.name }}\r\n      </mat-option>\r\n    </mat-select>\r\n    <mat-hint>{{data.hint}}</mat-hint>\r\n  </mat-form-field>\r\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\r\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\r\n</mat-dialog-content>\r\n\r\n<mat-dialog-actions align=\"end\">\r\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\r\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\r\n</mat-dialog-actions>\r\n"
+module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n  <mat-form-field *ngIf=\"!loading && !error\">\n    <mat-select [placeholder]=\"data.label\" [(value)]=\"result\">\n      <mat-option *ngFor=\"let item of items\" [value]=\"item.value\">\n        {{ item.name }}\n      </mat-option>\n    </mat-select>\n    <mat-hint>{{data.hint}}</mat-hint>\n  </mat-form-field>\n  <ng-container *ngIf=\"loading\">Please wait...</ng-container>\n  <ng-container *ngIf=\"error\">Something went wrong. Please, try again</ng-container>\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button (click)=\"complete()\" *ngIf=\"!error && !loading\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
 
 /***/ }),
 
@@ -620,9 +727,8 @@ var FsPromptSelectComponent = /** @class */ (function () {
     };
     FsPromptSelectComponent = __decorate([
         core_1.Component({
-            selector: 'fs-prompt-select',
             template: __webpack_require__("./fs-prompt-select/fs-prompt-select.component.html"),
-            styles: [__webpack_require__("./fsprompt.scss")],
+            styles: [__webpack_require__("./fsprompt.css")],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
@@ -648,10 +754,18 @@ __export(__webpack_require__("./fs-prompt-select/fs-prompt-select.component.ts")
 
 /***/ }),
 
-/***/ "./fsprompt.scss":
-/***/ (function(module, exports) {
+/***/ "./fsprompt.css":
+/***/ (function(module, exports, __webpack_require__) {
 
 
+        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./fsprompt.css");
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
 
 /***/ }),
 
@@ -674,8 +788,8 @@ var core_1 = __webpack_require__("@angular/core");
 // Modal
 var dialog_1 = __webpack_require__("@angular/material/dialog");
 // Components for open in modal
-var fs_confirm_component_1 = __webpack_require__("./fs-confirm/fs-confirm.component.ts");
-var fs_input_component_1 = __webpack_require__("./fs-input/fs-input.component.ts");
+var fs_prompt_confirm_component_1 = __webpack_require__("./fs-prompt-confirm/fs-prompt-confirm.component.ts");
+var fs_prompt_input_component_1 = __webpack_require__("./fs-prompt-input/fs-prompt-input.component.ts");
 var fs_prompt_select_component_1 = __webpack_require__("./fs-prompt-select/fs-prompt-select.component.ts");
 var fs_prompt_autocomplete_component_1 = __webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.component.ts");
 // Configs
@@ -687,10 +801,10 @@ __webpack_require__("rxjs/add/operator/switchMap");
 var Observable_1 = __webpack_require__("rxjs/Observable");
 var PromptType;
 (function (PromptType) {
-    PromptType[PromptType["confirm"] = 0] = "confirm";
-    PromptType[PromptType["input"] = 1] = "input";
-    PromptType[PromptType["select"] = 2] = "select";
-    PromptType[PromptType["autocomplete"] = 3] = "autocomplete";
+    PromptType["confirm"] = "confirm";
+    PromptType["input"] = "input";
+    PromptType["select"] = "select";
+    PromptType["autocomplete"] = "autocomplete";
 })(PromptType = exports.PromptType || (exports.PromptType = {}));
 var ConverterType;
 (function (ConverterType) {
@@ -789,13 +903,15 @@ var FsPrompt = /** @class */ (function () {
      * @returns {any}
      */
     FsPrompt.prototype.open = function (config, type) {
+        // Default classes for modal
+        config.addDefaultPanelClasses(type);
         switch (type) {
             case PromptType.confirm: {
-                return this.dialog.open(fs_confirm_component_1.FsConfirmComponent, config.dialogConfig).afterClosed()
+                return this.dialog.open(fs_prompt_confirm_component_1.FsPromptConfirmComponent, config.dialogConfig).afterClosed()
                     .switchMap(function (value) { return (value) ? Observable_1.Observable.of(value) : Observable_1.Observable.throw('error'); });
             }
             case PromptType.input: {
-                return this.dialog.open(fs_input_component_1.FsInputComponent, config.dialogConfig).afterClosed();
+                return this.dialog.open(fs_prompt_input_component_1.FsPromptInputComponent, config.dialogConfig).afterClosed();
             }
             case PromptType.select: {
                 return this.dialog.open(fs_prompt_select_component_1.FsPromptSelectComponent, config.dialogConfig).afterClosed();
@@ -828,8 +944,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("./fs-dialog.module.ts"));
 __export(__webpack_require__("./configs/index.ts"));
-__export(__webpack_require__("./fs-confirm/index.ts"));
-__export(__webpack_require__("./fs-input/index.ts"));
+__export(__webpack_require__("./fs-prompt-confirm/index.ts"));
+__export(__webpack_require__("./fs-prompt-input/index.ts"));
 __export(__webpack_require__("./fs-prompt-autocomplete/index.ts"));
 __export(__webpack_require__("./fs-prompt-select/index.ts"));
 __export(__webpack_require__("./fsprompt.service.ts"));

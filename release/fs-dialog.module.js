@@ -12,8 +12,8 @@ var forms_1 = require("@angular/forms");
 // Material
 var material_1 = require("@angular/material");
 // Dialog
-var fs_confirm_1 = require("./fs-confirm");
-var fs_input_1 = require("./fs-input");
+var fs_prompt_confirm_1 = require("./fs-prompt-confirm");
+var fs_prompt_input_1 = require("./fs-prompt-input");
 var fs_prompt_select_1 = require("./fs-prompt-select");
 var fsprompt_service_1 = require("./fsprompt.service");
 var fs_prompt_autocomplete_1 = require("./fs-prompt-autocomplete");
@@ -43,14 +43,14 @@ var FsDialogModule = /** @class */ (function () {
                 material_1.MatAutocompleteModule,
             ],
             entryComponents: [
-                fs_confirm_1.FsConfirmComponent,
-                fs_input_1.FsInputComponent,
+                fs_prompt_confirm_1.FsPromptConfirmComponent,
+                fs_prompt_input_1.FsPromptInputComponent,
                 fs_prompt_select_1.FsPromptSelectComponent,
                 fs_prompt_autocomplete_1.FsPromptAutocompleteComponent,
             ],
             declarations: [
-                fs_confirm_1.FsConfirmComponent,
-                fs_input_1.FsInputComponent,
+                fs_prompt_confirm_1.FsPromptConfirmComponent,
+                fs_prompt_input_1.FsPromptInputComponent,
                 fs_prompt_select_1.FsPromptSelectComponent,
                 fs_prompt_autocomplete_1.FsPromptAutocompleteComponent,
             ],

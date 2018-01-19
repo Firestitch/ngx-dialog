@@ -5,7 +5,7 @@ export interface IFsPromptConfig {
     template?: string;
     hint?: string;
     label?: string;
-    class?: string;
+    class?: string | string[];
     commitLabel?: string;
     cancelLabel?: string;
     values?: FsValuesFunction;

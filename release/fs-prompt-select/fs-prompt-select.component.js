@@ -69,7 +69,6 @@ var FsPromptSelectComponent = /** @class */ (function () {
     };
     FsPromptSelectComponent = __decorate([
         core_1.Component({
-            selector: 'fs-prompt-select',
             templateUrl: 'fs-prompt-select.component.html',
             styleUrls: ['../fsprompt.css'],
         }),

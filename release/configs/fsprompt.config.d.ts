@@ -15,10 +15,11 @@ export declare class FsPromptConfig<T> {
     protected _dialogConfig: MatDialogConfig;
     protected _defaultDialogConfig: {
         width: string;
-        heigth: string;
+        height: string;
     };
     constructor(config: IFsPromptConfig);
     readonly dialogConfig: MatDialogConfig<any>;
+    addDefaultPanelClasses(type: string): void;
     protected applyConfig(config: IFsPromptConfig): void;
     protected applyDialogConfig(config: IFsPromptConfig): void;
 }

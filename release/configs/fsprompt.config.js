@@ -13,7 +13,7 @@ var FsPromptConfig = /** @class */ (function () {
         this.values = [];
         this._defaultDialogConfig = {
             width: '500px',
-            heigth: 'auto'
+            height: 'auto'
         };
         this.applyDialogConfig(config);
         this.applyConfig(config);
@@ -36,6 +36,16 @@ var FsPromptConfig = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    FsPromptConfig.prototype.addDefaultPanelClasses = function (type) {
+        // FIXME replace this with FsUtil or something else
+        if (typeof this._dialogConfig.panelClass === 'string' || this._dialogConfig.panelClass instanceof String) {
+            this._dialogConfig.panelClass = this._dialogConfig.panelClass.split(' ');
+        }
+        if (!Array.isArray(this._dialogConfig.panelClass)) {
+            this._dialogConfig.panelClass = [];
+        }
+        this._dialogConfig.panelClass.push('fs-prompt', 'fs-prompt-' + type);
+    };
     FsPromptConfig.prototype.applyConfig = function (config) {
         Object.assign(this, config);
     };

@@ -14,25 +14,24 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var dialog_1 = require("@angular/material/dialog");
-var FsInputComponent = /** @class */ (function () {
-    function FsInputComponent(dialogRef, data) {
+var FsPromptInputComponent = /** @class */ (function () {
+    function FsPromptInputComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
         this.data = data;
         this.inputValue = '';
     }
-    FsInputComponent.prototype.complete = function () {
+    FsPromptInputComponent.prototype.complete = function () {
         this.dialogRef.close(this.inputValue);
     };
-    FsInputComponent = __decorate([
+    FsPromptInputComponent = __decorate([
         core_1.Component({
-            selector: 'fs-input',
-            templateUrl: 'fs-input.component.html',
+            templateUrl: 'fs-prompt-input.component.html',
             styleUrls: ['../fsprompt.css'],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
-    ], FsInputComponent);
-    return FsInputComponent;
+    ], FsPromptInputComponent);
+    return FsPromptInputComponent;
 }());
-exports.FsInputComponent = FsInputComponent;
-//# sourceMappingURL=fs-input.component.js.map
+exports.FsPromptInputComponent = FsPromptInputComponent;
+//# sourceMappingURL=fs-prompt-input.component.js.map

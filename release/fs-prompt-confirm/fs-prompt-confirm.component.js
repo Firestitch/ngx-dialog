@@ -14,20 +14,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var dialog_1 = require("@angular/material/dialog");
-var FsConfirmComponent = /** @class */ (function () {
-    function FsConfirmComponent(dialogRef, data) {
+var FsPromptConfirmComponent = /** @class */ (function () {
+    function FsPromptConfirmComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
         this.data = data;
     }
-    FsConfirmComponent = __decorate([
+    FsPromptConfirmComponent = __decorate([
         core_1.Component({
-            selector: 'fs-confirm',
-            templateUrl: './fs-confirm.component.html',
+            templateUrl: './fs-prompt-confirm.component.html',
+            styleUrls: ['../fsprompt.css'],
         }),
         __param(1, core_1.Inject(dialog_1.MAT_DIALOG_DATA)),
         __metadata("design:paramtypes", [dialog_1.MatDialogRef, Object])
-    ], FsConfirmComponent);
-    return FsConfirmComponent;
+    ], FsPromptConfirmComponent);
+    return FsPromptConfirmComponent;
 }());
-exports.FsConfirmComponent = FsConfirmComponent;
-//# sourceMappingURL=fs-confirm.component.js.map
+exports.FsPromptConfirmComponent = FsPromptConfirmComponent;
+//# sourceMappingURL=fs-prompt-confirm.component.js.map

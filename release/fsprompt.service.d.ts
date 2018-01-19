@@ -4,10 +4,10 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 export declare enum PromptType {
-    confirm = 0,
-    input = 1,
-    select = 2,
-    autocomplete = 3,
+    confirm = "confirm",
+    input = "input",
+    select = "select",
+    autocomplete = "autocomplete",
 }
 export declare enum ConverterType {
     observable = 0,

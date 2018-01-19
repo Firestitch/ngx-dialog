@@ -13,8 +13,8 @@ var core_1 = require("@angular/core");
 // Modal
 var dialog_1 = require("@angular/material/dialog");
 // Components for open in modal
-var fs_confirm_component_1 = require("./fs-confirm/fs-confirm.component");
-var fs_input_component_1 = require("./fs-input/fs-input.component");
+var fs_prompt_confirm_component_1 = require("./fs-prompt-confirm/fs-prompt-confirm.component");
+var fs_prompt_input_component_1 = require("./fs-prompt-input/fs-prompt-input.component");
 var fs_prompt_select_component_1 = require("./fs-prompt-select/fs-prompt-select.component");
 var fs_prompt_autocomplete_component_1 = require("./fs-prompt-autocomplete/fs-prompt-autocomplete.component");
 // Configs
@@ -26,10 +26,10 @@ require("rxjs/add/operator/switchMap");
 var Observable_1 = require("rxjs/Observable");
 var PromptType;
 (function (PromptType) {
-    PromptType[PromptType["confirm"] = 0] = "confirm";
-    PromptType[PromptType["input"] = 1] = "input";
-    PromptType[PromptType["select"] = 2] = "select";
-    PromptType[PromptType["autocomplete"] = 3] = "autocomplete";
+    PromptType["confirm"] = "confirm";
+    PromptType["input"] = "input";
+    PromptType["select"] = "select";
+    PromptType["autocomplete"] = "autocomplete";
 })(PromptType = exports.PromptType || (exports.PromptType = {}));
 var ConverterType;
 (function (ConverterType) {
@@ -128,13 +128,15 @@ var FsPrompt = /** @class */ (function () {
      * @returns {any}
      */
     FsPrompt.prototype.open = function (config, type) {
+        // Default classes for modal
+        config.addDefaultPanelClasses(type);
         switch (type) {
             case PromptType.confirm: {
-                return this.dialog.open(fs_confirm_component_1.FsConfirmComponent, config.dialogConfig).afterClosed()
+                return this.dialog.open(fs_prompt_confirm_component_1.FsPromptConfirmComponent, config.dialogConfig).afterClosed()
                     .switchMap(function (value) { return (value) ? Observable_1.Observable.of(value) : Observable_1.Observable.throw('error'); });
             }
             case PromptType.input: {
-                return this.dialog.open(fs_input_component_1.FsInputComponent, config.dialogConfig).afterClosed();
+                return this.dialog.open(fs_prompt_input_component_1.FsPromptInputComponent, config.dialogConfig).afterClosed();
             }
             case PromptType.select: {
                 return this.dialog.open(fs_prompt_select_component_1.FsPromptSelectComponent, config.dialogConfig).afterClosed();
