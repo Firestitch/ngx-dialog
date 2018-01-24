@@ -1,8 +1,8 @@
-# @firestitch/fs-dialog
+# @firestitch/dialog
 
 ### Installation
 
-`npm install @firestitch/fs-dialog --save`
+`npm install @firestitch/dialog --save`
 
 ### How to use
 
