@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("@angular/core"), require("@angular/material/dialog"), require("rxjs/add/observable/of"), require("rxjs/add/operator/switchMap"), require("rxjs/Observable"), require("@angular/forms"), require("rxjs/operators"), require("@angular/common"), require("@angular/material"));
 	else if(typeof define === 'function' && define.amd)
-		define("@firestitch/fs-dialog", ["@angular/core", "@angular/material/dialog", "rxjs/add/observable/of", "rxjs/add/operator/switchMap", "rxjs/Observable", "@angular/forms", "rxjs/operators", "@angular/common", "@angular/material"], factory);
+		define("@firestitch/dialog", ["@angular/core", "@angular/material/dialog", "rxjs/add/observable/of", "rxjs/add/operator/switchMap", "rxjs/Observable", "@angular/forms", "rxjs/operators", "@angular/common", "@angular/material"], factory);
 	else if(typeof exports === 'object')
-		exports["@firestitch/fs-dialog"] = factory(require("@angular/core"), require("@angular/material/dialog"), require("rxjs/add/observable/of"), require("rxjs/add/operator/switchMap"), require("rxjs/Observable"), require("@angular/forms"), require("rxjs/operators"), require("@angular/common"), require("@angular/material"));
+		exports["@firestitch/dialog"] = factory(require("@angular/core"), require("@angular/material/dialog"), require("rxjs/add/observable/of"), require("rxjs/add/operator/switchMap"), require("rxjs/Observable"), require("@angular/forms"), require("rxjs/operators"), require("@angular/common"), require("@angular/material"));
 	else
-		root["@firestitch/fs-dialog"] = factory(root["@angular/core"], root["@angular/material/dialog"], root["rxjs/add/observable/of"], root["rxjs/add/operator/switchMap"], root["rxjs/Observable"], root["@angular/forms"], root["rxjs/operators"], root["@angular/common"], root["@angular/material"]);
+		root["@firestitch/dialog"] = factory(root["@angular/core"], root["@angular/material/dialog"], root["rxjs/add/observable/of"], root["rxjs/add/operator/switchMap"], root["rxjs/Observable"], root["@angular/forms"], root["rxjs/operators"], root["@angular/common"], root["@angular/material"]);
 })(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE__angular_core__, __WEBPACK_EXTERNAL_MODULE__angular_material_dialog__, __WEBPACK_EXTERNAL_MODULE_rxjs_add_observable_of__, __WEBPACK_EXTERNAL_MODULE_rxjs_add_operator_switchMap__, __WEBPACK_EXTERNAL_MODULE_rxjs_Observable__, __WEBPACK_EXTERNAL_MODULE__angular_forms__, __WEBPACK_EXTERNAL_MODULE_rxjs_operators__, __WEBPACK_EXTERNAL_MODULE__angular_common__, __WEBPACK_EXTERNAL_MODULE__angular_material__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
