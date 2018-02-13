@@ -1,22 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FsPrompt } from '../../src';
+import { Component } from '@angular/core';
+import { FsPrompt } from './../../src';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'pl-app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: [ '../styles/styles.scss' ],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+
   public inputValue: string | boolean = false;
   public selectValue = false;
   public selectAutoValue = false;
 
   constructor(public fsPrompt: FsPrompt) {}
-
-  public ngOnInit() {
-  }
 
   /**
    * Confirm modal
