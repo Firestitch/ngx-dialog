@@ -83,7 +83,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".mat-form-field {\n  display: block;\n}", "", {"version":3,"sources":["/Users/mendor/work/fs-dialog/fsprompt.css"],"names":[],"mappings":"AAAA;EACE,eAAA;CACD","file":"fsprompt.css","sourcesContent":[".mat-form-field {\n  display: block;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".mat-form-field {\n  display: block;\n}\n\n.dialog-title {\n  margin: 0 0 20px;\n  display: block;\n}", "", {"version":3,"sources":["/Users/mendor/work/fs-dialog/fsprompt.css"],"names":[],"mappings":"AAAA;EACE,eAAA;CACD;;AAED;EACE,iBAAA;EACA,eAAA;CACD","file":"fsprompt.css","sourcesContent":[".mat-form-field {\n  display: block;\n}\n\n.dialog-title {\n  margin: 0 0 20px;\n  display: block;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -522,7 +522,7 @@ __export(__webpack_require__("./fs-prompt-autocomplete/fs-prompt-autocomplete.co
 /***/ "./fs-prompt-confirm/fs-prompt-confirm.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 mat-dialog-title>{{data.title}}</h2>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\n</mat-dialog-actions>\n"
+module.exports = "<b class=\"dialog-title\">{{data.title}}</b>\n<mat-dialog-content tabindex=\"-1\">\n  {{data.template}}\n</mat-dialog-content>\n\n<mat-dialog-actions align=\"end\">\n  <button mat-button [mat-dialog-close]=\"true\">{{data.commitLabel}}</button>\n  <button mat-button [mat-dialog-close]=\"false\">{{data.cancelLabel}}</button>\n</mat-dialog-actions>\n"
 
 /***/ }),
 
