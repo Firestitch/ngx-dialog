@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("@angular/core"), require("@angular/material/dialog"), require("rxjs/add/observable/of"), require("rxjs/add/operator/switchMap"), require("rxjs/Observable"), require("@angular/forms"), require("rxjs/operators"), require("@angular/common"), require("@angular/material"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("@firestitch/dialog", ["@angular/core", "@angular/material/dialog", "rxjs/add/observable/of", "rxjs/add/operator/switchMap", "rxjs/Observable", "@angular/forms", "rxjs/operators", "@angular/common", "@angular/material"], factory);
+		define("@firestitch/dialog", [], factory);
 	else if(typeof exports === 'object')
-		exports["@firestitch/dialog"] = factory(require("@angular/core"), require("@angular/material/dialog"), require("rxjs/add/observable/of"), require("rxjs/add/operator/switchMap"), require("rxjs/Observable"), require("@angular/forms"), require("rxjs/operators"), require("@angular/common"), require("@angular/material"));
+		exports["@firestitch/dialog"] = factory();
 	else
-		root["@firestitch/dialog"] = factory(root["@angular/core"], root["@angular/material/dialog"], root["rxjs/add/observable/of"], root["rxjs/add/operator/switchMap"], root["rxjs/Observable"], root["@angular/forms"], root["rxjs/operators"], root["@angular/common"], root["@angular/material"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE__angular_core__, __WEBPACK_EXTERNAL_MODULE__angular_material_dialog__, __WEBPACK_EXTERNAL_MODULE_rxjs_add_observable_of__, __WEBPACK_EXTERNAL_MODULE_rxjs_add_operator_switchMap__, __WEBPACK_EXTERNAL_MODULE_rxjs_Observable__, __WEBPACK_EXTERNAL_MODULE__angular_forms__, __WEBPACK_EXTERNAL_MODULE_rxjs_operators__, __WEBPACK_EXTERNAL_MODULE__angular_common__, __WEBPACK_EXTERNAL_MODULE__angular_material__) {
+		root["@firestitch/dialog"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -956,63 +956,63 @@ __export(__webpack_require__("./fsprompt.service.ts"));
 /***/ "@angular/common":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__angular_common__;
+module.exports = require("@angular/common");
 
 /***/ }),
 
 /***/ "@angular/core":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__angular_core__;
+module.exports = require("@angular/core");
 
 /***/ }),
 
 /***/ "@angular/forms":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__angular_forms__;
+module.exports = require("@angular/forms");
 
 /***/ }),
 
 /***/ "@angular/material":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__angular_material__;
+module.exports = require("@angular/material");
 
 /***/ }),
 
 /***/ "@angular/material/dialog":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__angular_material_dialog__;
+module.exports = require("@angular/material/dialog");
 
 /***/ }),
 
 /***/ "rxjs/Observable":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_rxjs_Observable__;
+module.exports = require("rxjs/Observable");
 
 /***/ }),
 
 /***/ "rxjs/add/observable/of":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_rxjs_add_observable_of__;
+module.exports = require("rxjs/add/observable/of");
 
 /***/ }),
 
 /***/ "rxjs/add/operator/switchMap":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_rxjs_add_operator_switchMap__;
+module.exports = require("rxjs/add/operator/switchMap");
 
 /***/ }),
 
 /***/ "rxjs/operators":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_rxjs_operators__;
+module.exports = require("rxjs/operators");
 
 /***/ })
 
