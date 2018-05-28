@@ -3,16 +3,8 @@
   githubUrl="https://github.com/Firestitch/fs-dialog"
   npmUrl="https://www.npmjs.com/package/@firestitch/dialog">
 
-  <fs-example title="FsDialog Example" componentName="first-example">
-    <div fxLayout="column" fxLayoutGap="10px">
-      <button mat-raised-button (click)="showConfirm()">Open Confirm Dialog</button>
-      <button mat-raised-button (click)="openInput()">Open Input</button>
-      <ng-container *ngIf="inputValue !== false">Typed value: {{inputValue}}</ng-container>
-      <button mat-raised-button (click)="openSelect()">Open Select</button>
-      <ng-container *ngIf="selectValue !== false">Selected: {{selectValue}}</ng-container>
-      <button mat-raised-button (click)="openAutocomplete()">Open Autocomplete</button>
-      <ng-container *ngIf="selectAutoValue !== false">Selected: {{selectAutoValue}}</ng-container>
-    </div>
+  <fs-example title="Prompt" componentName="example">
+    <example></example>
   </fs-example>
 
 </fs-examples>

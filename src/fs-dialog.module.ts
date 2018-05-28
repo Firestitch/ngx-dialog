@@ -13,12 +13,11 @@ import {
 } from '@angular/material';
 
 // Dialog
-import { FsPromptConfirmComponent } from './fs-prompt-confirm';
-import { FsPromptInputComponent } from './fs-prompt-input';
-import { FsPromptSelectComponent } from './fs-prompt-select';
-import { FsPrompt } from './fsprompt.service';
-import { FsPromptAutocompleteComponent } from './fs-prompt-autocomplete';
-
+import {  FsPromptConfirmComponent,
+          FsPromptInputComponent,
+          FsPromptSelectComponent,
+          FsPromptAutocompleteComponent } from './components';
+import { FsPrompt } from './services/fs-prompt.service';
 
 @NgModule({
   imports: [

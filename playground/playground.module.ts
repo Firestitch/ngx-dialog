@@ -8,6 +8,7 @@ import { FsDialogModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
+import { ExampleComponent } from './app/components/example/example.component';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -22,7 +23,8 @@ import { FsExampleModule } from '@firestitch/example';
   entryComponents: [
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    ExampleComponent
   ],
   providers: [
   ],

@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{"FsPromptConfirmConfig":{"__symbolic":"class","extends":{"__symbolic":"reference","module":"./fsprompt.config","name":"FsPromptConfig","line":3,"character":46},"arity":1,"members":{"applyConfig":[{"__symbolic":"method"}],"applyDialogConfig":[{"__symbolic":"method"}]}}}}]
