@@ -4,6 +4,7 @@ import { IFsPromptConfig } from '../interfaces';
 export class FsPromptConfirmConfig<T> extends FsPromptConfig<T> {
 
   protected applyConfig(config) {
+
     super.applyConfig(config);
 
     if (!config.title) {
@@ -12,6 +13,20 @@ export class FsPromptConfirmConfig<T> extends FsPromptConfig<T> {
 
     if (!config.class) {
       config.class = 'fs-modal-confirm'
+    }
+
+    if (!this.buttons.length) {
+      this.buttons = [
+        {
+          label: this.commitLabel,
+          color: 'primary'
+        },
+        {
+          label: this.cancelLabel,
+          cancel: true,
+          color: ''
+        }
+      ];
     }
   }
 

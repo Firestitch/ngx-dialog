@@ -8,7 +8,10 @@ import { FsDialogModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
-import { ExampleComponent } from './app/components/example/example.component';
+import {  SelectComponent,
+          AutocompleteComponent,
+          InputComponent,
+          ConfirmComponent } from './app/components';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -24,7 +27,10 @@ import { ExampleComponent } from './app/components/example/example.component';
   ],
   declarations: [
     AppComponent,
-    ExampleComponent
+    SelectComponent,
+    AutocompleteComponent,
+    InputComponent,
+    ConfirmComponent
   ],
   providers: [
   ],

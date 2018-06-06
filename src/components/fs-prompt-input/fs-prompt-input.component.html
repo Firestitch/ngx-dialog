@@ -7,7 +7,7 @@
   </mat-form-field>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="false" *ngIf="data.cancelShow">{{data.cancelLabel}}</button>
+<mat-dialog-actions>
   <button mat-button (click)="complete()" *ngIf="data.commitShow">{{data.commitLabel}}</button>
+  <button mat-button [mat-dialog-close]="false" *ngIf="data.cancelShow">{{data.cancelLabel}}</button>
 </mat-dialog-actions>

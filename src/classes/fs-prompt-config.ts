@@ -14,7 +14,8 @@ export class FsPromptConfig<T> {
   public commitLabel = 'Ok';
   public cancelLabel = 'Cancel';
   public commitShow = true;
-  public cancelShow = true;  
+  public cancelShow = true;
+  public buttons = [];
 
   public values: Observable<T> | Promise<T> | T[] | FsValuesFunction = [];
 
@@ -35,18 +36,7 @@ export class FsPromptConfig<T> {
   get dialogConfig() {
 
     const config = Object.assign({}, this._dialogConfig);
-    config.data = {
-      title: this.title,
-      template: this.template,
-      hint: this.hint,
-      label: this.label,
-      class: this.class,
-      commitLabel: this.commitLabel,
-      cancelLabel: this.cancelLabel,    
-      commitShow: this.commitShow,
-      cancelShow: this.cancelShow,          
-      values: this.values
-    };
+    config.data = this;
 
     return config
   }

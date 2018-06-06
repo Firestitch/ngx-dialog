@@ -3,7 +3,10 @@
   {{data.template}}
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="false" *ngIf="data.cancelShow">{{data.cancelLabel}}</button>
-  <button mat-button [mat-dialog-close]="true" *ngIf="data.commitShow">{{data.commitLabel}}</button>  
+<mat-dialog-actions>
+  <button mat-button
+          (click)="close(button)"
+          [color]="button.color"
+          [ngClass]="button.class"
+          *ngFor="let button of data.buttons">{{button.label}}</button>
 </mat-dialog-actions>
