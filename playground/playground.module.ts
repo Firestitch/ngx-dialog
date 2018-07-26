@@ -4,33 +4,30 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FsDialogModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
-import {  SelectComponent,
-          AutocompleteComponent,
-          InputComponent,
-          ConfirmComponent } from './app/components';
+import { FsFormModule } from '@firestitch/form';
+import {  BasicComponent,
+          BasicDialogComponent } from './app/components';
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsDialogModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    FsExampleModule
+    FsExampleModule,
+    FsFormModule
   ],
   entryComponents: [
+    BasicDialogComponent
   ],
   declarations: [
     AppComponent,
-    SelectComponent,
-    AutocompleteComponent,
-    InputComponent,
-    ConfirmComponent
+    BasicComponent,
+    BasicDialogComponent
   ],
   providers: [
   ],
