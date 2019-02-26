@@ -7,7 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class BasicDialogComponent {
 
-  public object = {};
+  public object: any = {};
+  public input = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<BasicDialogComponent>) {}
