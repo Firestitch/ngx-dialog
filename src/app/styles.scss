@@ -1,0 +1,29 @@
+
+@media only screen and (max-width: 600px) {
+  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-backdrop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed !important;
+    max-width: none !important;
+    width: auto !important;
+    min-width: initial !important;
+
+    fs-dialog {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .mat-dialog-content {
+        max-height: initial;
+      }
+    }
+
+    .mat-dialog-container {
+      form {
+        display: inline;
+      }
+    }
+  }
+}

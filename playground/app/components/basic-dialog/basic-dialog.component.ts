@@ -9,6 +9,7 @@ export class BasicDialogComponent {
 
   public object: any = {};
   public input = '';
+  public paragraphs = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<BasicDialogComponent>) {}
@@ -19,5 +20,9 @@ export class BasicDialogComponent {
 
   close() {
     this.dialogRef.close();
+  }
+
+  addParagraph() {
+    this.paragraphs.push(this.paragraphs.length);
   }
 }

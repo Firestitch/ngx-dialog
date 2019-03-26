@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppMaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { BasicComponent, BasicDialogComponent } from './components';
+import { FsDialogModule } from '../../src/app/fs-dialog.module';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -21,6 +22,7 @@ import { BasicComponent, BasicDialogComponent } from './components';
     FsExampleModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     FsMessageModule.forRoot(),
+    FsDialogModule.forRoot()
   ],
   entryComponents: [
     BasicDialogComponent

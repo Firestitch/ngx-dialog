@@ -1,18 +1,26 @@
 
 <form (fsForm)="save()">
-  <div mat-dialog-title>Dialog Title</div>
-  <mat-dialog-content>
-      <mat-form-field>
-        <input placeholder="Input"
-          [(ngModel)]="input"
-          name="input"
-          matInput
-          [fsFormRequired]="true"
-          />
-      </mat-form-field>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button type="submit" mat-raised-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
-    <button mat-button mat-dialog-close (click)="close()">Cancel</button>
-  </mat-dialog-actions>
+  <fs-dialog>
+    <h1 mat-dialog-title>Dialog Title</h1>
+    <mat-dialog-content>
+      <div fxLayout="column">
+        <mat-form-field>
+          <input placeholder="Input"
+            [(ngModel)]="input"
+            name="input"
+            matInput
+            [fsFormRequired]="true"
+            />
+        </mat-form-field>
+        <p *ngFor="let number of paragraphs">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget consequat nisl, eget egestas orci. Aliquam hendrerit dui eu mauris luctus vehicula. Sed pulvinar lacinia enim vitae varius. Etiam finibus justo ut sapien condimentum, et molestie neque fermentum. Proin mattis erat augue, vitae tempor sem imperdiet in. Cras a eleifend nisi. Praesent accumsan lectus eu ligula volutpat, sed malesuada sapien vestibulum. Morbi rhoncus hendrerit condimentum. Phasellus nunc turpis, ultrices sodales arcu nec, aliquam mattis ipsum.
+        </p>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button type="submit" mat-raised-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
+      <button mat-button (click)="addParagraph()">Add Paragraph</button>
+      <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+    </mat-dialog-actions>
+  </fs-dialog>
 </form>

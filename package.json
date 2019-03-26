@@ -1,6 +1,7 @@
 {
   "name": "@firestitch/dialog",
-  "version": "1.1.0",
+  "title": "Dialog",
+  "version": "7.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-dialog"
@@ -42,11 +43,9 @@
     "@angular/platform-browser": "^7.2.5",
     "@angular/platform-browser-dynamic": "^7.2.5",
     "@compodoc/compodoc": "^1.1.7",
-    "@firestitch/app": "^0.1.4",
     "@firestitch/common": "^0.5.1",
-    "@firestitch/example": "^0.6.0",
+    "@firestitch/example": "^7.0.0",
     "@firestitch/form": "^1.2.2",
-    "@firestitch/iframe": "^0.2.0",
     "@firestitch/message": "^0.2.0",
     "codelyzer": "^4.5.0",
     "cpx": "^1.5.0",
