@@ -27,7 +27,9 @@ export class FsDialogModule {
             panelClass: 'fs-dialog-backdrop',
             maxWidth: '95vw',
             disableClose: false,
-            minWidth: '400px'
+            minWidth: '400px',
+            autoFocus: true,
+            hasBackdrop: true
           }
         }
       ]
