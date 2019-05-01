@@ -5,11 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
+import { FsLabelModule } from '@firestitch/label';
 import { ToastrModule } from 'ngx-toastr';
 import { AppMaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { BasicComponent, BasicDialogComponent } from './components';
 import { FsDialogModule } from '../../src/app/fs-dialog.module';
+import { KitchenSinkConfigureComponent } from './components/kitchen-sink-configure';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -19,18 +21,21 @@ import { FsDialogModule } from '../../src/app/fs-dialog.module';
     AppMaterialModule,
     FormsModule,
     FsFormModule,
+    FsLabelModule,
     FsExampleModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     FsMessageModule.forRoot(),
     FsDialogModule.forRoot()
   ],
   entryComponents: [
-    BasicDialogComponent
+    BasicDialogComponent,
+    KitchenSinkConfigureComponent
   ],
   declarations: [
     AppComponent,
     BasicComponent,
-    BasicDialogComponent
+    BasicDialogComponent,
+    KitchenSinkConfigureComponent
   ],
   providers: [],
 })

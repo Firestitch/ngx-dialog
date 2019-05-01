@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { BasicDialogComponent} from './../basic-dialog';
+import { FsExampleComponent } from '@firestitch/example';
+import { FsMessage } from '@firestitch/message';
+import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 
 @Component({
   selector: 'basic-example',
@@ -9,11 +12,20 @@ import { BasicDialogComponent} from './../basic-dialog';
 export class BasicComponent {
 
   public dialogRef;
-  constructor(private dialog: MatDialog) {}
+  public config = {
+    mobileMode: 'bottom'
+  };
+
+  constructor(private dialog: MatDialog,
+              private exampleComponent: FsExampleComponent,
+      private message: FsMessage) {
+    exampleComponent.setConfigureComponent(KitchenSinkConfigureComponent, { config: this.config });
+  }
+
 
   public open() {
     this.dialogRef = this.dialog.open(BasicDialogComponent, {
-      data: { }
+      data: { mobileMode: this.config.mobileMode }
     });
 
     this.dialogRef.afterClosed().subscribe(response => {

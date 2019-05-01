@@ -10,9 +10,12 @@ export class BasicDialogComponent {
   public object: any = {};
   public input = '';
   public paragraphs = [];
+  public mobileMode;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialogRef: MatDialogRef<BasicDialogComponent>) {}
+              private dialogRef: MatDialogRef<BasicDialogComponent>) {
+    this.mobileMode = data.mobileMode;
+  }
 
   save() {
     this.dialogRef.close();

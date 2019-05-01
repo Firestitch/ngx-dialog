@@ -12,8 +12,6 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
   ],
   exports: [
     FsDialogComponent,
-  ],
-  entryComponents: [
   ]
 })
 export class FsDialogModule {
