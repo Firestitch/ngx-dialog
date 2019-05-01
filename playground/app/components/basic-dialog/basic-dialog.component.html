@@ -5,22 +5,20 @@
     <mat-dialog-content>
       <div fxLayout="column">
         <mat-form-field>
-          <textarea placeholder="Input"
+          <textarea
+            placeholder="Input"
             [(ngModel)]="input"
             name="input"
             matInput
             cdkTextareaAutosize
-            [fsFormRequired]="true"
-            ></textarea>
+            [fsFormRequired]="true">
+          </textarea>
         </mat-form-field>
-        <p *ngFor="let number of paragraphs">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget consequat nisl, eget egestas orci. Aliquam hendrerit dui eu mauris luctus vehicula. Sed pulvinar lacinia enim vitae varius. Etiam finibus justo ut sapien condimentum, et molestie neque fermentum. Proin mattis erat augue, vitae tempor sem imperdiet in. Cras a eleifend nisi. Praesent accumsan lectus eu ligula volutpat, sed malesuada sapien vestibulum. Morbi rhoncus hendrerit condimentum. Phasellus nunc turpis, ultrices sodales arcu nec, aliquam mattis ipsum.
-        </p>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button type="submit" mat-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
-      <button mat-button (click)="addParagraph()">Add Paragraph</button>
+      <button mat-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
+      <button mat-button (click)="addText()" type="button">Add Text</button>
       <button mat-button mat-dialog-close (click)="close()">Cancel</button>
     </mat-dialog-actions>
   </fs-dialog>
