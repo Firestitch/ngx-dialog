@@ -5,18 +5,13 @@
   <div class="configs">
 
     <mat-form-field>
-      <input matInput placeholder="Image Width" type="number" [(ngModel)]="config.width">
+      <mat-label>Mobile Mode</mat-label>
+      <mat-select [(ngModel)]="config.mobileMode" name="mode">
+        <mat-option value="bottom">Bottom</mat-option>
+        <mat-option value="full">Full</mat-option>
+        <mat-option value="float">Float</mat-option>
+      </mat-select>
     </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Image Height" [(ngModel)]="config.height">
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Text" type="text" [(ngModel)]="config.text">
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="reload()">Reload</button>
   </div>
 
 </div>

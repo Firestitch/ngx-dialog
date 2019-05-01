@@ -1,3 +1,6 @@
 @import './../tools/assets/playground.scss';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '../src/app/styles.scss';
+@import "~@firestitch/drawer/styles";
+
+@include fs-drawer($mat-blue);

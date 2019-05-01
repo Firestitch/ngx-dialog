@@ -6,7 +6,7 @@ import { Component, Input, AfterContentInit, ElementRef } from '@angular/core';
 })
 export class FsDialogComponent implements AfterContentInit {
 
-  @Input('mobileMode') mobileMode;
+  @Input('mobileMode') mobileMode = 'fs-mobile-mode-full';
 
   constructor(private el: ElementRef) {
   }
@@ -16,6 +16,14 @@ export class FsDialogComponent implements AfterContentInit {
 
     if (this.mobileMode === 'bottom') {
       backdrop.classList.add('fs-mobile-mode-bottom');
+    }
+
+    if (this.mobileMode === 'float') {
+      backdrop.classList.add('fs-mobile-mode-float');
+    }
+
+    if (this.mobileMode === 'full') {
+      backdrop.classList.add('fs-mobile-mode-full');
     }
   }
 
