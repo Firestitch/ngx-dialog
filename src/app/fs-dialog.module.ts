@@ -22,7 +22,7 @@ export class FsDialogModule {
         {
           provide: MAT_DIALOG_DEFAULT_OPTIONS,
           useValue: {
-            panelClass: 'fs-dialog-backdrop',
+            panelClass: 'fs-dialog-overlay-pane',
             maxWidth: '95vw',
             disableClose: false,
             autoFocus: true,

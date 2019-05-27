@@ -1,9 +1,14 @@
 
-@media only screen and (max-width: 599px) {
-  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-backdrop {
+.cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-overlay-pane {
+  .mat-dialog-container {
+    min-width: 400px;
+  }
+}
 
-    &.fs-mobile-mode-bottom,
-    &.fs-mobile-mode-full {
+@media only screen and (max-width: 599px) {
+  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-overlay-pane {
+
+    &:not(.mobile-mode-float) {
       top: 0;
       left: 0;
       right: 0;
@@ -32,7 +37,7 @@
       }
     }
 
-    &.fs-mobile-mode-bottom {
+    &.mobile-mode-bottom {
       top: initial;
 
       .mat-dialog-container {
@@ -58,14 +63,6 @@
           }
         }
       }
-    }
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-backdrop {
-    .mat-dialog-container {
-      min-width: 400px;
     }
   }
 }
