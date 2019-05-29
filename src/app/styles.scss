@@ -1,8 +1,6 @@
 
 .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-overlay-pane {
-  .mat-dialog-container {
-    min-width: 400px;
-  }
+  width: 400px;
 }
 
 @media only screen and (max-width: 599px) {
