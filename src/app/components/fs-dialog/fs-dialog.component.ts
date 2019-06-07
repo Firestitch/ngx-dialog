@@ -13,12 +13,21 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     const backdrop = this.findBackdrop(this.el.nativeElement);
-    backdrop.classList.add('mobile-mode-' + this.mobileMode);
+
+    if (backdrop) {
+      backdrop.classList.add('mobile-mode-' + this.mobileMode);
+    }
+
     (<any>window).document.body.classList.add('fs-dialog-open', `fs-dialog-mobile-mode-${this.mobileMode}`);
   }
 
   private findBackdrop(el) {
     if (el) {
+
+      if (el.classList) {
+        return null;
+      }
+
       if (el.classList.contains('fs-dialog-overlay-pane')) {
         return el;
       }
