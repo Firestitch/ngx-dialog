@@ -1,10 +1,23 @@
 
-.cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-overlay-pane {
+.cdk-overlay-pane.fs-dialog-overlay-pane {
   width: 400px;
+
+  // TAD-T886__Android_Scroll_is_displayed_during_removing_Staff_from_Organization
+  .mat-dialog-container {
+    overflow-y: hidden;
+  }
 }
 
 @media only screen and (max-width: 599px) {
-  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane.fs-dialog-overlay-pane {
+
+  body.fs-dialog-open.fs-dialog-mobile-mode-full {
+
+    .cdk-overlay-backdrop {
+      background: white;
+    }
+  }
+
+  .cdk-overlay-pane.fs-dialog-overlay-pane {
 
     &:not(.mobile-mode-float) {
       top: 0;
@@ -60,6 +73,16 @@
             margin-bottom: 0;
           }
         }
+      }
+    }
+
+    &.mobile-mode-full {
+      // iOS Cordova support
+      top: constant(safe-area-inset-top);
+      top: env(safe-area-inset-top);
+
+      .mat-dialog-container {
+        box-shadow: none;
       }
     }
   }
