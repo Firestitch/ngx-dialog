@@ -1,11 +1,6 @@
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
   width: 400px;
-
-  // TAD-T886__Android_Scroll_is_displayed_during_removing_Staff_from_Organization
-  .mat-dialog-container {
-    overflow-y: hidden;
-  }
 }
 
 @media only screen and (max-width: 599px) {
