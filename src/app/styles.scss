@@ -1,20 +1,17 @@
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
-  width: 400px;
+  min-width: 400px;
 }
 
 @media only screen and (max-width: 599px) {
 
-  body.fs-dialog-open.fs-dialog-mobile-mode-full {
-
-    .cdk-overlay-backdrop {
-      background: white;
-    }
+  .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mobile-mode-full {
+    background: white;
   }
 
   .cdk-overlay-pane.fs-dialog-overlay-pane {
 
-    &:not(.mobile-mode-float) {
+    &:not(.fs-dialog-mobile-mode-float) {
       top: 0;
       left: 0;
       right: 0;
@@ -43,7 +40,7 @@
       }
     }
 
-    &.mobile-mode-bottom {
+    &.fs-dialog-mobile-mode-bottom {
       top: initial;
 
       .mat-dialog-container {
@@ -71,7 +68,7 @@
       }
     }
 
-    &.mobile-mode-full {
+    &.fs-dialog-mobile-mode-full {
       // iOS Cordova support
       top: constant(safe-area-inset-top);
       top: env(safe-area-inset-top);

@@ -1,5 +1,7 @@
-import { Component, Input, AfterContentInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Input, AfterContentInit, ElementRef, OnDestroy, Optional, SkipSelf } from '@angular/core';
 import { Subject } from 'rxjs';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'fs-dialog',
@@ -9,30 +11,29 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy {
 
   @Input('mobileMode') mobileMode = 'full';
 
-  constructor(private el: ElementRef) {}
+  constructor(@Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>) {}
 
   ngAfterContentInit() {
-    const pane = this.findOverlayPane(this.el.nativeElement);
 
-    if (pane) {
-      pane.classList.add('mobile-mode-' + this.mobileMode);
-    }
+    const mobileMode = 'fs-dialog-mobile-mode-' + this.mobileMode;
 
-    (<any>window).document.body.classList.add('fs-dialog-open', `fs-dialog-mobile-mode-${this.mobileMode}`);
-  }
+    if (this._dialogRef) {
+      const pane = (<any>this._dialogRef)._overlayRef.overlayElement;
 
-  private findOverlayPane(el) {
-    if (el) {
-
-      if (!el.classList) {
-        return null;
+      if (pane) {
+        pane.classList.add('fs-dialog-overlay-pane');
+        pane.classList.add(mobileMode);
       }
 
-      if (el.classList.contains('fs-dialog-overlay-pane')) {
-        return el;
+      const backdrop = (<any>this._dialogRef)._overlayRef.backdropElement;
+
+      if (backdrop) {
+        backdrop.classList.add('fs-dialog-overlay-backdrop');
+        backdrop.classList.add(mobileMode);
       }
-      return this.findOverlayPane(el.parentNode);
     }
+
+    (<any>window).document.body.classList.add('fs-dialog-open', mobileMode);
   }
 
   ngOnDestroy() {
