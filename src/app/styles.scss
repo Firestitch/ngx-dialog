@@ -1,6 +1,20 @@
+@mixin horizontal-overflow-borders {
+  background: linear-gradient(#fff, #ffff),
+  linear-gradient(#fff, #ffff),
+  linear-gradient(#e0e0e0, #e0e0e0),
+  linear-gradient(#e0e0e0, #e0e0e0);
+  background-size: 100% 1px, 100% 1px;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+  background-position: 100% 100%, 100% 0;
+}
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
   min-width: 400px;
+
+  .mat-dialog-content {
+    @include horizontal-overflow-borders;
+  }
 }
 
 @media only screen and (max-width: 599px) {
