@@ -10,14 +10,19 @@
   background-size: 51px 100px, 100% 1px, 100% 1px, 15px auto, 100% 1px, 100% 1px;
   background-repeat: no-repeat;
   background-attachment: local, local, local, scroll, scroll, scroll;
-  background-position: 100% 100%, 100% 100%, 100% 0, 99% 98%, 100% 100%, 100% 0;
+  background-position: 100% 99%, 100% 100%, 100% 0, 99% 98%, 100% 100%, 100% 0;
 }
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
   min-width: 400px;
+}
 
-  .mat-dialog-content {
-    @include horizontal-overflow-borders;
+@media only screen and (min-width: 600px) {
+  .cdk-overlay-pane.fs-dialog-overlay-pane {
+
+    .mat-dialog-content {
+      @include horizontal-overflow-borders;
+    }
   }
 }
 
