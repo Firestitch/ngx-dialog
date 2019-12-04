@@ -3,7 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'basic-dialog',
-  templateUrl: 'basic-dialog.component.html'
+  templateUrl: 'basic-dialog.component.html',
+  styleUrls: ['basic-dialog.component.scss']
 })
 export class BasicDialogComponent {
 

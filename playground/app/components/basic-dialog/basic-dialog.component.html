@@ -1,20 +1,9 @@
 
 <form (fsForm)="save()">
   <fs-dialog>
-    <h1 mat-dialog-title>Dialog Title</h1>
+    <h1 mat-dialog-title>Dialog</h1>
     <mat-dialog-content>
-      <div fxLayout="column">
-        <mat-form-field>
-          <textarea
-            placeholder="Input"
-            [(ngModel)]="input"
-            name="input"
-            matInput
-            cdkTextareaAutosize
-            [fsFormRequired]="true">
-          </textarea>
-        </mat-form-field>
-      </div>
+      <div class="text">{{input}}</div>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>

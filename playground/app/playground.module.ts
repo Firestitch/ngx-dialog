@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessageModule } from '@firestitch/message';
+import { FsScrollbarModule } from '@firestitch/scrollbar';
 import { FsLabelModule } from '@firestitch/label';
 import { ToastrModule } from 'ngx-toastr';
 import { AppMaterialModule } from './material.module';
@@ -25,7 +26,8 @@ import { KitchenSinkConfigureComponent } from './components/kitchen-sink-configu
     FsExampleModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     FsMessageModule.forRoot(),
-    FsDialogModule.forRoot()
+    FsDialogModule.forRoot(),
+    FsScrollbarModule.forRoot(),
   ],
   entryComponents: [
     BasicDialogComponent,
