@@ -1,11 +1,18 @@
-import { Component, Input, AfterContentInit, ElementRef, OnDestroy, Optional, SkipSelf } from '@angular/core';
-import { Subject } from 'rxjs';
-import { OverlayRef } from '@angular/cdk/overlay';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  Optional,
+  SkipSelf
+} from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'fs-dialog',
-  template: '<ng-content></ng-content>'
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDialogComponent implements AfterContentInit, OnDestroy {
 

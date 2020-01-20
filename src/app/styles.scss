@@ -94,6 +94,7 @@ fs-dialog {
       flex-wrap: nowrap;
       display: flex;
       flex: none;
+      min-height: auto;
 
       button,
       .mat-button,
