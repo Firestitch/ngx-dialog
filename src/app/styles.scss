@@ -26,6 +26,14 @@
   }
 }
 
+fs-dialog {
+  .mat-dialog-actions .mat-button,
+  .mat-dialog-actions .mat-button + .mat-button {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
+
 @media only screen and (max-width: 599px) {
 
   .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mobile-mode-full {
@@ -69,26 +77,6 @@
       .mat-dialog-container {
         height: unset;
       }
-
-      .mat-dialog-actions {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        display: flex;
-        flex: none;
-
-        button,
-        .mat-button,
-        .mat-raised-button,
-        .mat-flat-button,
-        .mat-stroked-button {
-          width: 100%;
-          margin: 0 0 4px 0;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
     }
 
     &.fs-dialog-mobile-mode-full {
@@ -98,6 +86,26 @@
 
       .mat-dialog-container {
         box-shadow: none;
+      }
+    }
+
+    .mat-dialog-actions {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      display: flex;
+      flex: none;
+
+      button,
+      .mat-button,
+      .mat-raised-button,
+      .mat-flat-button,
+      .mat-stroked-button {
+        width: 100%;
+        margin: 0 0 4px 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }

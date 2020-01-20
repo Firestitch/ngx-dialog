@@ -18,7 +18,7 @@ export class KitchenSinkConfigureComponent {
     this.example = data.example;
   }
 
-  reload() {
+  change() {
     this.data.example.reload();
   }
 }

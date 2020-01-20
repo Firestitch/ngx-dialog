@@ -24,6 +24,7 @@ export class BasicComponent {
 
 
   public open() {
+
     this.dialogRef = this.dialog.open(BasicDialogComponent, {
       data: { mobileMode: this.config.mobileMode },
       width: '800px'
