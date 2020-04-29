@@ -1,16 +1,12 @@
 @mixin horizontal-overflow-borders {
-  background:
-  linear-gradient(rgba(255, 255, 255, .1) 10%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 100%),
+  background: linear-gradient(#fff, #ffff),
   linear-gradient(#fff, #ffff),
-  linear-gradient(#fff, #ffff),
-  url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMi4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzMTMgNjk3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMTMgNjk3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojOEM4QzhDO30NCjwvc3R5bGU+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2LjUsNi40QzczLjUsNi40LDUuOSw3My45LDUuOSwxNTd2MjEwLjhjMCw4Myw2Ny42LDE1MC42LDE1MC42LDE1MC42czE1MC42LTY3LjYsMTUwLjYtMTUwLjZWMTU3DQoJQzMwNy4xLDczLjksMjM5LjUsNi40LDE1Ni41LDYuNHogTTI3Ni40LDM2Ny44YzAsNjYuMS01My44LDExOS45LTExOS45LDExOS45UzM2LjYsNDMzLjksMzYuNiwzNjcuOFYxNTcNCgljMC02Ni4xLDUzLjgtMTE5LjksMTE5LjktMTE5LjlTMjc2LjQsOTAuOSwyNzYuNCwxNTdWMzY3Ljh6Ii8+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2LjYsMTIwLjhjLTguNSwwLTE1LjQsNS43LTE1LjQsMTIuN3Y1OC42YzAsNyw2LjksMTIuNywxNS40LDEyLjdjOC41LDAsMTUuNC01LjcsMTUuNC0xMi43di01OC42DQoJQzE3MiwxMjYuNSwxNjUuMSwxMjAuOCwxNTYuNiwxMjAuOHoiLz4NCjxnPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNTcsNjg5LjhjLTQsMC04LjEtMS41LTExLjItNC42TDQ4LjcsNTg4Yy02LjItNi4yLTYuMi0xNi4yLDAtMjIuNGM2LjItNi4yLDE2LjItNi4yLDIyLjQsMGw4Niw4Nmw4Ni04Ng0KCQljNi4yLTYuMiwxNi4yLTYuMiwyMi40LDBjNi4yLDYuMiw2LjIsMTYuMiwwLDIyLjRsLTk3LjEsOTcuMUMxNjUuMSw2ODguMiwxNjEsNjg5LjgsMTU3LDY4OS44eiIvPg0KPC9nPg0KPC9zdmc+DQo=),
   linear-gradient(#e0e0e0, #e0e0e0),
   linear-gradient(#e0e0e0, #e0e0e0);
-
-  background-size: 51px 100px, 100% 1px, 100% 1px, 15px auto, 100% 1px, 100% 1px;
+  background-size: 100% 1px, 100% 1px;
   background-repeat: no-repeat;
-  background-attachment: local, local, local, scroll, scroll, scroll;
-  background-position: 100% 99%, 100% 100%, 100% 0, 99% 98%, 100% 100%, 100% 0;
+  background-attachment: local, local, scroll, scroll;
+  background-position: 100% 100%, 100% 0;
 }
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
