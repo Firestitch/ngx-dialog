@@ -4,17 +4,13 @@
     <h1 mat-dialog-title>Dialog</h1>
     <mat-dialog-content>
       <div class="text">
-        {{input}}
-        {{input}}
-        {{input}}
-        {{input}}
-        {{input}}
-        {{input}}
+        <p *ngFor="let input of inputs">{{input}}</p>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
       <button mat-button (click)="addText()" type="button">Add Text</button>
+      <button mat-button (click)="removeText()" type="button">Remove Text</button>
       <button mat-button mat-dialog-close (click)="close()">Cancel</button>
     </mat-dialog-actions>
   </fs-dialog>
