@@ -48,6 +48,7 @@
     "@firestitch/common": "^8.0.11",
     "@firestitch/date": "^8.0.26",
     "@firestitch/datepicker": "^9.2.2",
+    "@firestitch/dialog": "^8.2.7",
     "@firestitch/drawer": "^9.2.7",
     "@firestitch/example": "^9.1.0",
     "@firestitch/form": "^9.7.6",

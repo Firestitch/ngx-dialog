@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppMaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { BasicComponent, BasicDialogComponent } from './components';
-import { FsDialogModule } from '../../src/app/fs-dialog.module';
+import { FsDialogModule } from 'fs-package';
 import { KitchenSinkConfigureComponent } from './components/kitchen-sink-configure';
 
 @NgModule({
