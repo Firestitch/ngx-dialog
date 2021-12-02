@@ -15,7 +15,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
   ]
 })
 export class FsDialogModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsDialogModule> {
     return {
       ngModule: FsDialogModule,
       providers: [
