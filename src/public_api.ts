@@ -4,5 +4,7 @@
 
 export { FsDialogModule } from './app/fs-dialog.module';
 
-export { FsDialogComponent } from './app/components/fs-dialog/fs-dialog.component';
+export { FsDialog } from './app/serivces/fs-dialog';
 
+export { FsDialogComponent } from './app/components/fs-dialog/fs-dialog.component';
+export { FsDialogRouteComponent } from './app/components/route/route.component';

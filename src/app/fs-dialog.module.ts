@@ -1,17 +1,25 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FsDialogComponent } from './components/fs-dialog/fs-dialog.component';
+import { RouterModule } from '@angular/router';
+
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+
+import { FsDialogComponent } from './components/fs-dialog/fs-dialog.component';
+import { FsDialogRouteComponent } from './components/route/route.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
   ],
   declarations: [
     FsDialogComponent,
+    FsDialogRouteComponent,
   ],
   exports: [
     FsDialogComponent,
+    FsDialogRouteComponent,
   ]
 })
 export class FsDialogModule {
@@ -28,7 +36,7 @@ export class FsDialogModule {
             autoFocus: true,
             hasBackdrop: true
           }
-        }
+        },
       ]
     };
   }
