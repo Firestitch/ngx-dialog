@@ -21,7 +21,7 @@ export class InvoicesComponent {
   ) {
     this._initConfig();
 
-    this._fsDialog.getDialogRef$(InvoiceComponent)
+    this._fsDialog.dialogRef$(InvoiceComponent)
       .pipe(
         switchMap((dialogRef) => dialogRef.afterClosed()),
       )
@@ -29,9 +29,10 @@ export class InvoicesComponent {
         console.log('DialogRef Data:', data);
 
         if (data) {
+          this._invoicesService.create(data);
           this.list.reload();
         }
-      })
+      });
   }
 
   private _initConfig(): void {
@@ -45,7 +46,22 @@ export class InvoicesComponent {
               };
             })
           )
-      }
+      },
+      actions: [
+        {
+          label: 'Create',
+          click: () => {
+            this._fsDialog.open(InvoiceComponent, {
+              data: {
+                invoice: {
+                  envId: 1,
+                  name: 'Test Invoice',
+                },
+              },
+            })
+          }
+        }
+      ],
     };
   }
 

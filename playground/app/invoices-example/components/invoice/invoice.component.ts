@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { RouteObserver } from '@firestitch/core';
-import { InvoicesService } from '../../services/invoices.service';
-import { tap } from 'rxjs/operators';
-import { MatDialogRef } from '@angular/material/dialog';
+import { filter, tap } from 'rxjs/operators';
+
 import { FsMessage } from '@firestitch/message';
+import { RouteObserver } from '@firestitch/core';
+
+import { InvoicesService } from '../../services/invoices.service';
 
 
 @Component({
@@ -17,15 +19,26 @@ export class InvoiceComponent {
   public invoice: any;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: any,
     private _route: ActivatedRoute,
     private _invoicesService: InvoicesService,
     private _dialogRef: MatDialogRef<any>,
     private _message: FsMessage,
   ) {
+
+    if (data) {
+      this.invoice = data.invoice;
+    }
+
     this.invoice$
+      .pipe(
+        filter((invoice) => !!invoice),
+      )
       .subscribe((invoice) => {
         this.invoice = invoice;
-      })
+      });
+
   }
 
   public save = () => {

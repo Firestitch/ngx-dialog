@@ -1,13 +1,13 @@
 import { Injectable, Type } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
-
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
 import { MatDialogRef } from '@angular/material/dialog/dialog-ref';
 import { ComponentType } from '@angular/cdk/portal';
+
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -41,16 +41,20 @@ export class FsDialogRouter {
   }
 
   public openDialog<T, D = any, R = any>(component: ComponentType<T>, config?: MatDialogConfig<D>): MatDialogRef<T, R> {
-    return this._dialog.open<T, D, R>(component, config);
+    const dialog = this._dialog.open<T, D, R>(component, config);
+
+    this._registerDialog(component, dialog);
+
+    return dialog;
   }
 
-  public dialogReady$(component: Type<any>): Observable<MatDialogRef<any>> {
+  public dialogRef$(component: Type<any>): Observable<MatDialogRef<any>> {
     return this._dialogOpened$
       .pipe(
         filter(() => {
           return this._activeDialogs.has(component);
         }),
-        map(() => this._activeDialogs.get(component))
+        map(() => this._activeDialogs.get(component)),
       );
   }
 

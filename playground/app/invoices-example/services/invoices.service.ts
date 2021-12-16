@@ -61,4 +61,8 @@ export class InvoicesService {
     return of(invoice);
   }
 
+  public create(invoice: any) {
+    this._invoices.push({ ...invoice });
+  }
+
 }

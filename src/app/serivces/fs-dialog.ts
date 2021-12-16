@@ -26,8 +26,8 @@ export class FsDialog {
     return this._dialogRouter.navigate(commands, extras);
   }
 
-  public getDialogRef$<T, R = any>(component: ComponentType<T>): Observable<MatDialogRef<T, R> | undefined> {
-    return this._dialogRouter.dialogReady$(component);
+  public dialogRef$<T, R = any>(component: ComponentType<T>): Observable<MatDialogRef<T, R> | undefined> {
+    return this._dialogRouter.dialogRef$(component);
   }
 
 }
