@@ -99,7 +99,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     while (route.routeConfig && (route.routeConfig.redirectTo || route.routeConfig.path === '') && route.parent) {
       stepsBack++;
 
-      if (route.routeConfig.path === '' && route.parent?.routeConfig.loadChildren) {
+      if (route.routeConfig.path === '' && route.parent?.routeConfig.loadChildren && route.parent?.parent) {
         route = route.parent.parent
       } else {
         route = route.parent;
