@@ -1,8 +1,7 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
+import { MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { merge, Subject } from 'rxjs';
