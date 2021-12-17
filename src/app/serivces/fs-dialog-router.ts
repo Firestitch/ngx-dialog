@@ -1,9 +1,8 @@
 import { Injectable, Type } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
-import { MatDialogRef } from '@angular/material/dialog/dialog-ref';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { BehaviorSubject, Observable } from 'rxjs';
