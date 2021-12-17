@@ -1,8 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 
-import { MatDialogRef } from '@angular/material/dialog/dialog-ref';
-import { MatDialogConfig } from '@angular/material/dialog/dialog-config';
+import { MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 
 import { ComponentType } from '@angular/cdk/portal';
 
