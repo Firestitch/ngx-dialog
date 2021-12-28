@@ -112,7 +112,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
       .join('');
 
     // Do it!
-    this._router.navigate([navigationPath], { relativeTo: this._route });
+    this._router.navigate([navigationPath], { relativeTo: this._route, queryParamsHandling: 'merge' });
   }
 
   private async _openLazyDialog(dialogConfig: IFsDialogRouteConfig): Promise<MatDialogRef<unknown, unknown>> {
