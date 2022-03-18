@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 
 import { FsDialogComponent } from './components/fs-dialog/fs-dialog.component';
 import { FsDialogRouteComponent } from './components/route/route.component';
@@ -18,6 +18,7 @@ import { FsDialogRouteComponent } from './components/route/route.component';
     FsDialogRouteComponent,
   ],
   exports: [
+    MatDialogModule,
     FsDialogComponent,
     FsDialogRouteComponent,
   ]
