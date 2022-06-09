@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { FsDialogRouteComponent } from 'fs-package';
+import { fsDialogRoute } from 'fs-package';
 
 import { InvoicesComponent } from './components/invoices';
 import { InvoiceComponent } from './components/invoice';
@@ -12,7 +12,17 @@ const routes: Route[] = [
     path: '',
     component: InvoicesComponent,
     children: [
-      {
+      fsDialogRoute(
+        {
+          path: 'invoices/:id',
+          component: InvoiceComponent,
+          data: {},
+          resolve: {
+            invoice: InvoiceResolver,
+          },
+        }
+      )
+      /*{
         path: 'invoices/:id',
         component: FsDialogRouteComponent,
         resolve: {
@@ -27,7 +37,7 @@ const routes: Route[] = [
             },
           }
         }
-      }
+      },*/
     ]
   }
 ]

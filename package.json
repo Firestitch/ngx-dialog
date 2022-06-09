@@ -50,7 +50,7 @@
     "@firestitch/chip": "^12.0.0",
     "@firestitch/clear": "^12.0.0",
     "@firestitch/common": "^12.0.0",
-    "@firestitch/core": "^9.1.2",
+    "@firestitch/core": "^12.0.2",
     "@firestitch/date": "^12.0.0",
     "@firestitch/datepicker": "^12.1.0",
     "@firestitch/dialog": "^12.0.1",
@@ -100,5 +100,8 @@
   },
   "dependencies": {
     "tslib": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@firestitch/core": ">=12.0.2"
   }
 }

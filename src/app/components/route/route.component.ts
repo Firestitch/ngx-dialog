@@ -4,6 +4,8 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 
+import { getPathToRouteParent } from '@firestitch/core';
+
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -90,28 +92,8 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   }
 
   private _navigateOutFromDialog(): void {
-    // let stepsBack = 1;
-    // let route = this._route.parent;
 
-    // // we are looking for parent route to navigate from current dialog
-    // // but we have to skip routes like loadChildren or redirectTo
-    // // because it does not make sence to do navigation to them
-    // while (route.routeConfig && (route.routeConfig.redirectTo || route.routeConfig.path === '') && route.parent) {
-    //   stepsBack++;
-
-    //   if (route.routeConfig.path === '' && route.parent?.routeConfig.loadChildren && route.parent?.parent) {
-    //     route = route.parent.parent
-    //   } else {
-    //     route = route.parent;
-    //   }
-    // }
-
-    const stepsBack = (this._route.routeConfig.path.match(/\//g) || []).length + 1; 
-
-    // // make relative navigation path like '../../../';
-    const navigationPath = Array
-      .from(Array(stepsBack), () => '../')
-      .join('');
+    const navigationPath = getPathToRouteParent(this._route);
 
     // Do it!
     this._router.navigate([navigationPath], { relativeTo: this._route, queryParamsHandling: 'merge' });
