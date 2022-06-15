@@ -38,6 +38,8 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
+
+    this._dialog.close();
   }
 
   public async openDialog(): Promise<void> {
