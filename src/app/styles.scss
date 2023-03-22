@@ -35,15 +35,17 @@ fs-dialog {
   }
 }
 
-@media only screen and (max-width: 599px) {
+.cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
+  background: white;
+}
 
-  .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mobile-mode-full {
-    background: white;
-  }
+.cdk-overlay-pane.fs-dialog-overlay-pane {
 
-  .cdk-overlay-pane.fs-dialog-overlay-pane {
+  &.fs-dialog-mode-full,
+  &.fs-dialog-mode-float,
+  &.fs-dialog-mode-bottom {
 
-    &:not(.fs-dialog-mobile-mode-float) {
+    &:not(.fs-dialog-mode-float) {
       top: 0;
       left: 0;
       right: 0;
@@ -72,7 +74,7 @@ fs-dialog {
       }
     }
 
-    &.fs-dialog-mobile-mode-bottom {
+    &.fs-dialog-mode-bottom {
       top: initial;
 
       .mat-dialog-container {
@@ -80,7 +82,7 @@ fs-dialog {
       }
     }
 
-    &.fs-dialog-mobile-mode-full {
+    &.fs-dialog-mode-full {
       // iOS Cordova support
       top: constant(safe-area-inset-top);
       top: env(safe-area-inset-top);

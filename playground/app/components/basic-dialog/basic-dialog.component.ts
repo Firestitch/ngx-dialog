@@ -13,8 +13,10 @@ export class BasicDialogComponent {
   public inputs = [];
   public mobileMode;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialogRef: MatDialogRef<BasicDialogComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<BasicDialogComponent>
+  ) {
     this.mobileMode = data.mobileMode;
     this.inputs = [this.input];
   }
