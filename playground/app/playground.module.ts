@@ -15,7 +15,7 @@ import { FsLabelModule } from '@firestitch/label';
 
 import { ToastrModule } from 'ngx-toastr';
 
-import { FsDialogModule } from 'fs-package';
+import { DialogConfig, FS_DAILOG_CONFIG, FsDialogModule } from 'fs-package';
 
 import { AppMaterialModule } from './material.module';
 import { AppComponent } from './app.component';
@@ -56,6 +56,15 @@ import { BasicExampleComponent } from './components/basic-example';
     KitchenSinkConfigureComponent,
     KitchenSinkComponent,
   ],
+  providers: [
+    { 
+      provide: FS_DAILOG_CONFIG,
+      useValue: {
+        mobileMode: 'peek',
+        mobileActionPlacement: 'bottom',
+      } as DialogConfig
+    }
+  ]
 })
 export class PlaygroundModule {
 }

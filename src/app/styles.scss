@@ -4,26 +4,15 @@
   .mat-dialog-content {
     position: relative;
     z-index: 1;
-    background: #FFF no-repeat;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(213,213,213,0) 100%),
-                      linear-gradient(0deg, rgba(0,0,0,0.10688025210084029) 0%, rgba(213,213,213,0) 100%);
-    background-position: 0 0, 0 100%;
-    background-size: 100% 5px;
-
-    &:before, &:after {
-      content: "";
-      position: relative;
-      z-index: -1;
-      display: block;
-      height: 10px;
-      margin: 0 -24px -10px;
-      background: linear-gradient(to bottom,#FFF,#FFF 30%,rgba(255,255,255,0));
-    }
-
-    &:after {
-      margin: -10px -24px 0;
-      background: linear-gradient(to bottom,rgba(255,255,255,0),#FFF 70%,#FFF);
-    }
+    background: 
+      linear-gradient(#ffffff 33%, rgba(255,255,255, 0)),
+      linear-gradient(rgba(255,255,255, 0), #ffffff 66%) 0 100%,
+      radial-gradient(farthest-side at 50% 0, rgba(34,34,34, 0.2), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(34,34,34, 0.2), rgba(0,0,0,0)) 0 100%;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    background-size: 100% 19px, 100% 19px, 100% 7px, 100% 7px;
   }
 }
 
@@ -33,6 +22,12 @@ fs-dialog {
     margin-left: 0;
     margin-right: 8px;
   }
+
+  &.action-placement-bottom {
+    .mat-dialog-content {
+      flex: 1;
+    }
+  }
 }
 
 .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
@@ -40,10 +35,16 @@ fs-dialog {
 }
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
-
   &.fs-dialog-mode-full,
+  &.fs-dialog-mode-peek,
   &.fs-dialog-mode-float,
   &.fs-dialog-mode-bottom {
+
+    &:not(.fs-dialog-mode-float):not(.fs-dialog-mode-peek) {
+      .mat-dialog-container {
+        border-radius: 0;
+      }
+    }
 
     &:not(.fs-dialog-mode-float) {
       top: 0;
@@ -66,8 +67,6 @@ fs-dialog {
       }
 
       .mat-dialog-container {
-        border-radius: 0;
-
         form {
           display: inline;
         }
@@ -81,8 +80,13 @@ fs-dialog {
         height: unset;
       }
     }
+    
+    &.fs-dialog-mode-peek {      
+      padding-top: 25px;
+    }
 
-    &.fs-dialog-mode-full {
+    &.fs-dialog-mode-full,
+    &.fs-dialog-mode-peek {
       // iOS Cordova support
       top: constant(safe-area-inset-top);
       top: env(safe-area-inset-top);
