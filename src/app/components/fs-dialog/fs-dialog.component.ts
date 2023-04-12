@@ -14,7 +14,8 @@ import {
   SkipSelf
 } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogConfig, FS_DAILOG_CONFIG } from 'fs-package';
+import { DialogConfig } from '../../interfaces';
+import { FS_DAILOG_CONFIG } from '../../injectors';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
