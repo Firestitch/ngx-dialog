@@ -51,7 +51,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   ) {}
   
   public ngOnChanges(changes: SimpleChanges): void {
-    if(changes.mode) {
+    if(changes.mode && !changes.mode.firstChange) {
       if(changes.mode.currentValue) {
         this.enableMode(this.mode);
       } else {
@@ -78,6 +78,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
             this.enableMode(this.mobileMode);
           }
         });
+    }
+
+    if(this.mode) {
+      this.enableMode(this.mode);
     }
   }
 
