@@ -13,6 +13,10 @@
     background-repeat: no-repeat;
     background-attachment: local, local, scroll, scroll;
     background-size: 100% 19px, 100% 19px, 100% 7px, 100% 7px;
+    /*
+      iOS half pixel horizontal fix
+    */
+    border-bottom: 1px solid #fff;
   }
 }
 
