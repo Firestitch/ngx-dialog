@@ -39,6 +39,10 @@ fs-dialog {
 }
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
+  .mat-dialog-container {
+    padding-bottom: max(calc(env(safe-area-inset-bottom)), 24px);
+  }
+
   &.fs-dialog-mode-full,
   &.fs-dialog-mode-peek,
   &.fs-dialog-mode-float,
