@@ -4,9 +4,8 @@ import { FsExampleComponent } from '@firestitch/example';
 
 import { FsDialog } from 'fs-package';
 
-import { BasicDialogComponent} from './../basic-dialog';
-import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 import { FsMessage } from '@firestitch/message';
+import { BasicDialogComponent } from './../basic-dialog';
 
 @Component({
   selector: 'navigation',
@@ -25,8 +24,6 @@ export class NavigationComponent {
     private exampleComponent: FsExampleComponent,
     private message: FsMessage,
   ) {
-    exampleComponent.setConfigureComponent(KitchenSinkConfigureComponent, { config: this.config });
-
   }
 
 
