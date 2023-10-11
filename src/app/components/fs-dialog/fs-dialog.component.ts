@@ -14,10 +14,10 @@ import {
   SkipSelf
 } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogConfig } from '../../interfaces';
-import { FS_DAILOG_CONFIG } from '../../injectors';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { FS_DAILOG_CONFIG } from '../../injectors';
+import { DialogConfig } from '../../interfaces';
 
 @Component({
   selector: 'fs-dialog',
@@ -27,16 +27,16 @@ import { filter, takeUntil } from 'rxjs/operators';
 })
 export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, OnChanges {
 
-  @Input() 
+  @Input()
   public mobileMode: 'full' | 'float' | 'bottom' | 'peek';
-  
-  @Input() 
-  public mobileActionPlacement: 'flow' | 'bottom';
-  
-  @Input() 
-  public mobileWidth = '500px';
 
-  @Input() 
+  @Input()
+  public mobileActionPlacement: 'flow' | 'bottom';
+
+  @Input()
+  public mobileWidth = '600px';
+
+  @Input()
   public mode: 'full' | 'float' | 'bottom' | 'peek';
 
   @HostBinding('class')
@@ -48,11 +48,11 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     @Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>,
     @Optional() @Inject(FS_DAILOG_CONFIG) private _config: DialogConfig,
     private _breakpointObserver: BreakpointObserver,
-  ) {}
-  
+  ) { }
+
   public ngOnChanges(changes: SimpleChanges): void {
-    if(changes.mode && !changes.mode.firstChange) {
-      if(changes.mode.currentValue) {
+    if (changes.mode && !changes.mode.firstChange) {
+      if (changes.mode.currentValue) {
         this.enableMode(this.mode);
       } else {
         this.disableMode();
@@ -62,9 +62,9 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public ngOnInit(): void {
     this.mobileMode = this.mobileMode ?? (this._config?.mobileMode || 'full');
-    this.mobileActionPlacement = this.mobileActionPlacement ?? (this._config?.mobileActionPlacement || 'flow');    
+    this.mobileActionPlacement = this.mobileActionPlacement ?? (this._config?.mobileActionPlacement || 'flow');
 
-    if(this.mobileWidth) {
+    if (this.mobileWidth) {
       this._breakpointObserver
         .observe([`(min-width: ${this.mobileWidth})`])
         .pipe(
@@ -73,14 +73,14 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
         )
         .subscribe((state: BreakpointState) => {
           if (state.matches) {
-            this.disableMode();               
+            this.disableMode();
           } else {
             this.enableMode(this.mobileMode);
           }
         });
     }
 
-    if(this.mode) {
+    if (this.mode) {
       this.enableMode(this.mode);
     }
   }
@@ -100,7 +100,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
         mode = 'fs-dialog-mode-' + mode;
         this.overlayEl?.classList.remove(mode);
         this.backdropEl?.classList.remove(mode);
-        this.body.classList.remove('fs-dialog-open', mode);   
+        this.body.classList.remove('fs-dialog-open', mode);
       });
   }
 
