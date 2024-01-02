@@ -105,11 +105,11 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public get overlayEl() {
-    return (<any>this._dialogRef)?._overlayRef.overlayElement;
+    return (<any>this._dialogRef)?._overlayRef?.overlayElement;
   }
 
   public get backdropEl() {
-    return (<any>this._dialogRef)?._overlayRef.backdropElement;
+    return (<any>this._dialogRef)?._overlayRef?.backdropElement;
   }
 
   public get body() {
