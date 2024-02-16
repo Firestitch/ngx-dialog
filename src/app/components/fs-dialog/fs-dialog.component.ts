@@ -95,7 +95,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public enableMode(mode) {
     mode = `fs-dialog-mode-${mode}`;
-    this.overlayEl?.classList.add(mode);
+    this._dialogRef.addPanelClass(mode);
     this.backdropEl?.classList.add(mode);
     this.body.classList.add('fs-dialog-open', mode);
     this.mobileButtonPlacementClass = `button-placement-${this.mobileButtonPlacement}`;
@@ -106,26 +106,22 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     ['full', 'float', 'bottom']
       .forEach((mode) => {
         mode = 'fs-dialog-mode-' + mode;
-        this.overlayEl?.classList.remove(mode);
+        this._dialogRef.removePanelClass(mode);
         this.backdropEl?.classList.remove(mode);
         this.body.classList.remove('fs-dialog-open', mode);
       });
   }
 
-  public get overlayEl() {
-    return (<any>this._dialogRef)?._overlayRef?.overlayElement;
-  }
-
   public get backdropEl() {
-    return (<any>this._dialogRef)?._overlayRef?.backdropElement;
+    return document.querySelector('.cdk-overlay-dark-backdrop');
   }
 
   public get body() {
-    return (<any>window).document.body;
+    return document.body;
   }
 
   public ngAfterContentInit(): void {
-    this.overlayEl?.classList.add('fs-dialog-overlay-pane');
+    this._dialogRef.addPanelClass('fs-dialog-overlay-pane');
     this.backdropEl?.classList.add('fs-dialog-overlay-backdrop');
   }
 
