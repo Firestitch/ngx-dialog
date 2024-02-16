@@ -58,7 +58,7 @@ import { BasicExampleComponent } from './components/basic-example';
       provide: FS_DAILOG_CONFIG,
       useValue: {
         mobileMode: 'peek',
-        mobileActionPlacement: 'bottom',
+        mobileButtonPlacement: 'bottom',
       } as DialogConfig
     }
   ]

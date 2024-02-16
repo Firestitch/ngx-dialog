@@ -27,7 +27,7 @@ fs-dialog {
     margin-right: 8px;
   }
 
-  &.action-placement-bottom {
+  &.button-placement-bottom {
     .mat-dialog-content {
       flex: 1;
     }
@@ -103,7 +103,13 @@ fs-dialog {
         box-shadow: none;
       }
     }
+  }
 
+  &.fs-dialog-mode-full,
+  &.fs-dialog-mode-peek,
+  &.fs-dialog-mode-float,
+  &.fs-dialog-mode-bottom,
+  .button-layout-full {
     .mat-dialog-actions {
       flex-direction: column;
       flex-wrap: nowrap;

@@ -3,8 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'basic-dialog',
-  templateUrl: 'basic-dialog.component.html',
-  styleUrls: ['basic-dialog.component.scss']
+  templateUrl: './basic-dialog.component.html',
+  styleUrls: ['./basic-dialog.component.scss']
 })
 export class BasicDialogComponent {
 
@@ -21,19 +21,19 @@ export class BasicDialogComponent {
     this.inputs = [this.input];
   }
 
-  save() {
+  public save() {
     this.dialogRef.close();
   }
 
-  close() {
+  public close() {
     this.dialogRef.close();
   }
 
-  addText() {
+  public addText() {
     this.inputs.push(this.input);
   }
 
-  removeText() {
+  public removeText() {
     this.inputs.pop();
   }
 }

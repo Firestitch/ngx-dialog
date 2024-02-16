@@ -31,18 +31,26 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   public mobileMode: 'full' | 'float' | 'bottom' | 'peek';
 
   @Input()
-  public mobileActionPlacement: 'flow' | 'bottom';
+  public mobileButtonPlacement: 'flow' | 'bottom';
 
   @Input()
   public mobileWidth = '600px';
 
+  @HostBinding('class')
+  public mobileButtonPlacementClass;
+
   @Input()
   public mode: 'full' | 'float' | 'bottom' | 'peek';
 
-  @HostBinding('class')
-  public mobileActionPlacementClass;
+  @Input()
+  public buttonLayout: 'flow' | 'full' = 'flow';
 
   private _destroy$ = new Subject();
+
+  @HostBinding('class.button-layout-full')
+  public get classButtonLayoutFullWidth() {
+    return this.buttonLayout === 'full';
+  }
 
   public constructor(
     @Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>,
@@ -62,7 +70,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public ngOnInit(): void {
     this.mobileMode = this.mobileMode ?? (this._config?.mobileMode || 'full');
-    this.mobileActionPlacement = this.mobileActionPlacement ?? (this._config?.mobileActionPlacement || 'flow');
+    this.mobileButtonPlacement = this.mobileButtonPlacement ?? (this._config?.mobileButtonPlacement || 'flow');
 
     if (this.mobileWidth) {
       this._breakpointObserver
@@ -86,15 +94,15 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public enableMode(mode) {
-    mode = 'fs-dialog-mode-' + mode;
+    mode = `fs-dialog-mode-${mode}`;
     this.overlayEl?.classList.add(mode);
     this.backdropEl?.classList.add(mode);
     this.body.classList.add('fs-dialog-open', mode);
-    this.mobileActionPlacementClass = `action-placement-${this.mobileActionPlacement}`;
+    this.mobileButtonPlacementClass = `button-placement-${this.mobileButtonPlacement}`;
   }
 
   public disableMode() {
-    this.mobileActionPlacementClass = null;
+    this.mobileButtonPlacementClass = null;
     ['full', 'float', 'bottom']
       .forEach((mode) => {
         mode = 'fs-dialog-mode-' + mode;

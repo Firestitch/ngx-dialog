@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 
 import { FsDialog } from 'fs-package';
 
-import { BasicDialogComponent} from './../basic-dialog';
+import { BasicDialogComponent } from './../basic-dialog';
 
 @Component({
   selector: 'basic-example',
-  templateUrl: 'basic-example.component.html',
+  templateUrl: './basic-example.component.html',
   styleUrls: ['./basic-example.component.scss'],
 })
 export class BasicExampleComponent {
 
   public dialogRef;
   public config = {
-    mobileMode: 'bottom'
+    mobileMode: 'bottom',
   };
 
   constructor(
@@ -24,7 +24,7 @@ export class BasicExampleComponent {
   public open(mobileMode) {
     this.dialogRef = this.dialog.open(BasicDialogComponent, {
       data: { mobileMode },
-      width: '800px'
+      width: '800px',
     });
   }
 }

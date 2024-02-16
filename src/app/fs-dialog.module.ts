@@ -24,7 +24,7 @@ import { FsDialogRouteComponent } from './components/route/route.component';
   ]
 })
 export class FsDialogModule {
-  static forRoot(): ModuleWithProviders<FsDialogModule> {
+  public static forRoot(): ModuleWithProviders<FsDialogModule> {
     return {
       ngModule: FsDialogModule,
       providers: [
