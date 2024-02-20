@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { FsExampleModule } from '@firestitch/example';
@@ -31,7 +30,6 @@ import { BasicExampleComponent } from './components/basic-example';
     AppMaterialModule,
     FormsModule,
     FsFormModule,
-    FlexLayoutModule,
     FsLabelModule,
     MatDialogModule,
     FsExampleModule.forRoot(),
