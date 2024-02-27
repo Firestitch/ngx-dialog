@@ -5,7 +5,8 @@ import {
   Input,
   TemplateRef,
 } from '@angular/core';
-import { FsDialogSubtitleDirective } from 'fs-package';
+import { FsDialogSubtitleDirective } from '../../directives';
+
 
 @Component({
   selector: 'fs-dialog-title',
