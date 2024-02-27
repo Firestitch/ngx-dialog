@@ -15,27 +15,30 @@ import { FsScrollbarModule } from '@firestitch/scrollbar';
 import { DialogConfig, FS_DAILOG_CONFIG, FsDialogModule } from 'fs-package';
 
 import { AppComponent } from './app.component';
-import { BasicDialogComponent, NavigationComponent } from './components';
-import { KitchenSinkConfigureComponent } from './components/kitchen-sink-configure';
-import { KitchenSinkComponent } from './components/kitchen-sink/kitchen-sink.component';
+import { BasicDialogComponent, CloseDialogComponent, CloseExampleComponent, KitchenSinkComponent, NavigationComponent } from './components';
 import { AppMaterialModule } from './material.module';
 
 import { BasicExampleComponent } from './components/basic-example';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppMaterialModule,
     FormsModule,
+    
+    MatDialogModule,
+    
     FsFormModule,
     FsLabelModule,
-    MatDialogModule,
+    FsDialogModule,
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
-    FsDialogModule.forRoot(),
     FsScrollbarModule.forRoot(),
+    
+    AppMaterialModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -48,8 +51,9 @@ import { BasicExampleComponent } from './components/basic-example';
     NavigationComponent,
     BasicDialogComponent,
     BasicExampleComponent,
-    KitchenSinkConfigureComponent,
     KitchenSinkComponent,
+    CloseExampleComponent,
+    CloseDialogComponent,
   ],
   providers: [
     {

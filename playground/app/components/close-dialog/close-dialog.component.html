@@ -1,0 +1,16 @@
+
+<form (fsForm)="save()">
+  <fs-dialog>
+    <fs-dialog-title [close]="true">
+      Close Dialog
+      <ng-template fsDialogSubtitle>
+        This is the subtitle
+      </ng-template>
+    </fs-dialog-title>
+    <mat-dialog-content>
+      <div class="text">
+        <p *ngFor="let input of inputs">{{input}}</p>
+      </div>
+    </mat-dialog-content>
+  </fs-dialog>
+</form>

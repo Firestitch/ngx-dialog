@@ -1,0 +1,15 @@
+.mat-dialog-title {
+  display: flex;
+  align-items: center;
+
+  .close {
+    display: flex;
+    flex: auto;
+    justify-content: flex-end;
+  }
+
+  .subtitle {
+    line-height: normal;
+    font-size: 60%;
+  }
+}
