@@ -26,7 +26,6 @@ export class InvoiceComponent {
     private _dialogRef: MatDialogRef<any>,
     private _message: FsMessage,
   ) {
-
     if (data) {
       this.invoice = data.invoice;
     }

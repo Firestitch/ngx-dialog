@@ -13,7 +13,7 @@ export function fsDialogRoute(route: Route, dialogConfig?: MatDialogConfig): Rou
     ...restRoute
   } = route;
 
-  const { data: dialogData, ...restDialogConfig } = dialogConfig || {};
+  const { data: dialogData } = dialogConfig || {};
 
   const data = {
     ...(routeData || {}),
@@ -25,11 +25,12 @@ export function fsDialogRoute(route: Route, dialogConfig?: MatDialogConfig): Rou
     component: FsDialogRouteComponent,
     ...restRoute,
     data: {
+      ...data,
       fsDialog: {
         component,
         config: {
           data,
-          ...restDialogConfig,
+          ...dialogConfig,
         },
       }
     }
