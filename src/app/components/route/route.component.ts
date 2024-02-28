@@ -117,7 +117,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
   private _openDialog(routeDialogConfig: IFsDialogRouteConfig): MatDialogRef<unknown, unknown> {
     const dialogComponent = routeDialogConfig.component;
-    const dialogConfig = routeDialogConfig.config as MatDialogConfig<unknown>;
+    const dialogConfig = routeDialogConfig.config as MatDialogConfig<unknown> || {};
 
     dialogConfig.viewContainerRef = this._viewContainerRef;
 
