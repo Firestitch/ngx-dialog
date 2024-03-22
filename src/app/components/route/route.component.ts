@@ -120,6 +120,9 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     const dialogConfig = routeDialogConfig.config as MatDialogConfig<unknown> || {};
 
     dialogConfig.viewContainerRef = this._viewContainerRef;
+    // We dont want to close dialog when navigation happens,
+    // because we want to have full control
+    dialogConfig.closeOnNavigation = false;
 
     return this._dialogRouter.openDialogForRoute(dialogComponent, dialogConfig);
   }
