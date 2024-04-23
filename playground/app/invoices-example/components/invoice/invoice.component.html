@@ -1,6 +1,6 @@
 <form fsForm [submit]="save" *ngIf="invoice">
   <fs-dialog>
-    <h2 mat-dialog-title>Invoice #{{ invoice.id }}</h2>
+    <fs-dialog-title mat-dialog-title>Invoice #{{ invoice.id }}</fs-dialog-title>
     <mat-dialog-content>
       <div fxLayout="column" fxLayoutGap="10px">
         <mat-form-field>
@@ -15,8 +15,8 @@
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button color="primary" type="submit">Save</button>
-      <button mat-button mat-dialog-close type="button">close</button>
+      <fs-form-dialog-actions>
+      </fs-form-dialog-actions>
     </mat-dialog-actions>
   </fs-dialog>
 </form>

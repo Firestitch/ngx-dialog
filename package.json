@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/dialog",
   "title": "Dialog",
-  "version": "13.0.5",
+  "version": "13.0.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-dialog"
@@ -58,7 +58,7 @@
     "@firestitch/exif-js": "^2.3.0",
     "@firestitch/file": "^12.18.6",
     "@firestitch/filter": "^12.11.7",
-    "@firestitch/form": "^12.4.16",
+    "@firestitch/form": "^13.1.0",
     "@firestitch/iframe": "^12.0.7",
     "@firestitch/label": "^12.0.2",
     "@firestitch/lint": "^12.0.18",

@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  ContentChildren,
+  ElementRef,
   HostBinding,
   Inject,
   Input,
@@ -11,10 +13,11 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  QueryList,
   SimpleChanges,
   SkipSelf
 } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FS_DAILOG_CONFIG } from '../../injectors';
@@ -32,6 +35,9 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   @ContentChild(FsDialogTitleComponent) 
   public dialogTitle: FsDialogTitleComponent;
 
+  @ContentChildren(MatDialogClose, { descendants: true, read: ElementRef }) 
+  public dialogCloseButton: QueryList<ElementRef[]>;
+  
   @Input()
   public mobileMode: 'full' | 'float' | 'bottom' | 'peek';
 
@@ -125,7 +131,20 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     return document.body;
   }
 
+  public addDialogCloseButtonClasses(elementRefs: any): void {
+    elementRefs.forEach((el) => {
+      el.nativeElement.classList.add('close-button');
+    });    
+  }
+
   public ngAfterContentInit(): void {
+    this.dialogCloseButton.changes
+      .subscribe((elementRefs: ElementRef[]) => {
+        this.addDialogCloseButtonClasses(elementRefs);
+      });
+      
+    this.addDialogCloseButtonClasses(this.dialogCloseButton.toArray());
+
     if(!!this.dialogTitle) {
       this._dialogRef.addPanelClass('fs-dialog-back');
     }

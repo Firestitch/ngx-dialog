@@ -3,7 +3,7 @@
 ::ng-deep {
   @media (max-width: fs-style.$break-xsmall) {
     .fs-dialog-back.fs-dialog-mode-full {
-      [mat-dialog-close] {
+      .close-button {
         display: none;
       }
 
