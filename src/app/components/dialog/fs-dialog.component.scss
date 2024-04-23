@@ -1,0 +1,22 @@
+@use '@firestitch/style/styles' as fs-style;
+
+::ng-deep {
+  @media (max-width: fs-style.$break-xsmall) {
+    .fs-dialog-back.fs-dialog-mode-full {
+      [mat-dialog-close] {
+        display: none;
+      }
+
+      fs-dialog-title {
+        .back {
+          margin-left: -13px;
+          display: block !important;
+        }
+
+        .close {
+          display: none !important;
+        }
+      }
+    }
+  }
+}

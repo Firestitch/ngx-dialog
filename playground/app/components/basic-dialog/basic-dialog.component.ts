@@ -25,10 +25,6 @@ export class BasicDialogComponent {
     this.dialogRef.close();
   }
 
-  public close() {
-    this.dialogRef.close();
-  }
-
   public addText() {
     this.inputs.push(this.input);
   }

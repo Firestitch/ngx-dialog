@@ -59,7 +59,7 @@ import { CommonModule } from '@angular/common';
     {
       provide: FS_DAILOG_CONFIG,
       useValue: {
-        mobileMode: 'peek',
+        mobileMode: 'full',
         mobileButtonPlacement: 'bottom',
       } as DialogConfig
     }

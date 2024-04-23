@@ -3,6 +3,7 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
   HostBinding,
   Inject,
   Input,
@@ -18,6 +19,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FS_DAILOG_CONFIG } from '../../injectors';
 import { DialogConfig } from '../../interfaces';
+import { FsDialogTitleComponent } from '../dialog-title';
 
 @Component({
   selector: 'fs-dialog',
@@ -26,6 +28,9 @@ import { DialogConfig } from '../../interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, OnChanges {
+
+  @ContentChild(FsDialogTitleComponent) 
+  public dialogTitle: FsDialogTitleComponent;
 
   @Input()
   public mobileMode: 'full' | 'float' | 'bottom' | 'peek';
@@ -94,10 +99,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public enableMode(mode) {
-    mode = `fs-dialog-mode-${mode}`;
-    this._dialogRef.addPanelClass(mode);
-    this.backdropEl?.classList.add(mode);
-    this.body.classList.add('fs-dialog-open', mode);
+    const modeClass = `fs-dialog-mode-${mode}`;
+    this._dialogRef.addPanelClass(modeClass);
+    this.backdropEl?.classList.add(modeClass);
+    this.body.classList.add('fs-dialog-open', modeClass);
     this.mobileButtonPlacementClass = `button-placement-${this.mobileButtonPlacement}`;
   }
 
@@ -105,10 +110,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     this.mobileButtonPlacementClass = null;
     ['full', 'float', 'bottom']
       .forEach((mode) => {
-        mode = 'fs-dialog-mode-' + mode;
-        this._dialogRef.removePanelClass(mode);
-        this.backdropEl?.classList.remove(mode);
-        this.body.classList.remove('fs-dialog-open', mode);
+        const modeClass = 'fs-dialog-mode-' + mode;
+        this._dialogRef.removePanelClass(modeClass);
+        this.backdropEl?.classList.remove(modeClass);
+        this.body.classList.remove('fs-dialog-open', modeClass);
       });
   }
 
@@ -121,6 +126,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public ngAfterContentInit(): void {
+    if(!!this.dialogTitle) {
+      this._dialogRef.addPanelClass('fs-dialog-back');
+    }
+
     this._dialogRef.addPanelClass('fs-dialog-overlay-pane');
     this.backdropEl?.classList.add('fs-dialog-overlay-backdrop');
   }

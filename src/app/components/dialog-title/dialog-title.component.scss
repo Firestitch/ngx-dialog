@@ -12,4 +12,12 @@
     line-height: normal;
     font-size: 60%;
   }
+
+  .back {
+    display: none;
+
+    mat-icon {
+      transform: scale(.9);
+    }
+  }
 }
