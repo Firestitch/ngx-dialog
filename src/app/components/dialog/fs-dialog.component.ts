@@ -1,4 +1,3 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -15,11 +14,15 @@ import {
   Optional,
   QueryList,
   SimpleChanges,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
+
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
+
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+
 import { FS_DAILOG_CONFIG } from '../../injectors';
 import { DialogConfig } from '../../interfaces';
 import { FsDialogTitleComponent } from '../dialog-title';
@@ -63,7 +66,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     return this.buttonLayout === 'full';
   }
 
-  public constructor(
+  constructor(
     @Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>,
     @Optional() @Inject(FS_DAILOG_CONFIG) private _config: DialogConfig,
     private _breakpointObserver: BreakpointObserver,
@@ -116,7 +119,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     this.mobileButtonPlacementClass = null;
     ['full', 'float', 'bottom']
       .forEach((mode) => {
-        const modeClass = 'fs-dialog-mode-' + mode;
+        const modeClass = `fs-dialog-mode-${  mode}`;
         this._dialogRef.removePanelClass(modeClass);
         this.backdropEl?.classList.remove(modeClass);
         this.body.classList.remove('fs-dialog-open', modeClass);
@@ -124,7 +127,17 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public get backdropEl() {
-    return document.querySelector('.cdk-overlay-dark-backdrop');
+    const el = document.getElementById(this._dialogRef.id)?.parentElement?.parentElement;
+
+    if(el?.classList.contains('cdk-global-overlay-wrapper')) {
+      const backdropEl = el.previousElementSibling;
+
+      if(backdropEl?.classList.contains('cdk-overlay-backdrop')) {
+        return backdropEl;
+      }
+    }
+
+    return null;
   }
 
   public get body() {
@@ -139,13 +152,16 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public ngAfterContentInit(): void {
     this.dialogCloseButton.changes
+      .pipe(
+        takeUntil(this._destroy$),
+      )
       .subscribe((elementRefs: ElementRef[]) => {
         this.addDialogCloseButtonClasses(elementRefs);
       });
       
     this.addDialogCloseButtonClasses(this.dialogCloseButton.toArray());
 
-    if(!!this.dialogTitle) {
+    if(this.dialogTitle) {
       this._dialogRef.addPanelClass('fs-dialog-back');
     }
 
