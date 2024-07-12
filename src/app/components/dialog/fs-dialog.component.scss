@@ -7,6 +7,10 @@
         display: none;
       }
 
+      .mat-dialog-container {
+        transform: none !important;
+      }
+
       fs-dialog-title {
         .back {
           margin-left: -13px;
@@ -19,4 +23,5 @@
       }
     }
   }
+  
 }
