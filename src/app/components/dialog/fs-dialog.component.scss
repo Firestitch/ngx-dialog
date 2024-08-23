@@ -14,6 +14,13 @@
       fs-dialog-title {
         .back {
           display: inline-block !important;
+
+          .mat-button-wrapper {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+          }
         }
 
         .close {
