@@ -1,3 +1,5 @@
+@use '@firestitch/style/styles' as fs-style;
+
 .cdk-overlay-pane.fs-dialog-overlay-pane {
   min-width: 400px;
 
@@ -39,8 +41,19 @@ fs-dialog {
 }
 
 .cdk-overlay-pane.fs-dialog-overlay-pane {
-  .mat-dialog-container {
-    padding-bottom: max(calc(env(safe-area-inset-bottom)), 24px);
+  
+  &.fs-dialog-mode-full {
+    .mat-dialog-container {
+      border-top: calc(fs-style.$safe-area-top * .8) solid transparent;
+    }
+  }
+
+  &.fs-dialog-mode-full,
+  &.fs-dialog-mode-peek,
+  &.fs-dialog-mode-bottom {
+    .mat-dialog-container {
+      border-bottom: calc(fs-style.$safe-area-bottom * .8) solid transparent;
+    }
   }
 
   &.fs-dialog-mode-full,
@@ -95,10 +108,6 @@ fs-dialog {
 
     &.fs-dialog-mode-full,
     &.fs-dialog-mode-peek {
-      // iOS Cordova support
-      top: constant(safe-area-inset-top);
-      top: env(safe-area-inset-top);
-
       .mat-dialog-container {
         box-shadow: none;
       }

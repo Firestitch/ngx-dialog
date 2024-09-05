@@ -1,10 +1,12 @@
 <div mat-dialog-title>
-  <a 
-      class="back"
-      mat-icon-button
-      mat-dialog-close>
-    <mat-icon>arrow_back_ios_new</mat-icon>
-  </a>
+  <ng-container *ngIf="back">
+    <a 
+        class="back"
+        mat-icon-button
+        mat-dialog-close>
+      <mat-icon>arrow_back_ios_new</mat-icon>
+    </a>
+  </ng-container>
   <div class="title">
     <ng-content></ng-content>
     <ng-container *ngIf="subtitle">

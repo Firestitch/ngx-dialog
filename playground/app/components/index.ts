@@ -1,3 +1,5 @@
+export * from './back-dialog';
+export * from './back-example';
 export * from './basic-dialog';
 export * from './basic-example';
 export * from './close-dialog';

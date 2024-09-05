@@ -5,6 +5,7 @@ import {
   Input,
   TemplateRef,
 } from '@angular/core';
+
 import { FsDialogSubtitleDirective } from '../../directives';
 
 
@@ -20,5 +21,6 @@ export class FsDialogTitleComponent {
   public subtitle: TemplateRef<any>;
 
   @Input() public close = false;
+  @Input() public back = false;
 
 }
