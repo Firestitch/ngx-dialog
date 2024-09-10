@@ -1,17 +1,17 @@
 .mat-dialog-title {
   display: flex;
   align-items: center;
-
-  .close {
-    display: flex;
-    flex: auto;
-    justify-content: flex-end;
-  }
+  justify-content: space-between;
 
   .subtitle {
     line-height: normal;
     font-size: 60%;
   }
+  
+  .right{
+    display: flex;
+    align-items: center;
+  }    
 
   .back {
     display: none;
@@ -19,5 +19,12 @@
     mat-icon {
       transform: scale(.9);
     }
+  }
+}
+
+::ng-deep {
+  .fs-dialog-fullscreen {
+    max-width: none !important;
+    max-height: none !important;
   }
 }

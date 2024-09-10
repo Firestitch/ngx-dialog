@@ -15,13 +15,24 @@
       </div>
     </ng-container>
   </div>
-  <ng-container *ngIf="close">
-    <div class="close">
-      <a 
-          mat-icon-button
-          mat-dialog-close>
-        <mat-icon>close</mat-icon>
-      </a>
-    </div>
-  </ng-container>
+  <div class="right">
+    <ng-container *ngIf="fullscreen">
+      <div>
+        <a 
+            (click)="fullscreenClick()"
+            mat-icon-button>
+          <mat-icon>{{fullscreenExpanded ? 'crop_landscape' : 'aspect_ratio'}}</mat-icon>
+        </a>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="close">
+      <div class="close">
+        <a 
+            mat-icon-button
+            mat-dialog-close>
+          <mat-icon>close</mat-icon>
+        </a>
+      </div>
+    </ng-container>
+  </div>
 </div>

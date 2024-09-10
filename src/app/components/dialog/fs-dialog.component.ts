@@ -59,6 +59,11 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   @Input()
   public buttonLayout: 'flow' | 'full' = 'flow';
 
+  @Input()
+  public fullscreen = false;
+
+  @Input() public fullscreenPercent = 90;
+
   private _destroy$ = new Subject();
 
   @HostBinding('class.button-layout-full')
@@ -83,6 +88,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public ngOnInit(): void {
+    if(this.fullscreen) {
+      this.openFullscreen();
+    }
+
     this.mobileMode = this.mobileMode ?? (this._config?.mobileMode || 'full');
     this.mobileButtonPlacement = this.mobileButtonPlacement ?? (this._config?.mobileButtonPlacement || 'flow');
 
@@ -142,6 +151,27 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public get body() {
     return document.body;
+  }
+
+  public openFullscreen() {
+    this.fullscreen = true;
+    const el = document.querySelector(`#${this._dialogRef.id}`).parentElement;
+    this._dialogRef.addPanelClass('fs-dialog-fullscreen');
+
+    el.setAttribute('data-fullscreen-width', el.style.width);
+    el.setAttribute('data-fullscreen-height', el.style.height);
+
+    el.style.width = `${this.fullscreenPercent}%`;
+    el.style.height = `${this.fullscreenPercent}%`;
+  }
+
+  public closeFullscreen() {
+    this.fullscreen = false;
+    const el = document.querySelector(`#${this._dialogRef.id}`).parentElement;
+    this._dialogRef.removePanelClass('fs-dialog-fullscreen');
+
+    el.style.width = el.getAttribute('data-fullscreen-width');
+    el.style.height = el.getAttribute('data-fullscreen-height');
   }
 
   public addDialogCloseButtonClasses(elementRefs: any): void {
