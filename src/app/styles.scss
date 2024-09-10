@@ -1,24 +1,47 @@
 @use '@firestitch/style/styles' as fs-style;
 
-.cdk-overlay-pane.fs-dialog-overlay-pane {
-  min-width: 400px;
+.cdk-overlay-pane {
 
-  .mat-dialog-content {
-    position: relative;
-    z-index: 1;
-    background: 
-      linear-gradient(#ffffff 33%, rgba(255,255,255, 0)),
-      linear-gradient(rgba(255,255,255, 0), #ffffff 66%) 0 100%,
-      radial-gradient(farthest-side at 50% 0, rgba(34,34,34, 0.2), rgba(0,0,0,0)),
-      radial-gradient(farthest-side at 50% 100%, rgba(34,34,34, 0.2), rgba(0,0,0,0)) 0 100%;
-    background-color: #ffffff;
-    background-repeat: no-repeat;
-    background-attachment: local, local, scroll, scroll;
-    background-size: 100% 19px, 100% 19px, 100% 7px, 100% 7px;
-    /*
-      iOS half pixel horizontal fix
-    */
-    border-bottom: 1px solid #fff;
+  &.fs-dialog-fullscreen {
+    max-width: none !important;
+    max-height: none !important;
+
+    form {
+      height: 100%;
+    }
+
+    fs-dialog {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mat-dialog-content {
+      max-height: none !important;
+      flex: 1;
+    }
+  }
+
+  .fs-dialog-overlay-pane {
+    min-width: 400px;
+
+    .mat-dialog-content {
+      position: relative;
+      z-index: 1;
+      background: 
+        linear-gradient(#ffffff 33%, rgba(255,255,255, 0)),
+        linear-gradient(rgba(255,255,255, 0), #ffffff 66%) 0 100%,
+        radial-gradient(farthest-side at 50% 0, rgba(34,34,34, 0.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(34,34,34, 0.2), rgba(0,0,0,0)) 0 100%;
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+      background-attachment: local, local, scroll, scroll;
+      background-size: 100% 19px, 100% 19px, 100% 7px, 100% 7px;
+      /*
+        iOS half pixel horizontal fix
+      */
+      border-bottom: 1px solid #fff;
+    }
   }
 }
 
