@@ -24,7 +24,6 @@ export class FsDialogTitleComponent {
 
   @Input() public close = false;
   @Input() public back = false;
-  @Input() public dockable = false;
   @Input() public fullscreenPercent = 90;
 
   constructor(

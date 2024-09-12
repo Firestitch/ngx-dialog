@@ -61,6 +61,8 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   @Input()
   public dock: 'fullscreen' | 'expanded';
+  
+  @Input() public dockable = false;
 
   @Input() public fullscreenPercent = 90;
 
@@ -89,6 +91,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public ngOnInit(): void {
     if(this.dock) {
+      this.dockable = true;
       if(this.dock === 'fullscreen') {
         this.enableFullscreenDock();
       } else if(this.dock === 'expanded') {
