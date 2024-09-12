@@ -16,18 +16,52 @@
     </ng-container>
   </div>
   <div class="right">
-    <ng-container *ngIf="fullscreen">
+    <ng-container *ngIf="dockable">
       <div>
-        <a 
-            (click)="fullscreenClick()"
-            mat-icon-button>
-          <mat-icon>{{fullscreenExpanded ? 'crop_landscape' : 'aspect_ratio'}}</mat-icon>
-        </a>
+        <button 
+            [tabIndex]="-1"
+            mat-icon-button 
+            type="button"
+            [fsMenuTriggerFor]="menu">
+          <ng-container *ngIf="!dock">
+            <mat-icon>crop_landscape</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="dock === 'expanded'">
+            <mat-icon>aspect_ratio</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="dock === 'fullscreen'">
+            <mat-icon>settings_overscan</mat-icon>
+          </ng-container>
+        </button>
+        <fs-menu #menu>
+          <ng-container *ngIf="dock">
+            <ng-template 
+                fs-menu-item
+                (click)="dialog.disableDock()">
+              <mat-icon>crop_landscape</mat-icon> Contract
+            </ng-template>
+          </ng-container>
+          <ng-container *ngIf="dock !== 'expanded'">
+            <ng-template 
+                fs-menu-item
+                (click)="dialog.enableExpandedDock()">
+              <mat-icon>aspect_ratio</mat-icon> Expand
+            </ng-template>
+          </ng-container>
+          <ng-container *ngIf="dock !== 'fullscreen'">
+            <ng-template 
+                fs-menu-item
+                (click)="dialog.enableFullscreenDock()">
+              <mat-icon>settings_overscan</mat-icon> Fullscreen
+            </ng-template>
+          </ng-container> 
+        </fs-menu>
       </div>
     </ng-container>
     <ng-container *ngIf="close">
       <div class="close">
         <a 
+            [tabIndex]="-1"
             mat-icon-button
             mat-dialog-close>
           <mat-icon>close</mat-icon>

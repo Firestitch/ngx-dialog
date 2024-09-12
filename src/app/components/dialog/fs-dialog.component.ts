@@ -60,7 +60,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   public buttonLayout: 'flow' | 'full' = 'flow';
 
   @Input()
-  public fullscreen = false;
+  public dock: 'fullscreen' | 'expanded';
 
   @Input() public fullscreenPercent = 90;
 
@@ -88,8 +88,12 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public ngOnInit(): void {
-    if(this.fullscreen) {
-      this.openFullscreen();
+    if(this.dock) {
+      if(this.dock === 'fullscreen') {
+        this.enableFullscreenDock();
+      } else if(this.dock === 'expanded') {
+        this.enableExpandedDock();  
+      }
     }
 
     this.mobileMode = this.mobileMode ?? (this._config?.mobileMode || 'full');
@@ -153,25 +157,22 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
     return document.body;
   }
 
-  public openFullscreen() {
-    this.fullscreen = true;
-    const el = document.querySelector(`#${this._dialogRef.id}`).parentElement;
+  public enableFullscreenDock() {
+    this.disableDock();
+    this.dock = 'fullscreen';
     this._dialogRef.addPanelClass('fs-dialog-fullscreen');
-
-    el.setAttribute('data-fullscreen-width', el.style.width);
-    el.setAttribute('data-fullscreen-height', el.style.height);
-
-    el.style.width = `${this.fullscreenPercent}%`;
-    el.style.height = `${this.fullscreenPercent}%`;
   }
 
-  public closeFullscreen() {
-    this.fullscreen = false;
-    const el = document.querySelector(`#${this._dialogRef.id}`).parentElement;
-    this._dialogRef.removePanelClass('fs-dialog-fullscreen');
+  public enableExpandedDock() {
+    this.disableDock();
+    this.dock = 'expanded';
+    this._dialogRef.addPanelClass('fs-dialog-expanded');
+  }
 
-    el.style.width = el.getAttribute('data-fullscreen-width');
-    el.style.height = el.getAttribute('data-fullscreen-height');
+  public disableDock() {
+    this.dock = null;
+    this._dialogRef.removePanelClass('fs-dialog-fullscreen');
+    this._dialogRef.removePanelClass('fs-dialog-expanded');
   }
 
   public addDialogCloseButtonClasses(elementRefs: any): void {

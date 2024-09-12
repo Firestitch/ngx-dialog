@@ -2,9 +2,24 @@
 
 .cdk-overlay-pane {
 
-  &.fs-dialog-fullscreen {
+  &.fs-dialog-fullscreen,
+  &.fs-dialog-expanded {
     max-width: none !important;
     max-height: none !important;
+
+    &.fs-dialog-fullscreen {
+      width: 100% !important;
+      height: 100% !important;
+
+      .mat-dialog-container {
+        border-radius: 0px;
+      }
+    }
+    
+    &.fs-dialog-expanded {
+      width: 95% !important;
+      height: 95% !important;
+    }
 
     .mat-dialog-container > form {
       height: 100%;

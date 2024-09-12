@@ -1,13 +1,15 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
-
-import { FsDialogRouteComponent } from './components/route/route.component';
-import { FsDialogComponent, FsDialogTitleComponent } from './components';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+
+import { FsMenuModule } from '@firestitch/menu';
+
+import { FsDialogComponent, FsDialogTitleComponent } from './components';
+import { FsDialogRouteComponent } from './components/route/route.component';
 import { FsDialogSubtitleDirective } from './directives';
 
 
@@ -18,6 +20,7 @@ import { FsDialogSubtitleDirective } from './directives';
 
     MatIconModule,
     MatButtonModule,
+    FsMenuModule,
     MatDialogModule,
   ],
   declarations: [
@@ -32,7 +35,7 @@ import { FsDialogSubtitleDirective } from './directives';
     FsDialogTitleComponent,
     FsDialogRouteComponent,
     FsDialogSubtitleDirective,
-  ]
+  ],
 })
 export class FsDialogModule {
   public static forRoot(): ModuleWithProviders<FsDialogModule> {
@@ -46,10 +49,10 @@ export class FsDialogModule {
             maxWidth: '95vw',
             disableClose: false,
             autoFocus: true,
-            hasBackdrop: true
-          }
+            hasBackdrop: true,
+          },
         },
-      ]
+      ],
     };
   }
 }

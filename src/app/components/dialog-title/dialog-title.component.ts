@@ -24,25 +24,18 @@ export class FsDialogTitleComponent {
 
   @Input() public close = false;
   @Input() public back = false;
-  @Input() public fullscreen = false;
+  @Input() public dockable = false;
   @Input() public fullscreenPercent = 90;
-  
-  public fullscreened = false;
 
   constructor(
     private _dialog: FsDialogComponent,
   ) {}
 
-  public get fullscreenExpanded() {
-    return this._dialog.fullscreen;
+  public get dialog(): FsDialogComponent {
+    return this._dialog;
   }
 
-  public fullscreenClick() {
-    if(this.fullscreenExpanded){
-      this._dialog.closeFullscreen();
-    } else {
-      this._dialog.openFullscreen();
-    }
+  public get dock() {
+    return this._dialog.dock;
   }
-
 }
