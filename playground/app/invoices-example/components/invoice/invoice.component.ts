@@ -1,11 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { filter, tap } from 'rxjs/operators';
 
-import { FsMessage } from '@firestitch/message';
 import { RouteObserver } from '@firestitch/core';
+import { FsMessage } from '@firestitch/message';
+
+import { filter, tap } from 'rxjs/operators';
 
 import { InvoicesService } from '../../services/invoices.service';
 
@@ -15,7 +17,7 @@ import { InvoicesService } from '../../services/invoices.service';
 })
 export class InvoiceComponent {
 
-  public invoice$ = new RouteObserver<any>(this._route, 'invoice');
+  public invoice$: RouteObserver<any>;
   public invoice: any;
 
   constructor(
@@ -26,6 +28,7 @@ export class InvoiceComponent {
     private _dialogRef: MatDialogRef<any>,
     private _message: FsMessage,
   ) {
+    this.invoice$ = new RouteObserver<any>(this._route, 'invoice');
     if (data) {
       this.invoice = data.invoice;
     }
@@ -47,7 +50,7 @@ export class InvoiceComponent {
           this._message.success('Saved');
 
           this._dialogRef.close(res);
-        })
+        }),
       );
-  }
+  };
 }
