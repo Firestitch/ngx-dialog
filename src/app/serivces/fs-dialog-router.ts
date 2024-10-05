@@ -63,7 +63,7 @@ export class FsDialogRouter {
 
       this._listenDialogClose(component, ref);
 
-      this._dialogOpened$.next();
+      this._dialogOpened$.next(null);
     }
   }
 
