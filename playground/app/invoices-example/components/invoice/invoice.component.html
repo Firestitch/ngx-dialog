@@ -1,8 +1,8 @@
 <form fsForm [submit]="save" *ngIf="invoice">
   <fs-dialog>
-    <fs-dialog-title mat-dialog-title>Invoice #{{ invoice.id }}</fs-dialog-title>
+    <div mat-dialog-title>Invoice #{{ invoice.id }}</div>
     <mat-dialog-content>
-      <div fxLayout="column" fxLayoutGap="10px">
+      <div class="fs-column">
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput [(ngModel)]="invoice.name" name="name" required>

@@ -179,3 +179,8 @@ fs-dialog {
     }
   }
 }
+
+:root {
+  --mat-dialog-with-actions-content-padding: 0 24px;
+  --mat-dialog-actions-padding: 16px 24px;
+}

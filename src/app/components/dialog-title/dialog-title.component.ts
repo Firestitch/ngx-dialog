@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  HostBinding,
   Input,
   TemplateRef,
 } from '@angular/core';
@@ -25,6 +26,9 @@ export class FsDialogTitleComponent {
   @Input() public close = false;
   @Input() public back = false;
   @Input() public fullscreenPercent = 90;
+
+  @HostBinding('class.mat-mdc-dialog-title')
+  public classTitle = true;
 
   constructor(
     private _dialog: FsDialogComponent,

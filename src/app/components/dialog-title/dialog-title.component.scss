@@ -1,7 +1,14 @@
-.mat-dialog-title {
+:host {
+  &::before {
+    display: none;
+  }
+}
+
+.dialog-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 15px;
 
   .subtitle {
     line-height: normal;
