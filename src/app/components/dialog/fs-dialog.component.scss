@@ -3,7 +3,7 @@
 ::ng-deep {
   fs-dialog {
     .mat-mdc-dialog-content {
-      .mat-mdc-form-field:first-of-type {
+      > *:first-child {
         margin-top: 4px;
       }
       
