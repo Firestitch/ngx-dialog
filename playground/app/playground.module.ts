@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { FsExampleModule } from '@firestitch/example';
 import { FsFormModule } from '@firestitch/form';
@@ -65,6 +65,10 @@ import { AppMaterialModule } from './material.module';
         mobileMode: 'full',
         mobileButtonPlacement: 'bottom',
       } as DialogConfig,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { floatLabel: 'auto', appearance: 'outline' },
     },
   ],
 })

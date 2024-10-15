@@ -1,7 +1,6 @@
 @use '@firestitch/style/styles' as fs-style;
 
 .cdk-overlay-pane {
-
   &.fs-dialog-fullscreen,
   &.fs-dialog-expanded {
     max-width: none !important;
@@ -11,17 +10,20 @@
       width: 100% !important;
       height: 100% !important;
 
-      .mat-dialog-container {
+      .mat-mdc-dialog-container {
         border-radius: 0px;
       }
     }
     
+    
     &.fs-dialog-expanded {
-      width: 95% !important;
+      @media (min-width: fs-style.$break-xsmall) {
+        width: 95% !important;
       height: 95% !important;
+      }
     }
 
-    .mat-dialog-container > form {
+    .mat-mdc-dialog-container > form {
       height: 100%;
     }
 
@@ -34,6 +36,113 @@
     .mat-dialog-content {
       max-height: none !important;
       flex: 1;
+    }
+  }
+
+  &.fs-dialog-overlay-pane {
+    
+    &.fs-dialog-mode-full {
+      .mat-mdc-dialog-container {
+        border-top: calc(fs-style.$safe-area-top * .8) solid transparent;
+      }
+      
+      .mat-mdc-dialog-content {
+        max-height: none;
+      }
+    }
+
+    &.fs-dialog-mode-full,
+    &.fs-dialog-mode-peek,
+    &.fs-dialog-mode-bottom {
+      .mat-mdc-dialog-container {
+        border-bottom: calc(fs-style.$safe-area-bottom * .8) solid transparent;
+      }
+    }
+
+    &.fs-dialog-mode-full,
+    &.fs-dialog-mode-peek,
+    &.fs-dialog-mode-float,
+    &.fs-dialog-mode-bottom {
+
+      &:not(.fs-dialog-mode-float):not(.fs-dialog-mode-peek) {
+        .mat-mdc-dialog-container {
+          border-radius: 0;
+        }
+      }
+
+      &:not(.fs-dialog-mode-float) {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute !important;
+        max-width: none !important;
+        width: auto !important;
+        min-width: initial !important;
+
+        fs-dialog {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+
+          .mat-dialog-content {
+            max-height: initial;
+          }
+        }
+
+        .mat-mdc-dialog-container {
+          form {
+            display: inline;
+            min-height: 0;
+          }
+        }
+      }
+
+      &.fs-dialog-mode-bottom {
+        top: initial;
+
+        .mat-mdc-dialog-container {
+          height: unset;
+        }
+      }
+      
+      &.fs-dialog-mode-peek {      
+        padding-top: 25px;
+      }
+
+      &.fs-dialog-mode-full,
+      &.fs-dialog-mode-peek {
+        .mat-mdc-dialog-container {
+          box-shadow: none;
+        }
+      }
+    }
+
+    &.fs-dialog-mode-full,
+    &.fs-dialog-mode-peek,
+    &.fs-dialog-mode-float,
+    &.fs-dialog-mode-bottom,
+    .button-layout-full {
+      mat-dialog-actions {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        display: flex;
+        flex: none;
+        min-height: auto;
+
+        button,
+        .mat-button,
+        .mat-raised-button,
+        .mat-flat-button,
+        .mat-stroked-button {
+          width: 100%;
+          margin: 0 0 4px 0;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
     }
   }
 
@@ -60,124 +169,8 @@
   }
 }
 
-fs-dialog {
-  .mat-dialog-actions .mat-button,
-  .mat-dialog-actions .mat-button + .mat-button {
-    margin-left: 0;
-    margin-right: 8px;
-  }
-
-  &.button-placement-bottom {
-    .mat-dialog-content {
-      flex: 1;
-    }
-  }
-}
-
 .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
   background: white;
-}
-
-.cdk-overlay-pane.fs-dialog-overlay-pane {
-  
-  &.fs-dialog-mode-full {
-    .mat-dialog-container {
-      border-top: calc(fs-style.$safe-area-top * .8) solid transparent;
-    }
-  }
-
-  &.fs-dialog-mode-full,
-  &.fs-dialog-mode-peek,
-  &.fs-dialog-mode-bottom {
-    .mat-dialog-container {
-      border-bottom: calc(fs-style.$safe-area-bottom * .8) solid transparent;
-    }
-  }
-
-  &.fs-dialog-mode-full,
-  &.fs-dialog-mode-peek,
-  &.fs-dialog-mode-float,
-  &.fs-dialog-mode-bottom {
-
-    &:not(.fs-dialog-mode-float):not(.fs-dialog-mode-peek) {
-      .mat-dialog-container {
-        border-radius: 0;
-      }
-    }
-
-    &:not(.fs-dialog-mode-float) {
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      position: absolute !important;
-      max-width: none !important;
-      width: auto !important;
-      min-width: initial !important;
-
-      fs-dialog {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .mat-dialog-content {
-          max-height: initial;
-        }
-      }
-
-      .mat-dialog-container {
-        form {
-          display: inline;
-        }
-      }
-    }
-
-    &.fs-dialog-mode-bottom {
-      top: initial;
-
-      .mat-dialog-container {
-        height: unset;
-      }
-    }
-    
-    &.fs-dialog-mode-peek {      
-      padding-top: 25px;
-    }
-
-    &.fs-dialog-mode-full,
-    &.fs-dialog-mode-peek {
-      .mat-dialog-container {
-        box-shadow: none;
-      }
-    }
-  }
-
-  &.fs-dialog-mode-full,
-  &.fs-dialog-mode-peek,
-  &.fs-dialog-mode-float,
-  &.fs-dialog-mode-bottom,
-  .button-layout-full {
-    .mat-dialog-actions {
-      flex-direction: column;
-      flex-wrap: nowrap;
-      display: flex;
-      flex: none;
-      min-height: auto;
-
-      button,
-      .mat-button,
-      .mat-raised-button,
-      .mat-flat-button,
-      .mat-stroked-button {
-        width: 100%;
-        margin: 0 0 4px 0;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
 }
 
 :root {

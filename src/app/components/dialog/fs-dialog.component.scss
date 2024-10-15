@@ -1,13 +1,34 @@
 @use '@firestitch/style/styles' as fs-style;
 
 ::ng-deep {
+  fs-dialog {
+    .mat-mdc-dialog-content {
+      .mat-mdc-form-field:first-of-type {
+        margin-top: 4px;
+      }
+      
+      mat-dialog-actions .mat-button,
+      mat-dialog-actions .mat-button + .mat-button {
+        margin-left: 0;
+        margin-right: 8px;
+      }
+    
+      &.button-placement-bottom {
+        .mat-dialog-content {
+          flex: 1;
+        }
+      }
+    }
+  }
+    
+
   @media (max-width: fs-style.$break-xsmall) {
     .fs-dialog-back.fs-dialog-mode-full {
       .close-button {
         display: none;
       }
 
-      .mat-dialog-container {
+      .mat-mdc-dialog-container {
         transform: none !important;
       }
 

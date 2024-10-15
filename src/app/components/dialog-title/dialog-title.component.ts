@@ -7,7 +7,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-
 import { FsDialogSubtitleDirective } from '../../directives';
 import { FsDialogComponent } from '../dialog/fs-dialog.component';
 

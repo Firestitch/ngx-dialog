@@ -7,14 +7,18 @@
 .dialog-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding-top: 15px;
 
-  .subtitle {
-    line-height: normal;
-    font-size: 60%;
-  }
-  
+
+  .title {
+    flex: 1;
+
+    .subtitle {
+      line-height: normal;
+      font-size: 60%;
+    }  
+}
+
   .right{
     display: flex;
     align-items: center;
