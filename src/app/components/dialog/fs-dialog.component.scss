@@ -3,10 +3,12 @@
 ::ng-deep {
   fs-dialog {
     .mat-mdc-dialog-content {
-      > *:first-child {
+      &:before {
         margin-top: 4px;
-      }
-      
+        content: ' ';
+        display: block;
+      }      
+
       mat-dialog-actions .mat-button,
       mat-dialog-actions .mat-button + .mat-button {
         margin-left: 0;
