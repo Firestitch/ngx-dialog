@@ -7,7 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { FsDialogSubtitleDirective } from '../../directives';
+import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from '../../directives';
 import { FsDialogComponent } from '../dialog/fs-dialog.component';
 
 
@@ -21,6 +21,9 @@ export class FsDialogTitleComponent {
 
   @ContentChild(FsDialogSubtitleDirective, { read: TemplateRef })
   public subtitle: TemplateRef<any>;
+
+  @ContentChild(FsDialogSupertitleDirective, { read: TemplateRef })
+  public supertitle: TemplateRef<any>;
 
   @Input() public close = false;
   @Input() public back = false;

@@ -2,6 +2,9 @@
 <form (fsForm)="save()">
   <fs-dialog [dock]="'expanded'">
     <fs-dialog-title [close]="true">
+      <ng-template fsDialogSupertitle>
+        This is the supertitle
+      </ng-template>
       Close Dialog
       <ng-template fsDialogSubtitle>
         This is the subtitle

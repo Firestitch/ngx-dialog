@@ -10,7 +10,7 @@ import { FsMenuModule } from '@firestitch/menu';
 
 import { FsDialogComponent, FsDialogTitleComponent } from './components';
 import { FsDialogRouteComponent } from './components/route/route.component';
-import { FsDialogSubtitleDirective } from './directives';
+import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './directives';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { FsDialogSubtitleDirective } from './directives';
     FsDialogRouteComponent,
     FsDialogTitleComponent,
     FsDialogSubtitleDirective,
+    FsDialogSupertitleDirective,
   ],
   exports: [
     MatDialogModule,
@@ -35,6 +36,7 @@ import { FsDialogSubtitleDirective } from './directives';
     FsDialogTitleComponent,
     FsDialogRouteComponent,
     FsDialogSubtitleDirective,
+    FsDialogSupertitleDirective,
   ],
 })
 export class FsDialogModule {

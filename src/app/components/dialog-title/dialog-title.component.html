@@ -8,6 +8,11 @@
     </a>
   </ng-container>
   <div class="title">
+    <ng-container *ngIf="supertitle">
+      <div class="supertitle">
+        <ng-container [ngTemplateOutlet]="supertitle"></ng-container>
+      </div>
+    </ng-container>    
     <ng-content></ng-content>
     <ng-container *ngIf="subtitle">
       <div class="subtitle">

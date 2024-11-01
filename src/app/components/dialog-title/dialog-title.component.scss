@@ -12,10 +12,15 @@
 
   .title {
     flex: 1;
+    line-height: normal;
 
     .subtitle {
-      line-height: normal;
       font-size: 60%;
+    } 
+
+    .supertitle {
+      font-size: 60%;
+      color: #818181;
     }  
 }
 
