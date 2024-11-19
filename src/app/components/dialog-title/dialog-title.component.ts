@@ -26,6 +26,7 @@ export class FsDialogTitleComponent {
   public supertitle: TemplateRef<any>;
 
   @Input() public close = false;
+  @Input() public dockToggle = false;
   @Input() public back = false;
   @Input() public fullscreenPercent = 90;
 

@@ -1,10 +1,12 @@
 <div class="dialog-title">
   <ng-container *ngIf="back">
-    <a 
+    <a
         class="back"
         mat-icon-button
         mat-dialog-close>
-      <mat-icon>arrow_back_ios_new</mat-icon>
+      <mat-icon>
+        arrow_back_ios_new
+      </mat-icon>
     </a>
   </ng-container>
   <div class="title">
@@ -12,7 +14,7 @@
       <div class="supertitle">
         <ng-container [ngTemplateOutlet]="supertitle"></ng-container>
       </div>
-    </ng-container>    
+    </ng-container>
     <ng-content></ng-content>
     <ng-container *ngIf="subtitle">
       <div class="subtitle">
@@ -21,55 +23,72 @@
     </ng-container>
   </div>
   <div class="right">
-    <ng-container *ngIf="dialog.dockable">
+    <ng-container *ngIf="dialog.dockable && dockToggle">
       <div>
-        <button 
+        <button
             [tabIndex]="-1"
-            mat-icon-button 
+            mat-icon-button
             type="button"
             [fsMenuTriggerFor]="menu">
           <ng-container *ngIf="!dock">
-            <mat-icon>crop_landscape</mat-icon>
+            <mat-icon>
+              crop_landscape
+            </mat-icon>
           </ng-container>
           <ng-container *ngIf="dock === 'expanded'">
-            <mat-icon>aspect_ratio</mat-icon>
+            <mat-icon>
+              aspect_ratio
+            </mat-icon>
           </ng-container>
           <ng-container *ngIf="dock === 'fullscreen'">
-            <mat-icon>settings_overscan</mat-icon>
+            <mat-icon>
+              settings_overscan
+            </mat-icon>
           </ng-container>
         </button>
         <fs-menu #menu>
           <ng-container *ngIf="dock">
-            <ng-template 
+            <ng-template
                 fs-menu-item
                 (click)="dialog.disableDock()">
-              <mat-icon>crop_landscape</mat-icon> Contract
+              <mat-icon>
+                crop_landscape
+              </mat-icon>
+              Contract
             </ng-template>
           </ng-container>
           <ng-container *ngIf="dock !== 'expanded'">
-            <ng-template 
+            <ng-template
                 fs-menu-item
                 (click)="dialog.enableExpandedDock()">
-              <mat-icon>aspect_ratio</mat-icon> Expand
+              <mat-icon>
+                aspect_ratio
+              </mat-icon>
+              Expand
             </ng-template>
           </ng-container>
           <ng-container *ngIf="dock !== 'fullscreen'">
-            <ng-template 
+            <ng-template
                 fs-menu-item
                 (click)="dialog.enableFullscreenDock()">
-              <mat-icon>settings_overscan</mat-icon> Fullscreen
+              <mat-icon>
+                settings_overscan
+              </mat-icon>
+              Fullscreen
             </ng-template>
-          </ng-container> 
+          </ng-container>
         </fs-menu>
       </div>
     </ng-container>
     <ng-container *ngIf="close">
       <div class="close">
-        <a 
+        <a
             [tabIndex]="-1"
             mat-icon-button
             mat-dialog-close>
-          <mat-icon>close</mat-icon>
+          <mat-icon>
+            close
+          </mat-icon>
         </a>
       </div>
     </ng-container>
