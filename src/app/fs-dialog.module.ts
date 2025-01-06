@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FsMenuModule } from '@firestitch/menu';
 
 import { FsDialogComponent, FsDialogTitleComponent } from './components';
-import { FsDialogRouteComponent } from './components/route/route.component';
 import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './directives';
 
 
@@ -25,7 +24,6 @@ import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './direct
   ],
   declarations: [
     FsDialogComponent,
-    FsDialogRouteComponent,
     FsDialogTitleComponent,
     FsDialogSubtitleDirective,
     FsDialogSupertitleDirective,
@@ -34,7 +32,6 @@ import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './direct
     MatDialogModule,
     FsDialogComponent,
     FsDialogTitleComponent,
-    FsDialogRouteComponent,
     FsDialogSubtitleDirective,
     FsDialogSupertitleDirective,
   ],

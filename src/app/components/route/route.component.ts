@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, inject, Injector, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -14,6 +14,10 @@ import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 
 @Component({
   template: '<router-outlet></router-outlet>',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+  ],
 })
 export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
