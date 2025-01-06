@@ -1,5 +1,6 @@
 import {
   Component, ComponentFactoryResolver, inject,
+  Injector,
   OnDestroy, OnInit, ViewContainerRef,
 } from '@angular/core';
 import {
@@ -13,7 +14,6 @@ import { getPathToRouteParent } from '@firestitch/core';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { FS_DIALOG_INJECTOR } from '../../injectors';
 import { IFsDialogRouteConfig } from '../../interfaces/route-data.interface';
 import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 
@@ -31,7 +31,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _hasActiveNavigation = false;
 
   private _destroy$ = new Subject<void>();
-  private _injector = inject(FS_DIALOG_INJECTOR);
+  private _injector = inject(Injector);
 
   constructor(
     private _route: ActivatedRoute,
@@ -107,10 +107,13 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     const navigationPath = getPathToRouteParent(this._route);
 
     // Do it!
-    this._router.navigate([navigationPath], { relativeTo: this._route, queryParamsHandling: 'merge' });
+    this._router
+      .navigate([navigationPath], { relativeTo: this._route, queryParamsHandling: 'merge' });
   }
 
-  private async _openLazyDialog(dialogConfig: IFsDialogRouteConfig): Promise<MatDialogRef<unknown, unknown>> {
+  private async _openLazyDialog(
+    dialogConfig: IFsDialogRouteConfig,
+  ): Promise<MatDialogRef<unknown, unknown>> {
     const loadedComponent = await dialogConfig.component;
     const componentName = Object.keys(loadedComponent)[0];
 
@@ -132,7 +135,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     // We dont want to close dialog when navigation happens,
     // because we want to have full control
     dialogConfig.closeOnNavigation = false;
-    //dialogConfig.injector = this._injector;
+    dialogConfig.injector = this._injector;
 
     return this._dialogRouter.openDialogForRoute(dialogComponent, dialogConfig);
   }

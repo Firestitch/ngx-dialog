@@ -33,7 +33,10 @@ export class FsDialogRouter {
     return this._router.navigate(commands, extras);
   }
 
-  public openDialog<T, D = any, R = any>(component: ComponentType<T>, config?: MatDialogConfig<D>): MatDialogRef<T, R> {
+  public openDialog<T, D = any, R = any>(
+    component: ComponentType<T>, 
+    config?: MatDialogConfig<D>,
+  ): MatDialogRef<T, R> {
     const dialog = this._dialog
       .open<T, D, R>(component, config);
 
