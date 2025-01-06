@@ -132,7 +132,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     // We dont want to close dialog when navigation happens,
     // because we want to have full control
     dialogConfig.closeOnNavigation = false;
-    dialogConfig.injector = this._injector;
+    //dialogConfig.injector = this._injector;
 
     return this._dialogRouter.openDialogForRoute(dialogComponent, dialogConfig);
   }
