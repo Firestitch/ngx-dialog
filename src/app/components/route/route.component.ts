@@ -1,5 +1,10 @@
-import { Component, ComponentFactoryResolver, inject, Injector, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import {
+  Component, ComponentFactoryResolver, inject,
+  OnDestroy, OnInit, ViewContainerRef,
+} from '@angular/core';
+import {
+  ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet,
+} from '@angular/router';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -8,6 +13,7 @@ import { getPathToRouteParent } from '@firestitch/core';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
+import { FS_DIALOG_INJECTOR } from '../../injectors';
 import { IFsDialogRouteConfig } from '../../interfaces/route-data.interface';
 import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 
@@ -25,7 +31,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _hasActiveNavigation = false;
 
   private _destroy$ = new Subject<void>();
-  private _injector = inject(Injector);
+  private _injector = inject(FS_DIALOG_INJECTOR);
 
   constructor(
     private _route: ActivatedRoute,
@@ -51,7 +57,9 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     const dialogConfig: IFsDialogRouteConfig = { ...this._route.snapshot.data?.fsDialog };
 
     if (dialogConfig?.component) {
-      this._dialog = dialogConfig.component instanceof Promise ? (await this._openLazyDialog(dialogConfig)) : this._openDialog(dialogConfig);
+      this._dialog = dialogConfig.component instanceof Promise ? 
+        (await this._openLazyDialog(dialogConfig)) : 
+        this._openDialog(dialogConfig);
 
       this._listenDialogClose();
     }

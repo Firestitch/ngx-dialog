@@ -19,8 +19,9 @@ import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './direct
 
     MatIconModule,
     MatButtonModule,
-    FsMenuModule,
     MatDialogModule,
+
+    FsMenuModule,
   ],
   declarations: [
     FsDialogComponent,

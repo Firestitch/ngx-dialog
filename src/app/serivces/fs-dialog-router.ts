@@ -34,7 +34,8 @@ export class FsDialogRouter {
   }
 
   public openDialog<T, D = any, R = any>(component: ComponentType<T>, config?: MatDialogConfig<D>): MatDialogRef<T, R> {
-    const dialog = this._dialog.open<T, D, R>(component, config);
+    const dialog = this._dialog
+      .open<T, D, R>(component, config);
 
     this._registerDialog(component, dialog);
 
