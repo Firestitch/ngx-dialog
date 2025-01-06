@@ -1,16 +1,15 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, inject, Injector, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
-import { MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
-import { ComponentType } from '@angular/cdk/portal';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { getPathToRouteParent } from '@firestitch/core';
 
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 import { IFsDialogRouteConfig } from '../../interfaces/route-data.interface';
+import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 
 
 @Component({
@@ -20,14 +19,16 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
   private _dialog: MatDialogRef<unknown, unknown>;
   private _hasActiveNavigation = false;
+
   private _destroy$ = new Subject<void>();
+  private _injector = inject(Injector);
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _dialogRouter: FsDialogRouter,
     private _componentFactory: ComponentFactoryResolver,
-    private _viewContainerRef?: ViewContainerRef
+    private _viewContainerRef?: ViewContainerRef,
   ) {}
 
   public ngOnInit(): void {
@@ -46,11 +47,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     const dialogConfig: IFsDialogRouteConfig = { ...this._route.snapshot.data?.fsDialog };
 
     if (dialogConfig?.component) {
-      if (dialogConfig.component instanceof Promise) {
-        this._dialog = await this._openLazyDialog(dialogConfig);
-      } else {
-        this._dialog = this._openDialog(dialogConfig);
-      }
+      this._dialog = dialogConfig.component instanceof Promise ? (await this._openLazyDialog(dialogConfig)) : this._openDialog(dialogConfig);
 
       this._listenDialogClose();
     }
@@ -60,24 +57,24 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     this._router.events
       .pipe(
         filter((event) => {
-          return event instanceof NavigationStart
+          return event instanceof NavigationStart;
         }),
         takeUntil(this._destroy$),
       )
-      .subscribe((event) => {
+      .subscribe(() => {
         this._hasActiveNavigation = true;
       });
 
     this._router.events
       .pipe(
         filter((event) => {
-          return event instanceof NavigationEnd
+          return event instanceof NavigationEnd;
         }),
         takeUntil(this._destroy$),
       )
-      .subscribe((event) => {
+      .subscribe(() => {
         this._hasActiveNavigation = false;
-      })
+      });
   }
 
   private _listenDialogClose(): void {
@@ -106,10 +103,10 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     const componentName = Object.keys(loadedComponent)[0];
 
     if (!componentName) {
-      throw Error('Lazy loading dialog component error! Component not found!')
+      throw Error('Lazy loading dialog component error! Component not found!');
     }
 
-    const factory = this._componentFactory.resolveComponentFactory(loadedComponent[componentName])
+    const factory = this._componentFactory.resolveComponentFactory(loadedComponent[componentName]);
     dialogConfig.component = factory.componentType;
 
     return this._openDialog(dialogConfig);
@@ -117,12 +114,13 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
   private _openDialog(routeDialogConfig: IFsDialogRouteConfig): MatDialogRef<unknown, unknown> {
     const dialogComponent = routeDialogConfig.component;
-    const dialogConfig = routeDialogConfig.config as MatDialogConfig<unknown> || {};
+    const dialogConfig = routeDialogConfig.config || {};
 
     dialogConfig.viewContainerRef = this._viewContainerRef;
     // We dont want to close dialog when navigation happens,
     // because we want to have full control
     dialogConfig.closeOnNavigation = false;
+    dialogConfig.injector = this._injector;
 
     return this._dialogRouter.openDialogForRoute(dialogComponent, dialogConfig);
   }

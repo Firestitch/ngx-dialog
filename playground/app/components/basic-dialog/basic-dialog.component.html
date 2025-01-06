@@ -1,17 +1,40 @@
-
 <form (fsForm)="save()">
-  <fs-dialog [mobileMode]="mobileMode" [dockable]="true">
-    <fs-dialog-title>Dialog</fs-dialog-title>
+  <fs-dialog
+      [mobileMode]="mobileMode"
+      [dockable]="true">
+    <fs-dialog-title>
+      Dialog
+    </fs-dialog-title>
     <mat-dialog-content>
       <div class="text">
-        <p *ngFor="let input of inputs">{{input}}</p>
+        <p *ngFor="let input of inputs">
+          {{ input }}
+        </p>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button color="primary">{{ object.id ? 'Save' : 'Create' }}</button>
-      <button mat-button (click)="addText()" type="button">Add Text</button>
-      <button mat-button (click)="removeText()" type="button">Remove Text</button>
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button
+          mat-button
+          color="primary">
+        {{ object.id ? 'Save' : 'Create' }}
+      </button>
+      <button
+          mat-button
+          (click)="addText()"
+          type="button">
+        Add Text
+      </button>
+      <button
+          mat-button
+          (click)="removeText()"
+          type="button">
+        Remove Text
+      </button>
+      <button
+          mat-button
+          mat-dialog-close>
+        Cancel
+      </button>
     </mat-dialog-actions>
   </fs-dialog>
 </form>

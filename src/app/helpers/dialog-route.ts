@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+
 import { MatDialogConfig } from '@angular/material/dialog';
 
 import { FsDialogRouteComponent } from '../components/route/route.component';
@@ -26,14 +27,14 @@ export function fsDialogRoute(route: Route, dialogConfig?: MatDialogConfig): Rou
     ...restRoute,
     data: {
       ...data,
-      fsDialog: {
+      fsDialog: { 
         component,
         config: {
           data,
           ...dialogConfig,
         },
-      }
-    }
+      },
+    },
   };
 
 }

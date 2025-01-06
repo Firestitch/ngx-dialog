@@ -1,9 +1,8 @@
-import { Injectable, Type } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-
 import { ComponentType } from '@angular/cdk/portal';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -15,14 +14,9 @@ import { filter, map, take } from 'rxjs/operators';
 export class FsDialogRouter {
 
   private _activeDialogs: WeakMap<Type<any>, MatDialogRef<unknown>> = new WeakMap();
-
   private _dialogOpened$ = new BehaviorSubject<void>(null);
-
-  constructor(
-    private _router: Router,
-    private _dialog: MatDialog,
-  ) {
-  }
+  private _router = inject(Router);
+  private _dialog = inject(MatDialog);
 
   public openDialogForRoute(
     component: ComponentType<unknown>,
@@ -70,11 +64,11 @@ export class FsDialogRouter {
   private _listenDialogClose(component: Type<any>, ref: MatDialogRef<unknown, unknown>): void {
     ref.afterClosed()
       .pipe(
-        take(1)
+        take(1),
       )
       .subscribe(() => {
         this._activeDialogs.delete(component);
-      })
+      });
 
   }
 }

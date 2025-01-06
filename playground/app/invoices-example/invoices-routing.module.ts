@@ -3,8 +3,8 @@ import { Route, RouterModule } from '@angular/router';
 
 import { fsDialogRoute } from 'fs-package';
 
-import { InvoicesComponent } from './components/invoices';
 import { InvoiceComponent } from './components/invoice';
+import { InvoicesComponent } from './components/invoices';
 import { InvoiceResolver } from './resolvers/invoice.resolver';
 
 const routes: Route[] = [
@@ -20,8 +20,8 @@ const routes: Route[] = [
           resolve: {
             invoice: InvoiceResolver,
           },
-        }
-      )
+        },
+      ),
       /*{
         path: 'invoices/:id',
         component: FsDialogRouteComponent,
@@ -38,9 +38,9 @@ const routes: Route[] = [
           }
         }
       },*/
-    ]
-  }
-]
+    ],
+  },
+];
 
 @NgModule({
   imports: [
