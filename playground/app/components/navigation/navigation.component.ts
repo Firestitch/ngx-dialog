@@ -1,50 +1,48 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FsExampleComponent } from '@firestitch/example';
+import { FsMessage } from '@firestitch/message';
 
 import { FsDialog } from 'fs-package';
 
-import { FsMessage } from '@firestitch/message';
 import { BasicDialogComponent } from './../basic-dialog';
 
 @Component({
   selector: 'navigation',
-  templateUrl: 'navigation.component.html',
+  templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {
 
   public dialogRef;
   public config = {
-    mobileMode: 'bottom'
+    mobileMode: 'bottom',
   };
 
   constructor(
-    private dialog: FsDialog,
-    private exampleComponent: FsExampleComponent,
-    private message: FsMessage,
+    private _dialog: FsDialog,
+    private _message: FsMessage,
   ) {
   }
 
-
   public open() {
-    this.dialogRef = this.dialog.open(BasicDialogComponent, {
+    this.dialogRef = this._dialog.open(BasicDialogComponent, {
       data: { mobileMode: this.config.mobileMode },
-      width: '800px'
+      width: '800px',
     });
 
     this.dialogRef
       .afterClosed()
-      .subscribe((response) => {
-        this.message.success('Closed');
+      .subscribe(() => {
+        this._message.success('Closed');
       });
   }
 
   public openLazyRoute() {
-    this.dialog.navigate(['lazy-dialog']);
+    this._dialog.navigate(['lazy-dialog']);
   }
 
-  close(data = null) {
+  public close(data = null) {
     this.dialogRef.close(data);
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
+
 import { fsDialogRoute } from 'fs-package';
 
 import { InvoiceComponent } from './components/invoice';
@@ -22,22 +23,16 @@ const routes: Route[] = [
           },
         },
       ),
-      /*{
-        path: 'invoices/:id',
-        component: FsDialogRouteComponent,
-        resolve: {
-          invoice: InvoiceResolver,
-        },
-        data: {
-          fsDialog: {
-            component: InvoiceComponent,
-            config: { // MatDialogConfig interface
-              width: '300px',
-              data: {}
-            },
-          }
-        }
-      },*/
+      // fsDialogRoute(
+      //   {
+      //     path: 'invoices/:id',
+      //     component: FsTaskDialogComponent,
+      //     data: {},
+      //     resolve: {
+      //       invoice: InvoiceResolver,
+      //     },
+      //   },
+      // ),
     ],
   },
 ];

@@ -30,7 +30,6 @@ import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from './direct
     FsDialogSupertitleDirective,
   ],
   exports: [
-    MatDialogModule,
     FsDialogComponent,
     FsDialogTitleComponent,
     FsDialogSubtitleDirective,

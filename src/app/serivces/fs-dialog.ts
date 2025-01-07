@@ -1,9 +1,8 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 
-import { MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
-
 import { ComponentType } from '@angular/cdk/portal';
+import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
 

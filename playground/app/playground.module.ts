@@ -17,7 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, FS_DAILOG_CONFIG, FsDialogModule } from 'fs-package';
 
 import { AppComponent } from './app.component';
-import { BackDialogComponent, BackExampleComponent, BasicDialogComponent, CloseDialogComponent, CloseExampleComponent, KitchenSinkComponent, NavigationComponent } from './components';
+import {
+  BackDialogComponent, BackExampleComponent, BasicDialogComponent,
+  CloseDialogComponent, CloseExampleComponent, KitchenSinkComponent, NavigationComponent,
+} from './components';
 import { BasicExampleComponent } from './components/basic-example';
 import { AppMaterialModule } from './material.module';
 

@@ -1,8 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+
 import { FsListComponent, FsListConfig } from '@firestitch/list';
-import { InvoicesService } from '../../services/invoices.service';
+
 import { map, switchMap } from 'rxjs/operators';
+
 import { FsDialog } from 'fs-package';
+
+import { InvoicesService } from '../../services/invoices.service';
 import { InvoiceComponent } from '../invoice';
 
 @Component({
@@ -42,25 +46,25 @@ export class InvoicesComponent {
           .pipe(
             map((data) => {
               return {
-                data
+                data,
               };
-            })
-          )
+            }),
+          );
       },
       actions: [
         {
           label: 'Create',
           click: () => {
-            this._fsDialog.open(InvoiceComponent, {
-              data: {
-                invoice: {
-                  envId: 1,
-                  name: 'Test Invoice',
-                },
-              },
-            })
-          }
-        }
+            // this._fsDialog.open(InvoiceComponent, {
+            //   data: {
+            //     invoice: {
+            //       envId: 1,
+            //       name: 'Test Invoice',
+            //     },
+            //   },
+            // })
+          },
+        },
       ],
     };
   }

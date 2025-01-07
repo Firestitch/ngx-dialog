@@ -18,17 +18,6 @@ export class FsDialogRouter {
   private _router = inject(Router);
   private _dialog = inject(MatDialog);
 
-  public openDialogForRoute(
-    component: ComponentType<unknown>,
-    config: MatDialogConfig<unknown>,
-  ): MatDialogRef<unknown, unknown> {
-    const dialog = this.openDialog(component, config);
-
-    this._registerDialog(component, dialog);
-
-    return dialog;
-  }
-
   public navigate(commands: any[], extras?: NavigationExtras): Promise<boolean> {
     return this._router.navigate(commands, extras);
   }
@@ -40,7 +29,7 @@ export class FsDialogRouter {
     const dialog = this._dialog
       .open<T, D, R>(component, config);
 
-    this._registerDialog(component, dialog);
+    this.registerDialog(component, dialog);
 
     return dialog;
   }
@@ -55,7 +44,7 @@ export class FsDialogRouter {
       );
   }
 
-  private _registerDialog(component: Type<any>, ref: MatDialogRef<unknown, unknown>): void {
+  public registerDialog(component: Type<any>, ref: MatDialogRef<unknown, unknown>): void {
     if (!this._activeDialogs.has(component)) {
       this._activeDialogs.set(component, ref);
 

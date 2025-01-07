@@ -1,22 +1,37 @@
-<form fsForm [submit]="save" *ngIf="invoice">
+<form
+    fsForm
+    [submit]="save"
+    *ngIf="invoice">
   <fs-dialog>
-    <div mat-dialog-title>Invoice #{{ invoice.id }}</div>
+    <div mat-dialog-title>
+      Invoice #{{ invoice.id }}
+    </div>
     <mat-dialog-content>
+      {{ fsDialogConfig | json }}
       <div class="fs-column">
         <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="invoice.name" name="name" required>
+          <mat-label>
+            Name
+          </mat-label>
+          <input
+            matInput
+            [(ngModel)]="invoice.name"
+            name="name"
+            required>
         </mat-form-field>
-
         <mat-form-field>
-          <mat-label>Amount</mat-label>
-          <input matInput [(ngModel)]="invoice.amount" name="amount">
+          <mat-label>
+            Amount
+          </mat-label>
+          <input
+            matInput
+            [(ngModel)]="invoice.amount"
+            name="amount">
         </mat-form-field>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <fs-form-dialog-actions>
-      </fs-form-dialog-actions>
+      <fs-form-dialog-actions></fs-form-dialog-actions>
     </mat-dialog-actions>
   </fs-dialog>
 </form>

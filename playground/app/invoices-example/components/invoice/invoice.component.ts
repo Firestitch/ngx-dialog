@@ -1,11 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-
 import { RouteObserver } from '@firestitch/core';
 import { FsMessage } from '@firestitch/message';
+import { FS_TASK_CONFIG } from '@firestitch/task';
 
 import { filter, tap } from 'rxjs/operators';
 
@@ -14,11 +14,15 @@ import { InvoicesService } from '../../services/invoices.service';
 
 @Component({
   templateUrl: './invoice.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InvoiceComponent {
 
   public invoice$: RouteObserver<any>;
+  public fsDialogConfig = inject(FS_TASK_CONFIG);
   public invoice: any;
+
+  private _cdRef = inject(ChangeDetectorRef);
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -39,8 +43,8 @@ export class InvoiceComponent {
       )
       .subscribe((invoice) => {
         this.invoice = invoice;
+        this._cdRef.markForCheck();
       });
-
   }
 
   public save = () => {
