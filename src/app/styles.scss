@@ -129,11 +129,7 @@
         flex: none;
         min-height: auto;
 
-        button,
-        .mat-button,
-        .mat-raised-button,
-        .mat-flat-button,
-        .mat-stroked-button {
+        .mdc-button {
           width: 100%;
           margin: 0 0 4px 0;
 

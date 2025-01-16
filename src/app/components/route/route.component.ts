@@ -1,6 +1,6 @@
 import {
-  Component, ComponentFactoryResolver, EnvironmentInjector, inject,
-  Injector,
+  Component, ComponentFactoryResolver,
+  inject,
   OnDestroy, OnInit,
   ViewContainerRef,
 } from '@angular/core';
@@ -28,8 +28,6 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _dialogRef: MatDialogRef<unknown, unknown>;
   private _hasActiveNavigation = false;
   private _destroy$ = new Subject<void>();
-  private _injector = inject(Injector);
-  private _environmentInjector = inject(EnvironmentInjector);
   private _dialog = inject(MatDialog);
 
   constructor(
