@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FsDialog } from 'fs-package';
 
@@ -8,6 +8,7 @@ import { BasicDialogComponent } from './../basic-dialog';
   selector: 'basic-example',
   templateUrl: './basic-example.component.html',
   styleUrls: ['./basic-example.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicExampleComponent {
 
@@ -17,14 +18,15 @@ export class BasicExampleComponent {
   };
 
   constructor(
-    private dialog: FsDialog,
+    private _dialog: FsDialog,
   ) {
   }
 
-  public open(mobileMode) {
-    this.dialogRef = this.dialog.open(BasicDialogComponent, {
-      data: { mobileMode },
-      width: '800px',
-    });
+  public  open(mobileMode) {
+    this.dialogRef = this._dialog
+      .open(BasicDialogComponent, {
+        data: { mobileMode },
+        width: '800px',
+      });
   }
 }

@@ -1,6 +1,5 @@
-
 <form (fsForm)="save()">
-  <fs-dialog [dock]="'expanded'">
+  <fs-dialog [mode]="'stretch'">
     <fs-dialog-title [close]="true">
       <ng-template fsDialogSupertitle>
         This is the supertitle
@@ -9,14 +8,33 @@
       <ng-template fsDialogSubtitle>
         This is the subtitle
       </ng-template>
+      <ng-template
+          fsDialogTitle
+          let-titlesTemplate="titlesTemplate"
+          let-backTemplate="backTemplate"
+          let-actionsTemplate="actionsTemplate">
+        <div class="fs-row fs-flex">
+          <ng-container *ngTemplateOutlet="backTemplate"></ng-container>
+          <div class="fs-flex">
+            <ng-container *ngTemplateOutlet="titlesTemplate"></ng-container>
+          </div>
+          <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+        </div>
+      </ng-template>
     </fs-dialog-title>
     <mat-dialog-content>
       <div class="text">
-        <p *ngFor="let input of inputs">{{input}}</p>
+        <p *ngFor="let input of inputs">
+          {{ input }}
+        </p>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button color="primary">Save</button>
+      <button
+          mat-button
+          color="primary">
+        Save
+      </button>
     </mat-dialog-actions>
   </fs-dialog>
 </form>

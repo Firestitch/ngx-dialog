@@ -2,12 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  HostBinding,
   Input,
   TemplateRef,
 } from '@angular/core';
 
-import { FsDialogSubtitleDirective, FsDialogSupertitleDirective } from '../../directives';
+import {
+  FsDialogSubtitleDirective, FsDialogSupertitleDirective, FsDialogTitleDirective,
+} from '../../directives';
 import { FsDialogComponent } from '../dialog/fs-dialog.component';
 
 
@@ -20,18 +21,17 @@ import { FsDialogComponent } from '../dialog/fs-dialog.component';
 export class FsDialogTitleComponent {
 
   @ContentChild(FsDialogSubtitleDirective, { read: TemplateRef })
-  public subtitle: TemplateRef<any>;
+  public subtitleTemplate: TemplateRef<any>;
 
   @ContentChild(FsDialogSupertitleDirective, { read: TemplateRef })
-  public supertitle: TemplateRef<any>;
+  public supertitleTemplate: TemplateRef<any>;
+
+  @ContentChild(FsDialogTitleDirective, { read: TemplateRef })
+  public titleTemplate: TemplateRef<any>;
 
   @Input() public close = false;
   @Input() public dockToggle = false;
   @Input() public back = false;
-  @Input() public fullscreenPercent = 90;
-
-  @HostBinding('class.mat-mdc-dialog-title')
-  public classTitle = true;
 
   constructor(
     private _dialog: FsDialogComponent,
@@ -39,9 +39,5 @@ export class FsDialogTitleComponent {
 
   public get dialog(): FsDialogComponent {
     return this._dialog;
-  }
-
-  public get dock() {
-    return this._dialog.dock;
   }
 }

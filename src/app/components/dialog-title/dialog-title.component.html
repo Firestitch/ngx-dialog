@@ -1,5 +1,23 @@
 <div class="dialog-title">
-  <ng-container *ngIf="back">
+  @if (titleTemplate) {
+    <ng-container
+      [ngTemplateOutlet]="titleTemplate"
+      [ngTemplateOutletContext]="{ 
+        backTemplate,
+        titlesTemplate,
+        actionsTemplate
+       }">
+    </ng-container>
+  } @else {
+    <ng-container *ngTemplateOutlet="backTemplate"></ng-container>
+    <div class="title-container">
+      <ng-container *ngTemplateOutlet="titlesTemplate"></ng-container>
+    </div>
+    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+  }
+</div>
+<ng-template #backTemplate>
+  @if (back) {
     <a
         class="back"
         mat-icon-button
@@ -8,22 +26,28 @@
         arrow_back_ios_new
       </mat-icon>
     </a>
-  </ng-container>
+  }
+</ng-template>
+<ng-template #titlesTemplate>
   <div class="title">
-    <ng-container *ngIf="supertitle">
+    <ng-container *ngIf="supertitleTemplate">
       <div class="supertitle">
-        <ng-container [ngTemplateOutlet]="supertitle"></ng-container>
+        <ng-container [ngTemplateOutlet]="supertitleTemplate"></ng-container>
       </div>
     </ng-container>
-    <ng-content></ng-content>
-    <ng-container *ngIf="subtitle">
+    <div class="mat-mdc-dialog-title">
+      <ng-content></ng-content>
+    </div>
+    <ng-container *ngIf="subtitleTemplate">
       <div class="subtitle">
-        <ng-container [ngTemplateOutlet]="subtitle"></ng-container>
+        <ng-container [ngTemplateOutlet]="subtitleTemplate"></ng-container>
       </div>
     </ng-container>
   </div>
-  <div class="right">
-    <ng-container *ngIf="dialog.dockable && dockToggle">
+</ng-template>
+<ng-template #actionsTemplate>
+  <div class="actions">
+    <!-- <ng-container *ngIf="dialog.dockable && dockToggle">
       <div>
         <button
             [tabIndex]="-1"
@@ -79,7 +103,7 @@
           </ng-container>
         </fs-menu>
       </div>
-    </ng-container>
+    </ng-container> -->
     <ng-container *ngIf="close">
       <div class="close">
         <a
@@ -93,4 +117,4 @@
       </div>
     </ng-container>
   </div>
-</div>
+</ng-template>

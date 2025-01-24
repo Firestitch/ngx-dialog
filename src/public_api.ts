@@ -7,6 +7,7 @@ export { FsDialogComponent } from './app/components/dialog/fs-dialog.component';
 export { FsDialogRouteComponent } from './app/components/route/route.component';
 export { FsDialogSubtitleDirective } from './app/directives/dialog-subtitle.directive';
 export { FsDialogSupertitleDirective } from './app/directives/dialog-supertitle.directive';
+export { FsDialogTitleDirective } from './app/directives/dialog-title.directive';
 export { fsDialogRoute } from './app/helpers/dialog-route';
 
 export * from './app/injectors';

@@ -21,7 +21,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { FS_DAILOG_CONFIG } from '../../injectors';
 import { DialogConfig } from '../../interfaces';
@@ -42,7 +42,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   public dialogCloseButton: QueryList<ElementRef[]>;
   
   @Input()
-  public mobileMode: 'full' | 'float' | 'bottom' | 'peek';
+  public mobileMode: 'full' | 'float' | 'bottom' | 'peek' = 'full';
 
   @Input()
   public mobileButtonPlacement: 'flow' | 'bottom';
@@ -54,17 +54,10 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   public mobileButtonPlacementClass;
 
   @Input()
-  public mode: 'full' | 'float' | 'bottom' | 'peek';
+  public mode: 'full' | 'float' | 'bottom' | 'peek' | 'stretch';
 
   @Input()
   public buttonLayout: 'flow' | 'full' = 'flow';
-
-  @Input()
-  public dock: 'fullscreen' | 'expanded';
-  
-  @Input() public dockable = false;
-
-  @Input() public fullscreenPercent = 90;
 
   private _destroy$ = new Subject();
 
@@ -90,15 +83,6 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public ngOnInit(): void {
-    if(this.dock) {
-      this.dockable = true;
-      if(this.dock === 'fullscreen') {
-        this.enableFullscreenDock();
-      } else if(this.dock === 'expanded') {
-        this.enableExpandedDock();  
-      }
-    }
-
     this.mobileMode = this.mobileMode ?? (this._config?.mobileMode || 'full');
     this.mobileButtonPlacement = this.mobileButtonPlacement ?? (this._config?.mobileButtonPlacement || 'flow');
 
@@ -106,20 +90,17 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
       this._breakpointObserver
         .observe([`(min-width: ${this.mobileWidth})`])
         .pipe(
-          filter(() => !this.mode),
           takeUntil(this._destroy$),
         )
         .subscribe((state: BreakpointState) => {
+          this.disableMode();
+
           if (state.matches) {
-            this.disableMode();
+            this.enableMode(this.mode);
           } else {
             this.enableMode(this.mobileMode);
           }
         });
-    }
-
-    if (this.mode) {
-      this.enableMode(this.mode);
     }
   }
 
@@ -133,9 +114,9 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public disableMode() {
     this.mobileButtonPlacementClass = null;
-    ['full', 'float', 'bottom']
+    ['full', 'float', 'bottom', 'peek', 'stretch']
       .forEach((mode) => {
-        const modeClass = `fs-dialog-mode-${  mode}`;
+        const modeClass = `fs-dialog-mode-${mode}`;
         this._dialogRef.removePanelClass(modeClass);
         this.backdropEl?.classList.remove(modeClass);
         this.body.classList.remove('fs-dialog-open', modeClass);
@@ -158,24 +139,6 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
 
   public get body() {
     return document.body;
-  }
-
-  public enableFullscreenDock() {
-    this.disableDock();
-    this.dock = 'fullscreen';
-    this._dialogRef.addPanelClass('fs-dialog-fullscreen');
-  }
-
-  public enableExpandedDock() {
-    this.disableDock();
-    this.dock = 'expanded';
-    this._dialogRef.addPanelClass('fs-dialog-expanded');
-  }
-
-  public disableDock() {
-    this.dock = null;
-    this._dialogRef.removePanelClass('fs-dialog-fullscreen');
-    this._dialogRef.removePanelClass('fs-dialog-expanded');
   }
 
   public addDialogCloseButtonClasses(elementRefs: any): void {

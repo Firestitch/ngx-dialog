@@ -1,5 +1,13 @@
 @use '@firestitch/style/styles' as fs-style;
 
+:host {
+  ::ng-deep {
+    fs-dialog-title + .mat-mdc-dialog-content {
+      padding-top: 0;
+    }
+  }
+}
+
 ::ng-deep {
   fs-dialog {
     .mat-mdc-dialog-content {

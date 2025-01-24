@@ -1,44 +1,50 @@
 @use '@firestitch/style/styles' as fs-style;
 
-.cdk-overlay-pane {
-  &.fs-dialog-fullscreen,
-  &.fs-dialog-expanded {
-    max-width: none !important;
-    max-height: none !important;
+@mixin full-width-actions() {
+  mat-dialog-actions {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    display: flex;
+    flex: none;
+    min-height: auto;
 
-    &.fs-dialog-fullscreen {
-      width: 100% !important;
-      height: 100% !important;
+    .mdc-button {
+      width: 100%;
+      margin: 0 0 4px 0;
 
-      .mat-mdc-dialog-container {
-        border-radius: 0px;
+      &:last-child {
+        margin-bottom: 0;
       }
     }
-    
-    &.fs-dialog-expanded {
+  }
+}
+
+.cdk-overlay-pane {
+  &.fs-dialog-overlay-pane {
+    &.fs-dialog-mode-stretch {
       @media (min-width: fs-style.$break-xsmall) {
+        max-width: none;
+        max-height: none;
         width: calc(100% - 50px) !important;
         height: calc(100% - 50px) !important;
       }
-    }
 
-    .mat-mdc-dialog-container > form {
-      height: 100%;
+      .mat-mdc-dialog-content {
+        max-height: none !important;
+        flex: 1;
+      }
+      
+      fs-dialog {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      form {
+        height: 100%;
+      }
+  
     }
-
-    fs-dialog {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mat-dialog-content {
-      max-height: none !important;
-      flex: 1;
-    }
-  }
-
-  &.fs-dialog-overlay-pane {
     
     &.fs-dialog-mode-full {
       .mat-mdc-dialog-container {
@@ -117,27 +123,12 @@
       }
     }
 
-    &.fs-dialog-mode-full,
-    &.fs-dialog-mode-peek,
-    &.fs-dialog-mode-float,
-    &.fs-dialog-mode-bottom,
+    @media (max-width: fs-style.$break-xsmall) {
+      @include full-width-actions();
+    }
+
     .button-layout-full {
-      mat-dialog-actions {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        display: flex;
-        flex: none;
-        min-height: auto;
-
-        .mdc-button {
-          width: 100%;
-          margin: 0 0 4px 0;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
+      @include full-width-actions();
     }
   }
 

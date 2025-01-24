@@ -1,6 +1,15 @@
 :host {
-  &::before {
-    display: none;
+  padding: var(--mat-dialog-headline-padding, 0 24px 9px);
+  display: block; 
+
+  ::ng-deep {
+    .mat-mdc-dialog-title {
+      padding: 0;
+      
+      &::before {
+        display: none;
+      }
+    }
   }
 }
 
@@ -9,25 +18,27 @@
   align-items: center;
   padding-top: 15px;
 
+  .title-container {
+    flex: 1;
+  }
 
   .title {
-    flex: 1;
     line-height: normal;
 
     .subtitle {
-      font-size: 60%;
+      font-size: 80%;
     } 
 
     .supertitle {
-      font-size: 60%;
+      font-size: 80%;
       color: #818181;
     }  
-}
+  }
 
-  .right{
+  .actions {
     display: flex;
     align-items: center;
-  }    
+  }     
 
   .back {
     display: none;
