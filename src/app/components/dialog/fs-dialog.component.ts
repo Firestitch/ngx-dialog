@@ -59,12 +59,15 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   @Input()
   public buttonLayout: 'flow' | 'full' = 'flow';
 
-  private _destroy$ = new Subject();
+  @HostBinding('class.close-button')
+  public closeButton = false;
 
   @HostBinding('class.button-layout-full')
   public get classButtonLayoutFullWidth() {
     return this.buttonLayout === 'full';
   }
+
+  private _destroy$ = new Subject();
 
   constructor(
     @Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>,
@@ -157,10 +160,6 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
       });
       
     this.addDialogCloseButtonClasses(this.dialogCloseButton.toArray());
-
-    if(this.dialogTitle) {
-      this._dialogRef.addPanelClass('fs-dialog-back');
-    }
 
     this._dialogRef.addPanelClass('fs-dialog-overlay-pane');
     this.backdropEl?.classList.add('fs-dialog-overlay-backdrop');

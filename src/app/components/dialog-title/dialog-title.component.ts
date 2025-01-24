@@ -3,6 +3,8 @@ import {
   Component,
   ContentChild,
   Input,
+  OnChanges,
+  SimpleChanges,
   TemplateRef,
 } from '@angular/core';
 
@@ -18,7 +20,7 @@ import { FsDialogComponent } from '../dialog/fs-dialog.component';
   styleUrls: ['./dialog-title.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsDialogTitleComponent {
+export class FsDialogTitleComponent implements OnChanges {
 
   @ContentChild(FsDialogSubtitleDirective, { read: TemplateRef })
   public subtitleTemplate: TemplateRef<any>;
@@ -39,5 +41,11 @@ export class FsDialogTitleComponent {
 
   public get dialog(): FsDialogComponent {
     return this._dialog;
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.close) {
+      this._dialog.closeButton = this.close;
+    }
   }
 }

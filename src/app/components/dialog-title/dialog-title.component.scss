@@ -41,10 +41,10 @@
   }     
 
   .back {
-    display: none;
-
+    margin-right: 3px;
     mat-icon {
       transform: scale(.9);
+      display: flex;
     }
   }
 }

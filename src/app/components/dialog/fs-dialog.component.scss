@@ -23,31 +23,17 @@
         }
       }
     }
-  }
-    
 
-  @media (max-width: fs-style.$break-xsmall) {
-    .fs-dialog-back.fs-dialog-mode-full {
+    &.close-button {
       .close-button {
         display: none;
       }
-
-      .mat-mdc-dialog-container {
-        transform: none !important;
-      }
-
-      fs-dialog-title {
-        .back {
-          display: inline-block !important;
-
-          .mat-button-wrapper {
-            display: flex;
-            justify-content: center;
-            height: 100%;
-            align-items: center;
-          }
-        }
-      }
+    }
+  }
+    
+  @media (max-width: fs-style.$break-xsmall) {
+    .mat-mdc-dialog-container {
+      transform: none !important;
     }
   }
   
