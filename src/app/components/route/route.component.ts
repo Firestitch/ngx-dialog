@@ -1,6 +1,7 @@
 import {
   Component, ComponentFactoryResolver,
   inject,
+  Injector,
   OnDestroy, OnInit,
   ViewContainerRef,
 } from '@angular/core';
@@ -36,6 +37,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     private _dialogRouter: FsDialogRouter,
     private _componentFactory: ComponentFactoryResolver,
     private _viewContainerRef: ViewContainerRef,
+    private _injector: Injector,
   ) {}
 
   public ngOnInit(): void {
@@ -132,6 +134,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     // because we want to have full control
     dialogConfig.closeOnNavigation = false;
     dialogConfig.viewContainerRef = this._viewContainerRef;
+    dialogConfig.injector = this._injector;
 
     const dialogRef = this._dialog.open(dialogComponent, dialogConfig);
 
