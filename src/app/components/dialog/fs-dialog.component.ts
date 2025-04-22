@@ -108,6 +108,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   public enableMode(mode) {
+    this.disableMode();
     const modeClass = `fs-dialog-mode-${mode}`;
     this._dialogRef.addPanelClass(modeClass);
     this.backdropEl?.classList.add(modeClass);
