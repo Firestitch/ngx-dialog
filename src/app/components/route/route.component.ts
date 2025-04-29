@@ -1,13 +1,18 @@
 import {
-  Component, ComponentFactoryResolver,
+  Component,
+  ComponentFactoryResolver,
   inject,
   Injector,
-  OnDestroy, OnInit,
+  OnDestroy,
+  OnInit,
   ViewContainerRef,
 } from '@angular/core';
 import {
   ActivatedRoute, NavigationEnd, NavigationStart, Router,
 } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+
+import { Overlay } from '@angular/cdk/overlay';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -30,6 +35,10 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _hasActiveNavigation = false;
   private _destroy$ = new Subject<void>();
   private _dialog = inject(MatDialog);
+  private _document = inject(DOCUMENT);
+  private _overlay = inject(Overlay);
+
+  private _resizeObserver: ResizeObserver;
 
   constructor(
     private _route: ActivatedRoute,
@@ -42,6 +51,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this._listenNavigationEvents();
+    this._listenBodyResize();
     this.openDialog();
   }
 
@@ -49,16 +59,19 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     this._destroy$.next(null);
     this._destroy$.complete();
     this._dialogRef.close();
+
+    this._resizeObserver?.disconnect();
+    this._enableBodyScroll();
   }
 
   public async openDialog(): Promise<void> {
-    const dialogConfig: IFsDialogRouteConfig = { 
-      ...this._route.snapshot.data?.fsDialog, 
+    const dialogConfig: IFsDialogRouteConfig = {
+      ...this._route.snapshot.data?.fsDialog,
     };
 
     if (dialogConfig?.component) {
-      this._dialogRef = dialogConfig.component instanceof Promise ? 
-        (await this._openLazyDialog(dialogConfig)) : 
+      this._dialogRef = dialogConfig.component instanceof Promise ?
+        (await this._openLazyDialog(dialogConfig)) :
         this._openDialog(dialogConfig);
 
       this._listenDialogClose();
@@ -100,6 +113,29 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this._navigateOutFromDialog();
       });
+  }
+
+  // CC-T2746
+  // we need to listen to body resize event for cases
+  // when dialog opened directly by using direct link like /client/123
+  // in that case dialog & overlay will be created before page content loaded
+  // and body scroll won't be disabled, because it does not have content yet and does not go beyond the viewport
+  // so we are listening body resize event and manually enabling blocked scroll strategy
+  private _listenBodyResize(): void {
+    this._resizeObserver = new ResizeObserver(() => {
+      this._disableBodyScroll();
+    });
+
+    this._resizeObserver.observe(this._document.body);
+  }
+
+  //
+  private _disableBodyScroll(): void {
+    this._overlay.scrollStrategies.block().enable();
+  }
+
+  private _enableBodyScroll(): void {
+    this._overlay.scrollStrategies.block().disable();
   }
 
   private _navigateOutFromDialog(): void {
