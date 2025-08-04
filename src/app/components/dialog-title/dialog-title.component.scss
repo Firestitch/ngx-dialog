@@ -38,6 +38,12 @@
   .actions {
     display: flex;
     align-items: center;
+
+    .close {
+      a {
+        display: flex;
+      }
+    }
   }     
 
   .back {
