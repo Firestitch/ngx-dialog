@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
 
@@ -22,16 +22,16 @@ import { CurrencyPipe } from '@angular/common';
     ],
 })
 export class InvoicesComponent {
+  private _invoicesService = inject(InvoicesService);
+  private _fsDialog = inject(FsDialog);
+
 
   public config: FsListConfig;
 
   @ViewChild(FsListComponent)
   public list: FsListComponent;
 
-  constructor(
-    private _invoicesService: InvoicesService,
-    private _fsDialog: FsDialog,
-  ) {
+  constructor() {
     this._initConfig();
 
     this._fsDialog.dialogRef$(InvoiceComponent)

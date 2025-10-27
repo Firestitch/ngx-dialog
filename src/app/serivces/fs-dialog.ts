@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 
 import { ComponentType } from '@angular/cdk/portal';
@@ -13,8 +13,8 @@ import { FsDialogRouter } from './fs-dialog-router';
   providedIn: 'root',
 })
 export class FsDialog {
+  private _dialogRouter = inject(FsDialogRouter);
 
-  constructor(private _dialogRouter: FsDialogRouter) {}
 
   public open<T, D = any, R = any>(component: ComponentType<T>, config?: MatDialogConfig<D>): MatDialogRef<T, R> {
     return this._dialogRouter.openDialog<T, D, R>(component, config);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsMessage } from '@firestitch/message';
 
@@ -16,17 +16,14 @@ import { RouterOutlet } from '@angular/router';
     imports: [RouterOutlet],
 })
 export class NavigationComponent {
+  private _dialog = inject(FsDialog);
+  private _message = inject(FsMessage);
+
 
   public dialogRef;
   public config = {
     mobileMode: 'bottom',
   };
-
-  constructor(
-    private _dialog: FsDialog,
-    private _message: FsMessage,
-  ) {
-  }
 
   public open() {
     this.dialogRef = this._dialog.open(BasicDialogComponent, {

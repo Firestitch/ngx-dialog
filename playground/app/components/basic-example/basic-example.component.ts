@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsDialog } from 'fs-package';
 
@@ -15,16 +15,13 @@ import { FsFormModule } from '@firestitch/form';
     imports: [MatButton, FsFormModule],
 })
 export class BasicExampleComponent {
+  private _dialog = inject(FsDialog);
+
 
   public dialogRef;
   public config = {
     mobileMode: 'bottom',
   };
-
-  constructor(
-    private _dialog: FsDialog,
-  ) {
-  }
 
   public  open(mobileMode) {
     this.dialogRef = this._dialog

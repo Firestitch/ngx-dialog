@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  TemplateRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, inject } from '@angular/core';
 
 import {
   FsDialogSubtitleDirective, FsDialogSupertitleDirective, FsDialogTitleDirective,
@@ -32,6 +24,8 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class FsDialogTitleComponent implements OnChanges {
+  private _dialog = inject(FsDialogComponent);
+
 
   @ContentChild(FsDialogSubtitleDirective, { read: TemplateRef })
   public subtitleTemplate: TemplateRef<any>;
@@ -45,10 +39,6 @@ export class FsDialogTitleComponent implements OnChanges {
   @Input() public close = false;
   @Input() public dockToggle = false;
   @Input() public back = false;
-
-  constructor(
-    private _dialog: FsDialogComponent,
-  ) {}
 
   public get dialog(): FsDialogComponent {
     return this._dialog;

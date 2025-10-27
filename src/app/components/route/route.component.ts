@@ -30,6 +30,13 @@ import { FsDialogRouter } from '../../serivces/fs-dialog-router';
   template: '',
 })
 export class FsDialogRouteComponent implements OnInit, OnDestroy {
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _dialogRouter = inject(FsDialogRouter);
+  private _componentFactory = inject(ComponentFactoryResolver);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _injector = inject(Injector);
+
 
   private _dialogRef: MatDialogRef<unknown, unknown>;
   private _hasActiveNavigation = false;
@@ -39,15 +46,6 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _overlay = inject(Overlay);
 
   private _resizeObserver: ResizeObserver;
-
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _dialogRouter: FsDialogRouter,
-    private _componentFactory: ComponentFactoryResolver,
-    private _viewContainerRef: ViewContainerRef,
-    private _injector: Injector,
-  ) {}
 
   public ngOnInit(): void {
     this._listenNavigationEvents();

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
@@ -27,16 +27,18 @@ import { MatButton } from '@angular/material/button';
     ],
 })
 export class BasicDialogComponent {
+  data = inject(MAT_DIALOG_DATA);
+  private _dialogRef = inject<MatDialogRef<BasicDialogComponent>>(MatDialogRef);
+
 
   public object: any = {};
   public input = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas facilisis urna at arcu fringilla porta. Fusce tincidunt, nunc accumsan tincidunt tincidunt, quam lorem rhoncus odio, ultricies varius quam orci id sapien. Nunc aliquet tempus augue at sodales. Mauris vel fringilla massa. Mauris nisi magna, gravida eget nisi sit amet, fermentum placerat mi. Nulla vitae efficitur ligula. Mauris ullamcorper tortor id magna euismod, eu faucibus eros imperdiet. Etiam pretium et enim quis gravida.';
   public inputs = [];
   public mobileMode;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private _dialogRef: MatDialogRef<BasicDialogComponent>,
-  ) {
+  constructor() {
+    const data = this.data;
+
     this.mobileMode = data.mobileMode;
     this.inputs = [this.input];
   }

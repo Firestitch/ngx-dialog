@@ -1,21 +1,4 @@
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  Component,
-  ContentChild,
-  ContentChildren,
-  ElementRef,
-  HostBinding,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Optional,
-  QueryList,
-  SimpleChanges,
-  SkipSelf,
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, inject } from '@angular/core';
 
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
@@ -35,6 +18,10 @@ import { FsDialogTitleComponent } from '../dialog-title';
     standalone: true,
 })
 export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, OnChanges {
+  private _dialogRef = inject<MatDialogRef<any>>(MatDialogRef, { optional: true, skipSelf: true });
+  private _config = inject<DialogConfig>(FS_DAILOG_CONFIG, { optional: true });
+  private _breakpointObserver = inject(BreakpointObserver);
+
 
   @ContentChild(FsDialogTitleComponent) 
   public dialogTitle: FsDialogTitleComponent;
@@ -69,12 +56,6 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   }
 
   private _destroy$ = new Subject();
-
-  constructor(
-    @Optional() @SkipSelf() private _dialogRef: MatDialogRef<any>,
-    @Optional() @Inject(FS_DAILOG_CONFIG) private _config: DialogConfig,
-    private _breakpointObserver: BreakpointObserver,
-  ) { }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.mode && !changes.mode.firstChange) {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
@@ -38,6 +38,12 @@ import { JsonPipe } from '@angular/common';
     ],
 })
 export class InvoiceComponent {
+  data = inject(MAT_DIALOG_DATA);
+  private _route = inject(ActivatedRoute);
+  private _invoicesService = inject(InvoicesService);
+  private _dialogRef = inject<MatDialogRef<any>>(MatDialogRef);
+  private _message = inject(FsMessage);
+
 
   public invoice$: RouteObserver<any>;
   public fsDialogConfig = inject(FS_TASK_CONFIG);
@@ -45,14 +51,9 @@ export class InvoiceComponent {
 
   private _cdRef = inject(ChangeDetectorRef);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: any,
-    private _route: ActivatedRoute,
-    private _invoicesService: InvoicesService,
-    private _dialogRef: MatDialogRef<any>,
-    private _message: FsMessage,
-  ) {
+  constructor() {
+    const data = this.data;
+
     this.invoice$ = new RouteObserver<any>(this._route, 'invoice');
     if (data) {
       this.invoice = data.invoice;
