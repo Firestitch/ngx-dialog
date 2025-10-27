@@ -1,12 +1,30 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { FsFormModule } from '@firestitch/form';
+import { FsDialogComponent } from '../../../../src/app/components/dialog/fs-dialog.component';
+import { FsDialogTitleComponent } from '../../../../src/app/components/dialog-title/dialog-title.component';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'basic-dialog',
-  templateUrl: './basic-dialog.component.html',
-  styleUrls: ['./basic-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'basic-dialog',
+    templateUrl: './basic-dialog.component.html',
+    styleUrls: ['./basic-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        FsFormModule,
+        FsDialogComponent,
+        FsDialogTitleComponent,
+        CdkScrollable,
+        MatDialogContent,
+        MatDialogActions,
+        MatButton,
+        MatDialogClose,
+    ],
 })
 export class BasicDialogComponent {
 

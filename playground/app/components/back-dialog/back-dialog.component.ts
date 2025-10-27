@@ -1,11 +1,27 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogContent } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { FsFormModule } from '@firestitch/form';
+import { FsDialogComponent } from '../../../../src/app/components/dialog/fs-dialog.component';
+import { FsDialogTitleComponent } from '../../../../src/app/components/dialog-title/dialog-title.component';
+import { FsDialogSubtitleDirective } from '../../../../src/app/directives/dialog-subtitle.directive';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
-  templateUrl: './back-dialog.component.html',
-  styleUrls: ['./back-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './back-dialog.component.html',
+    styleUrls: ['./back-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        FsFormModule,
+        FsDialogComponent,
+        FsDialogTitleComponent,
+        FsDialogSubtitleDirective,
+        CdkScrollable,
+        MatDialogContent,
+    ],
 })
 export class BackDialogComponent {
 

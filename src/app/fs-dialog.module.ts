@@ -15,30 +15,26 @@ import {
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-
-    FsMenuModule,
-  ],
-  declarations: [
-    FsDialogComponent,
-    FsDialogTitleComponent,
-    FsDialogSubtitleDirective,
-    FsDialogSupertitleDirective,
-    FsDialogTitleDirective,
-  ],
-  exports: [
-    FsDialogComponent,
-    FsDialogTitleComponent,
-    FsDialogSubtitleDirective,
-    FsDialogSupertitleDirective,
-    FsDialogTitleDirective,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        FsMenuModule,
+        FsDialogComponent,
+        FsDialogTitleComponent,
+        FsDialogSubtitleDirective,
+        FsDialogSupertitleDirective,
+        FsDialogTitleDirective,
+    ],
+    exports: [
+        FsDialogComponent,
+        FsDialogTitleComponent,
+        FsDialogSubtitleDirective,
+        FsDialogSupertitleDirective,
+        FsDialogTitleDirective,
+    ],
 })
 export class FsDialogModule {
   public static forRoot(): ModuleWithProviders<FsDialogModule> {

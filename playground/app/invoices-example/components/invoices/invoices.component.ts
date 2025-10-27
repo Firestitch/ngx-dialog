@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { FsListComponent, FsListConfig } from '@firestitch/list';
+import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
 
 import { map, switchMap } from 'rxjs/operators';
 
@@ -8,9 +8,18 @@ import { FsDialog } from 'fs-package';
 
 import { InvoicesService } from '../../services/invoices.service';
 import { InvoiceComponent } from '../invoice';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  templateUrl: './invoices.component.html',
+    templateUrl: './invoices.component.html',
+    standalone: true,
+    imports: [
+        FsListModule,
+        RouterLink,
+        RouterOutlet,
+        CurrencyPipe,
+    ],
 })
 export class InvoicesComponent {
 

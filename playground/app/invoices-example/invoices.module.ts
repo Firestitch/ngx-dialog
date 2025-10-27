@@ -19,33 +19,27 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FsListModule,
-    FsFormModule,
-
-    InvoicesRoutingModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-
-    FormsModule,
-
-    FsDialogModule,
-    
-  ],
-  declarations: [
-    InvoicesComponent,
-    InvoiceComponent,
-  ],
-  providers: [
-    {
-      provide: FS_TASK_CONFIG,
-      useValue: {
-        commentPlaceholder: 'Test!!!',
-      } as TaskConfig,
-    },
-  ],
+    imports: [
+        CommonModule,
+        FsListModule,
+        FsFormModule,
+        InvoicesRoutingModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        FsDialogModule,
+        InvoicesComponent,
+        InvoiceComponent,
+    ],
+    providers: [
+        {
+            provide: FS_TASK_CONFIG,
+            useValue: {
+                commentPlaceholder: 'Test!!!',
+            } as TaskConfig,
+        },
+    ],
 })
 export class InvoicesModule {}

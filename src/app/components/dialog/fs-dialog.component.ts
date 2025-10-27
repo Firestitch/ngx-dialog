@@ -28,10 +28,11 @@ import { DialogConfig } from '../../interfaces';
 import { FsDialogTitleComponent } from '../dialog-title';
 
 @Component({
-  selector: 'fs-dialog',
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./fs-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-dialog',
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./fs-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, OnChanges {
 

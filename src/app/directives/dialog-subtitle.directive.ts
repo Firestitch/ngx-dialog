@@ -4,7 +4,8 @@ import {
 
 
 @Directive({
-  selector: '[fsDialogSubtitle]',
+    selector: '[fsDialogSubtitle]',
+    standalone: true,
 })
 export class FsDialogSubtitleDirective {
 }

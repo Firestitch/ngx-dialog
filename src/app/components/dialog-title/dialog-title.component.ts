@@ -12,13 +12,24 @@ import {
   FsDialogSubtitleDirective, FsDialogSupertitleDirective, FsDialogTitleDirective,
 } from '../../directives';
 import { FsDialogComponent } from '../dialog/fs-dialog.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { MatIconAnchor } from '@angular/material/button';
+import { MatDialogClose } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
-  selector: 'fs-dialog-title',
-  templateUrl: './dialog-title.component.html',
-  styleUrls: ['./dialog-title.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-dialog-title',
+    templateUrl: './dialog-title.component.html',
+    styleUrls: ['./dialog-title.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        MatIconAnchor,
+        MatDialogClose,
+        MatIcon,
+    ],
 })
 export class FsDialogTitleComponent implements OnChanges {
 

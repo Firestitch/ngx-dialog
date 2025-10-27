@@ -5,12 +5,15 @@ import { FsMessage } from '@firestitch/message';
 import { FsDialog } from 'fs-package';
 
 import { BasicDialogComponent } from './../basic-dialog';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [RouterOutlet],
 })
 export class NavigationComponent {
 
