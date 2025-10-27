@@ -9,10 +9,10 @@
         This is the subtitle
       </ng-template>
       <ng-template
-          fsDialogTitle
-          let-titlesTemplate="titlesTemplate"
-          let-backTemplate="backTemplate"
-          let-actionsTemplate="actionsTemplate">
+        fsDialogTitle
+        let-titlesTemplate="titlesTemplate"
+        let-backTemplate="backTemplate"
+        let-actionsTemplate="actionsTemplate">
         <div class="fs-row fs-flex">
           <ng-container *ngTemplateOutlet="backTemplate"></ng-container>
           <div class="fs-flex">
@@ -24,20 +24,22 @@
     </fs-dialog-title>
     <mat-dialog-content>
       <div class="text">
-        <p *ngFor="let input of inputs">
-          {{ input }}
-        </p>
+        @for (input of inputs; track input) {
+          <p>
+            {{ input }}
+          </p>
+        }
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button
-          mat-button
-          color="primary">
+        mat-button
+        color="primary">
         Save
       </button>
       <button
-          mat-button
-          mat-dialog-close>
+        mat-button
+        mat-dialog-close>
         Cancel
       </button>
     </mat-dialog-actions>
