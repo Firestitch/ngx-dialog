@@ -12,7 +12,7 @@ import {
 } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -44,6 +44,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
   private _document = inject(DOCUMENT);
   private _overlay = inject(Overlay);
+  private _scrollStrategy: ScrollStrategy | undefined;
 
   private _resizeObserver: ResizeObserver;
 
@@ -60,6 +61,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
     this._resizeObserver?.disconnect();
     this._enableBodyScroll();
+    this._scrollStrategy?.detach();
   }
 
   public async openDialog(): Promise<void> {
@@ -120,6 +122,8 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   // and body scroll won't be disabled, because it does not have content yet and does not go beyond the viewport
   // so we are listening body resize event and manually enabling blocked scroll strategy
   private _listenBodyResize(): void {
+    this._initializeScrollStrategy();
+
     this._resizeObserver = new ResizeObserver(() => {
       this._disableBodyScroll();
     });
@@ -127,13 +131,20 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
     this._resizeObserver.observe(this._document.body);
   }
 
-  //
   private _disableBodyScroll(): void {
-    this._overlay.scrollStrategies.block().enable();
+    this._scrollStrategy?.enable();
   }
 
   private _enableBodyScroll(): void {
-    this._overlay.scrollStrategies.block().disable();
+    this._scrollStrategy?.disable()
+  }
+
+  private _initializeScrollStrategy(): void {
+    if (this._scrollStrategy) {
+      return;
+    }
+
+    this._scrollStrategy = this._overlay.scrollStrategies.block();
   }
 
   private _navigateOutFromDialog(): void {
