@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   ComponentFactoryResolver,
@@ -10,10 +11,8 @@ import {
 import {
   ActivatedRoute, NavigationEnd, NavigationStart, Router,
 } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
 
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
-
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { getPathToRouteParent } from '@firestitch/core';
@@ -30,14 +29,13 @@ import { FsDialogRouter } from '../../serivces/fs-dialog-router';
   template: '',
 })
 export class FsDialogRouteComponent implements OnInit, OnDestroy {
+
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _dialogRouter = inject(FsDialogRouter);
   private _componentFactory = inject(ComponentFactoryResolver);
   private _viewContainerRef = inject(ViewContainerRef);
   private _injector = inject(Injector);
-
-
   private _dialogRef: MatDialogRef<unknown, unknown>;
   private _hasActiveNavigation = false;
   private _destroy$ = new Subject<void>();
@@ -61,7 +59,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
 
     this._resizeObserver?.disconnect();
     this._enableBodyScroll();
-    this._scrollStrategy?.detach();
+    this._scrollStrategy?.disable();
   }
 
   public async openDialog(): Promise<void> {
@@ -136,7 +134,7 @@ export class FsDialogRouteComponent implements OnInit, OnDestroy {
   }
 
   private _enableBodyScroll(): void {
-    this._scrollStrategy?.disable()
+    this._scrollStrategy?.disable();
   }
 
   private _initializeScrollStrategy(): void {
