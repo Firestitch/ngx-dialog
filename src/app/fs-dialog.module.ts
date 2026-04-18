@@ -1,40 +1,31 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
-import { FsMenuModule } from '@firestitch/menu';
 
-import { FsDialogComponent, FsDialogTitleComponent } from './components';
+import { FsDialogComponent, FsDialogRouteComponent, FsDialogTitleComponent } from './components';
 import {
   FsDialogSubtitleDirective, FsDialogSupertitleDirective, FsDialogTitleDirective,
 } from './directives';
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDialogModule,
-        FsMenuModule,
-        FsDialogComponent,
-        FsDialogTitleComponent,
-        FsDialogSubtitleDirective,
-        FsDialogSupertitleDirective,
-        FsDialogTitleDirective,
-    ],
-    exports: [
-        FsDialogComponent,
-        FsDialogTitleComponent,
-        FsDialogSubtitleDirective,
-        FsDialogSupertitleDirective,
-        FsDialogTitleDirective,
-    ],
+  imports: [
+    FsDialogComponent,
+    FsDialogRouteComponent,
+    FsDialogTitleComponent,
+    FsDialogSubtitleDirective,
+    FsDialogSupertitleDirective,
+    FsDialogTitleDirective,
+  ],
+  exports: [
+    FsDialogComponent,
+    FsDialogRouteComponent,
+    FsDialogTitleComponent,
+    FsDialogSubtitleDirective,
+    FsDialogSupertitleDirective,
+    FsDialogTitleDirective,
+  ],
 })
 export class FsDialogModule {
   public static forRoot(): ModuleWithProviders<FsDialogModule> {

@@ -1,7 +1,7 @@
 <div class="dialog-title">
-  @if (titleTemplate) {
+  @if (titleTemplate()) {
     <ng-container
-      [ngTemplateOutlet]="titleTemplate"
+      [ngTemplateOutlet]="titleTemplate()!"
       [ngTemplateOutletContext]="{ 
         backTemplate,
         titlesTemplate,
@@ -20,9 +20,9 @@
   @if (back) {
     <div>
       <a
-        class="back"
-        mat-icon-button
-        mat-dialog-close>
+          class="back"
+          mat-icon-button
+          mat-dialog-close>
         <mat-icon>
           arrow_back_ios_new
         </mat-icon>
@@ -32,17 +32,17 @@
 </ng-template>
 <ng-template #titlesTemplate>
   <div class="title">
-    @if (supertitleTemplate) {
+    @if (supertitleTemplate()) {
       <div class="supertitle">
-        <ng-container [ngTemplateOutlet]="supertitleTemplate"></ng-container>
+        <ng-container [ngTemplateOutlet]="supertitleTemplate()!"></ng-container>
       </div>
     }
     <div class="mat-mdc-dialog-title">
       <ng-content></ng-content>
     </div>
-    @if (subtitleTemplate) {
+    @if (subtitleTemplate()) {
       <div class="subtitle">
-        <ng-container [ngTemplateOutlet]="subtitleTemplate"></ng-container>
+        <ng-container [ngTemplateOutlet]="subtitleTemplate()!"></ng-container>
       </div>
     }
   </div>
@@ -52,9 +52,9 @@
     @if (close) {
       <div class="close">
         <a
-          [tabIndex]="-1"
-          mat-icon-button
-          mat-dialog-close>
+            [tabIndex]="-1"
+            mat-icon-button
+            mat-dialog-close>
           <mat-icon>
             close
           </mat-icon>

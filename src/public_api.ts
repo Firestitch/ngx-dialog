@@ -1,6 +1,7 @@
 export { FsDialogModule } from './app/fs-dialog.module';
 
 export { FsDialog } from './app/serivces/fs-dialog';
+export { FsDialogRouter } from './app/serivces/fs-dialog-router';
 
 export { FsDialogTitleComponent } from './app/components/dialog-title/dialog-title.component';
 export { FsDialogComponent } from './app/components/dialog/fs-dialog.component';

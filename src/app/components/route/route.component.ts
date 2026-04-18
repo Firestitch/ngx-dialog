@@ -26,6 +26,7 @@ import { FsDialogRouter } from '../../serivces/fs-dialog-router';
 
 
 @Component({
+  standalone: true,
   template: '',
 })
 export class FsDialogRouteComponent implements OnInit, OnDestroy {
