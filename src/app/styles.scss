@@ -148,11 +148,12 @@
         a dark dialog and the shadow never disappeared.
 
         --fs-color-surface-raised is the shared contract from
-        @firestitch/style (styles/_tokens.scss); the fallback restates that
-        package's own default so this renders correctly when
-        @firestitch/style is not installed at all. Keep the two in step.
+        @firestitch/style (styles/_tokens.scss). THE FALLBACK IS THE LEGACY
+        VALUE, NOT THE PACKAGE DEFAULT: an app that does not define the token —
+        every existing Material 2 consumer — must render exactly as it did
+        before, so the fallback is the #ffffff these lines used to hardcode.
       */
-      $surface: var(--fs-color-surface-raised, light-dark(#FFFFFF, #292A2F));
+      $surface: var(--fs-color-surface-raised, #ffffff);
 
       background:
         linear-gradient(#{$surface} 33%, rgba(255,255,255, 0)),
@@ -174,10 +175,11 @@
 /*
   The full-screen mode's backdrop IS the page behind the dialog, so it takes
   the surface token rather than white — on a dark app it was a white sheet over
-  the whole viewport. Fallback restates @firestitch/style's own default.
+  the whole viewport. Fallback is the legacy , so an app that defines no
+  token is unchanged.
 */
 .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
-  background: var(--fs-color-surface, light-dark(#FFFFFF, #232428));
+  background: var(--fs-color-surface, white);
 }
 
 :root {
