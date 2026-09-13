@@ -138,25 +138,46 @@
     .mat-dialog-content {
       position: relative;
       z-index: 1;
-      background: 
-        linear-gradient(#ffffff 33%, rgba(255,255,255, 0)),
-        linear-gradient(rgba(255,255,255, 0), #ffffff 66%) 0 100%,
+
+      /*
+        THE SCROLL SHADOW READS THE SURFACE TOKEN, NOT WHITE.
+
+        The two linear-gradients are the top and bottom fades that mask the
+        scroll shadows behind them, so they have to be the SAME colour as the
+        dialog itself — hardcoded #ffffff, they painted two white bands across
+        a dark dialog and the shadow never disappeared.
+
+        --fs-color-surface-raised is the shared contract from
+        @firestitch/style (styles/_tokens.scss); the fallback restates that
+        package's own default so this renders correctly when
+        @firestitch/style is not installed at all. Keep the two in step.
+      */
+      $surface: var(--fs-color-surface-raised, light-dark(#FFFFFF, #292A2F));
+
+      background:
+        linear-gradient(#{$surface} 33%, rgba(255,255,255, 0)),
+        linear-gradient(rgba(255,255,255, 0), #{$surface} 66%) 0 100%,
         radial-gradient(farthest-side at 50% 0, rgba(34,34,34, 0.2), rgba(0,0,0,0)),
         radial-gradient(farthest-side at 50% 100%, rgba(34,34,34, 0.2), rgba(0,0,0,0)) 0 100%;
-      background-color: #ffffff;
+      background-color: $surface;
       background-repeat: no-repeat;
       background-attachment: local, local, scroll, scroll;
       background-size: 100% 19px, 100% 19px, 100% 7px, 100% 7px;
       /*
         iOS half pixel horizontal fix
       */
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid $surface;
     }
   }
 }
 
+/*
+  The full-screen mode's backdrop IS the page behind the dialog, so it takes
+  the surface token rather than white — on a dark app it was a white sheet over
+  the whole viewport. Fallback restates @firestitch/style's own default.
+*/
 .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
-  background: white;
+  background: var(--fs-color-surface, light-dark(#FFFFFF, #232428));
 }
 
 :root {
