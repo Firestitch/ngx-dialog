@@ -19,6 +19,61 @@
   }
 }
 
+/*
+  THE APPEARANCE A FULL-WIDTH ACTION WEARS - Ray 2026-09-14.
+
+  Paired with full-width-actions() above, which stacks the row and gives every
+  button the full width. At that size the appearances have to change too: a text
+  button spanning the screen reads as a label rather than a target, so the
+  primary action takes a FILL and everything beside it takes an OUTLINE.
+
+  In a FLOATING dialog none of this applies - every button stays text, with
+  emphasis carried by colour alone. That is Material 3's dialog guidance (text
+  actions, at most one filled button anywhere) and it is why this lives in a
+  mixin applied only at the mobile breakpoint rather than on the actions row
+  unconditionally.
+
+  CSS, NOT setAppearance(). MatButton.setAppearance() exists only on Material 20,
+  this package builds against 18, and there is no supported way to reach a
+  button instance from a directive here - getComponent() is not a named export of
+  @angular/core, and a @ContentChildren(MatButton) query cannot cross into
+  fs-form-dialog-actions' own template, which is where Save / Cancel / Close
+  actually live. Styling the rendered classes has none of those problems and
+  works identically on both majors.
+
+  THE ROLE IS `.mat-primary`, the class Material puts on a button host when the
+  template sets color="primary" - the same hook the M2 theme itself keys off
+  (`:root .mat-mdc-button.mat-primary`). The footer standard is exactly one
+  color="primary" per dialog, so no template names an appearance and a package
+  rendering its own footer follows along without being rebuilt.
+
+  EVERY COLOUR IS STATED, none inherited. An app on an M2 theme defines no
+  --mat-sys-* tokens, so Material's own `var(--mat-button-filled-container-color,
+  var(--mat-sys-primary))` fallbacks resolve to nothing. The --fs-* names are the
+  shared contract from @firestitch/style and carry their own light-dark() pairs,
+  so both schemes follow with no second block.
+*/
+@mixin full-width-action-appearance() {
+  mat-dialog-actions {
+    .mdc-button {
+      /* The outlined treatment, which every non-primary action takes. */
+      border: var(--mat-button-outlined-outline-width, 1px) solid
+        var(--fs-hairline-strong, light-dark(rgba(0, 0, 0, 0.38), rgba(255, 255, 255, 0.38)));
+      border-radius: var(--mat-button-outlined-container-shape, 9999px);
+      background-color: transparent;
+      color: var(--fs-color-text, light-dark(rgba(0, 0, 0, 0.87), #E8EDEC));
+
+      /* The one filled action. --fs-color-primary is the app's own brand mapped
+         onto the shared name; the fallback is @firestitch/style's neutral. */
+      &.mat-primary {
+        border-color: var(--fs-color-primary, #1B474E);
+        background-color: var(--fs-color-primary, #1B474E);
+        color: var(--fs-surface-background, light-dark(#FFFFFF, #232428));
+      }
+    }
+  }
+}
+
 .cdk-overlay-pane {
   &.fs-dialog-overlay-pane {
     &.fs-dialog-mode-stretch {
@@ -46,17 +101,88 @@
   
     }
     
+    /*
+      FULL MODE IS THE SCREEN, NOT A PANEL INSIDE IT.
+
+      The dialog runs edge to edge, under the status bar and the home
+      indicator, and the safe areas are padding INSIDE it. They were
+      transparent borders at 80% of the inset, so the backdrop showed as a band
+      above and below the dialog, with its shadow and corners cut against it.
+
+      The padding sits on the container, not the surface, because the surface
+      is the scroller: padding there scrolls off with the title and lets the
+      content ride up under the clock. The container stays put, so it is
+      painted with Material's own chain for the surface colour (v20 token, then
+      v18) and the band cannot drift from what the surface paints.
+    */
     &.fs-dialog-mode-full {
+      $surface: var(--mat-dialog-container-color, var(--mdc-dialog-container-color, var(--mat-sys-surface, white)));
+
       .mat-mdc-dialog-container {
-        border-top: calc(fs-style.$safe-area-top * .8) solid transparent;
+        padding-top: fs-style.$safe-area-top;
+        padding-bottom: fs-style.$safe-area-bottom;
+        background-color: $surface;
       }
+
+      .mat-mdc-dialog-surface {
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      /*
+        ONE BUTTON PLACEMENT, DECIDED HERE AND NOT BY THE TEMPLATE'S WRAPPER.
+
+        fs-dialog was a height: 100% flex column and Material grows
+        .mat-mdc-dialog-content, so with nothing around fs-dialog the content
+        stretched and the actions pinned to the bottom of the screen. Inside a
+        <form> the percentage had nothing definite to resolve against and the
+        same dialog flowed its actions straight under the content. Which one a
+        dialog got came down to whether its template happened to have a form.
+
+        The top-level form drops out of the box tree, so fs-dialog is always a
+        direct flex item of the surface and mobileButtonPlacement alone decides:
+
+          flow   - the actions follow the content. Once the content is taller
+                   than the screen they stick to its bottom edge rather than
+                   scroll out of reach, so a long form never hides its Save.
+          bottom - the actions sit at the foot of the screen even when the
+                   content is short.
+      */
+      .mat-mdc-dialog-component-host > form {
+        display: contents;
+      }
+
+      fs-dialog {
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      /*
+        THE ACTIONS FLOW UNDER THE CONTENT - THEY ARE NOT PINNED. Ray 2026-09-14.
+
+        They used to be `position: sticky; bottom: 0`, which pinned them to the
+        floor of the screen whatever the content did. On a dialog whose content
+        fills a quarter of the phone - an informational list with a single Close
+        - that left the button a thousand pixels below the last row, detached
+        from the thing it belonged to and easy to miss entirely.
+
+        Pinning solves a real problem, but only when content OVERFLOWS: a long
+        form whose Save would otherwise scroll out of reach. It is not the
+        default, because a bottom-pinned control is how this app says "the
+        primary action", and spending that position on a dismiss inverts the
+        hierarchy. Material 3 and Apple's HIG both put a full-screen dialog's
+        dismiss in the header rather than the footer for the same reason.
+
+        Overflow needs no rule here: the surface is the scroller, so once the
+        content is taller than the screen the actions are simply the last thing
+        in it and scroll into view with everything else.
+      */
       
       .mat-mdc-dialog-content {
         max-height: none;
       }
     }
 
-    &.fs-dialog-mode-full,
     &.fs-dialog-mode-peek,
     &.fs-dialog-mode-bottom {
       .mat-mdc-dialog-container {
@@ -84,7 +210,10 @@
         max-width: none !important;
         width: auto !important;
         min-width: initial !important;
+      }
 
+      &.fs-dialog-mode-peek,
+      &.fs-dialog-mode-bottom {
         fs-dialog {
           height: 100%;
           display: flex;
@@ -125,10 +254,12 @@
 
     @media (max-width: fs-style.$break-xsmall) {
       @include full-width-actions();
+      @include full-width-action-appearance();
     }
 
     .button-layout-full {
       @include full-width-actions();
+      @include full-width-action-appearance();
     }
   }
 
@@ -147,13 +278,13 @@
         dialog itself — hardcoded #ffffff, they painted two white bands across
         a dark dialog and the shadow never disappeared.
 
-        --fs-color-surface-raised is the shared contract from
+        --fs-surface-background is the shared contract from
         @firestitch/style (styles/_tokens.scss). THE FALLBACK IS THE LEGACY
         VALUE, NOT THE PACKAGE DEFAULT: an app that does not define the token —
         every existing Material 2 consumer — must render exactly as it did
         before, so the fallback is the #ffffff these lines used to hardcode.
       */
-      $surface: var(--fs-color-surface-raised, #ffffff);
+      $surface: var(--fs-surface-background, #ffffff);
 
       background:
         linear-gradient(#{$surface} 33%, rgba(255,255,255, 0)),
@@ -179,7 +310,7 @@
   token is unchanged.
 */
 .cdk-overlay-backdrop.fs-dialog-overlay-backdrop.fs-dialog-mode-full {
-  background: var(--fs-color-surface, white);
+  background: var(--fs-surface-background, white);
 }
 
 :root {

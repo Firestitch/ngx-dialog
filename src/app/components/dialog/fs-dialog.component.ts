@@ -50,6 +50,7 @@ export class FsDialogComponent implements AfterContentInit, OnDestroy, OnInit, O
   @HostBinding('class.close-button')
   public closeButton = false;
 
+
   @HostBinding('class.button-layout-full')
   public get classButtonLayoutFullWidth() {
     return this.buttonLayout === 'full';
