@@ -1,21 +1,62 @@
 @use '@firestitch/style/styles' as fs-style;
 
+/*
+  THE COLUMN HAS TO REACH THE BUTTONS' OWN PARENT. Ray 2026-09-15 ("it's not
+  stacking the buttons ever now").
+
+  This set flex-direction on mat-dialog-actions alone, and that element does
+  not hold the buttons. A footer built with fs-form-dialog-actions nests three
+  deep:
+
+    mat-dialog-actions          <- what this used to stack
+      fs-form-dialog-actions    <- :host { display: flex } - the real row
+        button.mdc-button
+
+  Turning mat-dialog-actions into a column reflows its ONE child, so nothing
+  moved. Meanwhile full-width-action-appearance() matches
+  `mat-dialog-actions .mdc-button` - a DESCENDANT selector, which crosses the
+  extra level without caring - so the buttons took the filled and outlined
+  treatment while staying side by side. Appearance applied, layout did not, and
+  that split is the symptom this comment exists to explain.
+
+  So both elements are stacked: whichever of them is the buttons' parent, that
+  parent is a column. mat-dialog-actions stays in the list because a dialog
+  that writes its own <button>s directly - no fs-form-dialog-actions - has its
+  buttons at that level.
+
+  !IMPORTANT IS REQUIRED ON THE HOST, and not for specificity. The display:flex
+  lives in fs-form-dialog-actions' own emulated-encapsulation styles, which are
+  emitted with an _nghost attribute this stylesheet cannot name; without
+  !important the component's own rule wins however the selector here is
+  written. Same reason the width on the buttons carries it - MatButton sets its
+  own.
+*/
 @mixin full-width-actions() {
-  mat-dialog-actions {
-    flex-direction: column;
+  mat-dialog-actions,
+  fs-form-dialog-actions {
+    flex-direction: column !important;
     flex-wrap: nowrap;
-    display: flex;
+    display: flex !important;
+    align-items: stretch !important;
     flex: none;
     min-height: auto;
 
     .mdc-button {
-      width: 100%;
+      width: 100% !important;
       margin: 0 0 4px 0;
 
       &:last-child {
         margin-bottom: 0;
       }
     }
+  }
+
+  /*
+    The nested host is the row itself, so it must not also be a full-width
+    "button" in its parent column - it is the container of them.
+  */
+  mat-dialog-actions > fs-form-dialog-actions {
+    width: 100%;
   }
 }
 
@@ -252,7 +293,37 @@
       }
     }
 
-    @media (max-width: fs-style.$break-xsmall) {
+    /*
+      MOBILE STACKS ITS ACTIONS, AND THE MODE SAYS SO - NOT A PIXEL WIDTH.
+      Ray 2026-09-15 ("in mobile mode the buttons have to stack... always").
+
+      This was `@media (max-width: $break-xsmall)`, which is 599px, while
+      fs-dialog swaps `mode` for `mobileMode` at its own `mobileWidth`, 600px.
+      Two numbers deciding two halves of one behaviour, disagreeing by a pixel:
+      a dialog 600px wide went into its MOBILE mode - edge to edge, bottom
+      sheet - while the stack query stayed unmatched, so the actions kept the
+      floating dialog's side-by-side row inside a full-bleed sheet. The gap was
+      only ever one pixel wide in theory, but any viewport between the two (a
+      narrow desktop window, a tablet in portrait, a phone in landscape) sat in
+      it.
+
+      Keying off the mode class closes that by construction. The component
+      already decides mobile-or-not in ONE place - the mobileWidth breakpoint
+      observer in ngOnInit - and stamps the result on the pane; the stylesheet
+      now reads that decision instead of re-deriving it from a number it has to
+      keep in sync by hand. Changing mobileWidth on a dialog moves both halves
+      together, with nothing here to update.
+
+      FLOAT IS EXCLUDED, and it is the whole reason this is a list rather than
+      "any mobile mode". float is the mode a dialog wears when it is still a
+      PANEL on a small screen, and Material 3's dialog guidance - text actions
+      in a row - is right for it. full, bottom and peek are the three that go
+      edge to edge, and those are the ones whose actions become full-width
+      targets.
+    */
+    &.fs-dialog-mode-full,
+    &.fs-dialog-mode-bottom,
+    &.fs-dialog-mode-peek {
       @include full-width-actions();
       @include full-width-action-appearance();
     }
