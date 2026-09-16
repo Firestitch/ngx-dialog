@@ -1,4 +1,5 @@
 @use '@firestitch/style/styles' as fs-style;
+@use '@firestitch/style/variables' as fs-variables;
 
 /*
   THE COLUMN HAS TO REACH THE BUTTONS' OWN PARENT. Ray 2026-09-15 ("it's not
@@ -91,25 +92,28 @@
   EVERY COLOUR IS STATED, none inherited. An app on an M2 theme defines no
   --mat-sys-* tokens, so Material's own `var(--mat-button-filled-container-color,
   var(--mat-sys-primary))` fallbacks resolve to nothing. The --fs-* names are the
-  shared contract from @firestitch/style and carry their own light-dark() pairs,
-  so both schemes follow with no second block.
+  shared contract from @firestitch/style, which flips them per scheme at :root,
+  so both schemes follow with no second block here. The fallbacks are the LIGHT
+  half, for a host with no style package at all -- which has a white page.
 */
 @mixin full-width-action-appearance() {
   mat-dialog-actions {
     .mdc-button {
       /* The outlined treatment, which every non-primary action takes. */
       border: var(--mat-button-outlined-outline-width, 1px) solid
-        var(--fs-hairline-strong, light-dark(rgba(0, 0, 0, 0.38), rgba(255, 255, 255, 0.38)));
+        var(--fs-hairline-strong, rgba(0, 0, 0, 0.38));
       border-radius: var(--mat-button-outlined-container-shape, 9999px);
       background-color: transparent;
-      color: var(--fs-color-text, light-dark(rgba(0, 0, 0, 0.87), #E8EDEC));
+      color: var(--fs-color-text, rgba(0, 0, 0, 0.87));
 
-      /* The one filled action. --fs-color-primary is the app's own brand mapped
-         onto the shared name; the fallback is @firestitch/style's neutral. */
+      /* The one filled action. --fs-color-primary is the app's own brand,
+         configured through @firestitch/style's $primary-color knob; the
+         fallback tracks that same knob rather than repeating its default, so an
+         app that configured a brand never sees this package contradict it. */
       &.mat-primary {
-        border-color: var(--fs-color-primary, #1B474E);
-        background-color: var(--fs-color-primary, #1B474E);
-        color: var(--fs-surface-background, light-dark(#FFFFFF, #232428));
+        border-color: var(--fs-color-primary, #{fs-variables.$primary-color});
+        background-color: var(--fs-color-primary, #{fs-variables.$primary-color});
+        color: var(--fs-surface-background, #FFFFFF);
       }
     }
   }
