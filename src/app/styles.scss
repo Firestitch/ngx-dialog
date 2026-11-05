@@ -237,6 +237,11 @@
       mode, the inset is padding on the container painted with the surface's
       own colour chain (v20 token, then v18); only that strip is painted, so
       the surface keeps its own corners above it.
+
+      The surface's elevation shadow (M2: 0 24px 38px) falls straight down onto
+      that strip, which read as the same dark band fading out. A sheet resting
+      on the foot of the screen casts nothing below it: the shadow is clipped at
+      the surface's bottom edge and still shows above and beside it.
     */
     &.fs-dialog-mode-peek,
     &.fs-dialog-mode-bottom {
@@ -245,6 +250,10 @@
       .mat-mdc-dialog-container {
         padding-bottom: fs-style.$safe-area-bottom;
         background: linear-gradient($surface, $surface) bottom / 100% fs-style.$safe-area-bottom no-repeat;
+      }
+
+      .mat-mdc-dialog-surface {
+        clip-path: inset(-64px -64px 0 -64px);
       }
     }
 
