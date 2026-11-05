@@ -228,10 +228,23 @@
       }
     }
 
+    /*
+      A BOTTOM SHEET RUNS TO THE FOOT OF THE SCREEN, UNDER THE HOME INDICATOR.
+
+      The inset was a transparent border at 80% of it, and the surface paints
+      its colour inside the container, so the border showed the dimmed app
+      through it: a dark band under every bottom and peek dialog. As in full
+      mode, the inset is padding on the container painted with the surface's
+      own colour chain (v20 token, then v18); only that strip is painted, so
+      the surface keeps its own corners above it.
+    */
     &.fs-dialog-mode-peek,
     &.fs-dialog-mode-bottom {
+      $surface: var(--mat-dialog-container-color, var(--mdc-dialog-container-color, var(--mat-sys-surface, white)));
+
       .mat-mdc-dialog-container {
-        border-bottom: calc(fs-style.$safe-area-bottom * .8) solid transparent;
+        padding-bottom: fs-style.$safe-area-bottom;
+        background: linear-gradient($surface, $surface) bottom / 100% fs-style.$safe-area-bottom no-repeat;
       }
     }
 
