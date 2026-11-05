@@ -84,7 +84,7 @@
     "@firestitch/selection": "^18.0.6",
     "@firestitch/skeleton": "^18.0.0",
     "@firestitch/store": "^18.0.0",
-    "@firestitch/style": "^18.0.38",
+    "@firestitch/style": "^18.4.5",
     "@firestitch/task": "^18.0.149",
     "@firestitch/zoom-pan": "^18.0.2",
     "hammerjs": "^2.0.8",
